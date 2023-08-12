@@ -1,0 +1,6 @@
+Criar estrutura e adicionar arquivos já produzidos.
+
+Sugestão de estrutura:
++documentacao
++desenvolvimento
++testes
