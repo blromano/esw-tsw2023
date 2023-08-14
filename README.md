@@ -1,7 +1,9 @@
 # esw-tsw2023
 Repositório dos Projetos Práticos de ESW de BCC e TSI (2023)
-Proj01 - ChamaWeb
-Proj02 - Hospeda+
-Proj03 - VotoLyze
-Proj04 - Devden
-Proj05 - Helpet
+<ul>
+  <li>Proj01 - ChamaWeb</li>
+  <li>Proj02 - Hospeda+</li>
+  <li>Proj03 - VotoLyze</li>
+  <li>Proj04 - Devden</li>
+  <li>Proj05 - Helpet</li>
+</ul>
