@@ -694,7 +694,7 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-end;
-  background-color: #D0F4FD;
+  background-color: #b7ecf1be;
 }
 .home-practices1 {
   gap: var(--dl-space-space-threeunits);
