@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
   <div>
     <div class="row">
       <div class="col-md-4 d-flex justify-content-center align-items-center">
@@ -50,11 +49,9 @@
             </div>
           </div>
         </div>
-
-
       </div>
-      <div class="col-md-8 text-center">
 
+      <div class="col-md-8 text-center">
         <img class="logo" src="./public/Branding/helpet.png" alt="logo">
         <div class="row">
           <div class="container">
@@ -75,11 +72,9 @@
                   for="quantidadeDiaria">
                 <label for="floatingInput" id="quantidadeDiaria">Quantidade Diária Prescrita:</label>
               </div>
-
               <button class="btn btn-primary" onclick="salvarMedicacao()">Salvar</button>
             </div>
-
-            <h2>Lista de Medicações</h2>
+            <h2 class="text-white">Lista de Medicações</h2>
             <button class="btn btn-primary text-center" id="registrarMedicacoesBtn"
               onclick="registrarMedicacoes(1)">Registrar
               Medicações</button>
@@ -88,7 +83,7 @@
           <div class="col-md-12 mt-5">
             <div class="container bg-light">
               <div class="row text-center">
-                <h1>Lista de Medicações</h1>
+                <h1 style="color: #14A9FF;">Lista de Medicações</h1>
                 <div id="listaMedicacoes"></div>
               </div>
             </div>
@@ -148,7 +143,6 @@
       document.getElementById("tomaMedicacoes1").appendChild(editarButton);
     }
 
-
     function analisarPet(petId) {
       alert(`Analisando o pet: ${document.getElementById(`petName${petId}`).textContent}`);
     }
@@ -187,17 +181,50 @@
       document.getElementById("registrarMedicacoesBtn").style.display = "block";
 
     }
-
     function atualizarListaMedicacoes() {
       const lista = document.getElementById("listaMedicacoes");
       lista.innerHTML = "";
 
       listaMedicacoes.forEach((medicao, index) => {
         const itemLista = document.createElement("li");
-        itemLista.textContent = `Pet: ${medicao.pet}, Tipo: ${medicao.tipo}, Finalidade: ${medicao.finalidade}, Quantidade Diária: ${medicao.quantidadeDiaria}`;
+
+        // Criar spans para cada campo
+        const petSpan = document.createElement("span");
+        petSpan.style.color = "#14A9FF";
+        petSpan.textContent = `Pet: ${medicao.pet}`;
+        itemLista.appendChild(petSpan);
+
+        const tipoSpan = document.createElement("span");
+        tipoSpan.style.color = "#14A9FF";
+        tipoSpan.textContent = `Tipo: ${medicao.tipo}`;
+        itemLista.appendChild(tipoSpan);
+
+        const finalidadeSpan = document.createElement("span");
+        finalidadeSpan.style.color = "#14A9FF";
+        finalidadeSpan.textContent = `Finalidade: ${medicao.finalidade}`;
+        itemLista.appendChild(finalidadeSpan);
+
+        const quantidadeDiariaSpan = document.createElement("span");
+        quantidadeDiariaSpan.style.color = "#14A9FF";
+        quantidadeDiariaSpan.textContent = `Quantidade Diária: ${medicao.quantidadeDiaria}`;
+        itemLista.appendChild(quantidadeDiariaSpan);
+
+        // Adicione uma quebra de linha <br> após cada campo (exceto após o último)
+        if (index < listaMedicacoes.length - 1) {
+          const br = document.createElement("br");
+          itemLista.appendChild(br);
+        }
+
         lista.appendChild(itemLista);
+
+        // Adicione um <hr> após cada item de medicamento (exceto após o último)
+        if (index < listaMedicacoes.length - 1) {
+          const hr = document.createElement("hr");
+          lista.appendChild(hr);
+        }
       });
     }
+
   </script>
 </body>
 
@@ -247,10 +274,11 @@
   }
 
   .container {
-    max-width: 44%;
+    max-width: 77%;
     border-radius: 12px;
     padding: 20px;
     list-style: none;
+    display: block;
   }
 
   #registrarMedicacoesBtn {
@@ -261,5 +289,9 @@
   #listaMedicacoes {
     font-size: 29px;
     font-weight: 600;
+  }
+
+  #listaMedicacoes span {
+    display: block;
   }
 </style>
