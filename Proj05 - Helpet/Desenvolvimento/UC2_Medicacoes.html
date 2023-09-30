@@ -16,7 +16,7 @@
   <header class="mb-4">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="index.html">
-        <img src="/public/Branding/helpet.png" width="162" height="61" alt="">
+        <img class="logo" src="/public/Branding/helpet.png" width="162" height="61" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
   <main class="container">
     <!-- Botão para abrir o formulário/modal de registro de medicação -->
     <div class="container mt-5">
-      <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center justify-content-between mb-5">
         <h2>Medicamentos Registrados</h2>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#medicationModal">
           Registrar Medicações
@@ -185,3 +185,25 @@
 </body>
 
 </html>
+
+<style>
+  .logo {
+    border-style: none;
+    object-fit: cover;
+    z-index: 1;
+    width: 231px;
+  }
+
+  .btn-primary {
+    padding: 12px 30px;
+    border-radius: 50px;
+    background-color: #14A9FF !important;
+    border: none;
+    font-weight: 700;
+  }
+
+  .btn-danger {
+    border-radius: 50px;
+
+  }
+</style>

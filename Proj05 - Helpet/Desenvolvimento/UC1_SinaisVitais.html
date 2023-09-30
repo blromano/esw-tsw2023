@@ -23,8 +23,7 @@
   <header class="mb-4">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="index.html">
-        <img src="/public/Branding/helpet.png" width="162"
-          height="61" alt="">
+        <img class="logo" src="/public/Branding/helpet.png" width="162" height="61" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,10 +43,8 @@
   </header>
 
   <main class="container">
-    <div class="card border-light mb-3">
-      <div class="card-header">
-        <h4 class="offset-top-20">Gerenciamento dos Sinais Vitais</h4>
-      </div>
+    <h2 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h2>
+    <div class="card mb-3">
       <div class="card-body">
         <form class="text-left" id="vitalsForm">
           <div class="form-group">
@@ -57,7 +54,7 @@
           </div>
           <div class="d-flex justify-content-center align-items-center">
             <button type="submit" class="btn btn-primary">Salvar</button>
-        </div>
+          </div>
 
         </form>
       </div>
@@ -99,3 +96,26 @@
 </body>
 
 </html>
+
+
+<style>
+  .logo {
+    border-style: none;
+    object-fit: cover;
+    z-index: 1;
+    width: 231px;
+  }
+
+  .btn-primary {
+    padding: 12px 30px;
+    border-radius: 50px;
+    background-color: #14A9FF !important;
+    border: none;
+    font-weight: 700;
+  }
+
+  .btn-danger {
+    border-radius: 50px;
+
+  }
+</style>
