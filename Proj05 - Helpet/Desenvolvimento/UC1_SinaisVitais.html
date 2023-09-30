@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>UC1 - Gerenciamento dos Sinais Vitais</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    #vitalsObservations {
+      max-height: 125px;
+      min-height: 100px;
+
+    }
+  </style>
+</head>
+
+<body class="text-center">
+
+  <header class="mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="/public/Branding/helpet.png" width="162"
+          height="61" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./"><i class="fas fa-home"></i> Home page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class=" fas fa-regular fa-user"></i> Nome</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card border-light mb-3">
+      <div class="card-header">
+        <h4 class="offset-top-20">Gerenciamento dos Sinais Vitais</h4>
+      </div>
+      <div class="card-body">
+        <form class="text-left" id="vitalsForm">
+          <div class="form-group">
+            <textarea class="form-control" id="vitalsObservations" name="message" maxlength="300"
+              placeholder="Digite as observações do pet (máximo de 300 caracteres)"></textarea>
+            <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="mt-4">
+    <div class="container text-center">
+      HELPET
+      <span>&#169;</span> <span id="copyright-year">2023</span>
+  </footer>
+
+  <!-- Bootstrap JS and Popper JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const vitalsObservations = document.getElementById('vitalsObservations');
+      const charCount = document.getElementById('charCount');
+      const vitalsForm = document.getElementById('vitalsForm');
+
+      vitalsObservations.addEventListener('input', function () {
+        charCount.textContent = vitalsObservations.value.length + "/300 caracteres";
+      });
+
+      vitalsForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (vitalsObservations.value.length > 300) {
+          alert('A observação excedeu o limite máximo de 300 caracteres.');
+        } else {
+          alert('Observação salva com sucesso!');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
