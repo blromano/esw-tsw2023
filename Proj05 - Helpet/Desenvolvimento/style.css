@@ -85,7 +85,7 @@
   flex-direction: row;
   padding-bottom: var(--dl-space-space-unit);
   justify-content: center;
-  background-color: rgb(36, 97, 255);
+  background-color: rgb(5, 175, 242);
 }
 .button-main:hover {
   opacity: 0.75;
