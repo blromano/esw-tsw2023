@@ -246,8 +246,12 @@
             <button class="home-phone button">
               <a class="home-text06 home-book button button-main" href="#cadastro">Não possui conta?</a>
             </button>
+            <a href="login_client.html" class="home-book button button-main">
+              <span class="home-text07">Cliente</span>
+            </a>
+
             <a href="login.html" class="home-book button button-main">
-              <span class="home-text07">Entrar</span>
+              <span class="home-text07">Admin</span>
             </a>
           </div>
           <div data-thq="thq-burger-menu" class="home-burger-menu">
@@ -749,13 +753,14 @@
             </div> -->
             <div class="home-inputs" id="formFields">
               <!-- Campos de cliente (inicialmente visíveis) -->
-              <input type="text" placeholder="Name" autocomplete="name" class="input book-input" id="clientNameField" />
-              <input type="email" placeholder="Email" autocomplete="email" class="input book-input"
+              <input type="text" placeholder="Nome" autocomplete="name" class="input book-input" id="clientNameField" />
+              <input type="text" placeholder="CPF" autocomplete="cpf" class="input book-input" id="clientNameField" />
+              <input type="text" placeholder="Endereço" autocomplete="name" class="input book-input" id="clientNameField" />
+              <input type="email" placeholder="E-mail" autocomplete="email" class="input book-input"
                 id="clientEmailField" />
-              <input type="tel" placeholder="Phone" autocomplete="tel" class="input book-input" id="clientPhoneField" />
+              <input type="password" placeholder="Senha" autocomplete="tel" class="input book-input" id="clientPhoneField" />
+              <input type="password" placeholder="Confirmar senha" autocomplete="tel" class="input book-input" id="clientPhoneField" />
               <div class="home-date">
-                <input type="date" placeholder="Date" class="input book-input" id="dateField" />
-              </div>
 
               <!-- Campos de pet (inicialmente ocultos) -->
               <input type="text" placeholder="Nome do pet" autocomplete="off" class="input book-input" id="petNameField"
@@ -799,7 +804,7 @@
 
                 // Redirecionar para login.html após 1 segundo
                 setTimeout(function () {
-                  window.location.href = "login.html";
+                  window.location.href = "login_client.html";
                 }, 1000);
               }, 1000);
             });
