@@ -785,7 +785,7 @@
   flex-direction: row;
   padding-bottom: var(--dl-space-space-fiveunits);
   justify-content: center;
-  background-color: #2461FF;
+  background-color: orange;
 }
 
 .home-content01 {
