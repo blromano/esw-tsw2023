@@ -76,23 +76,19 @@
             const status = document.getElementById('status').value;
             const procedimento = document.getElementById('procedimento').value;
 
-            // ... Seu código existente ...
-
-            // Crie uma nova linha na tabela com os valores inseridos
             const tableBody = document.getElementById('operationList');
             const newRow = tableBody.insertRow();
             const cell1 = newRow.insertCell(0);
             const cell2 = newRow.insertCell(1);
             const cell3 = newRow.insertCell(2);
             const cell4 = newRow.insertCell(3);
-            const cell5 = newRow.insertCell(4); // Célula para as ações
+            const cell5 = newRow.insertCell(4); 
 
             cell1.innerHTML = petType;
             cell2.innerHTML = status;
             cell3.innerHTML = procedimento;
             cell4.innerHTML = data + ' - ' + horario;
 
-            // Adicione botões de atualização na célula de ações
             cell5.innerHTML = `
     <button class="btn btn-primary btn-sm" onclick="updateStatus(this)">Atualizar Status</button>
     <button class="btn btn-primary btn-sm" onclick="updateHorario(this)">Atualizar Horário</button>
@@ -100,10 +96,9 @@
 
         });
 
-        // Função para atualizar o status
         function updateStatus(button) {
             const row = button.closest('tr');
-            const statusCell = row.cells[1]; // Célula do status
+            const statusCell = row.cells[1]; 
             const newStatus = prompt('Digite o novo status:');
 
             if (newStatus !== null) {
@@ -111,10 +106,9 @@
             }
         }
 
-        // Função para atualizar o horário
         function updateHorario(button) {
             const row = button.closest('tr');
-            const horarioCell = row.cells[3]; // Célula do horário
+            const horarioCell = row.cells[3]; 
             const newHorario = prompt('Digite o novo horário no formato DD/MM/AAAA - HH:MM:');
 
             if (newHorario !== null) {
