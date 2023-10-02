@@ -1,5 +1,6 @@
 import { Image } from "@phosphor-icons/react";
 import EdFoto from "../assets/edw.png";
+import { auth } from "../lib/firebase";
 
 export default function PersonalPage() {
   return (
@@ -11,7 +12,7 @@ export default function PersonalPage() {
         className="rounded-lg m-10 max-h-64"
       />
       <span className="text-blue-600 font-bold text-5xl mt-24">
-        Eduardo Eurico Lisin
+        {auth.currentUser?.email}
       </span>
       <div className="flex flex-col w-screen h-screen">
         <textarea
