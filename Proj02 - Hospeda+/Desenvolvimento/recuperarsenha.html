@@ -69,6 +69,15 @@
                </div>
             </div>
          </div>
+         <script>
+            function enviarLinkRecuperacao() {
+                // Aqui você pode adicionar a lógica para enviar o link de recuperação por e-mail, etc.
+    
+                // Exibindo a mensagem de sucesso
+                var mensagem = "Link de recuperação enviado com sucesso!";
+                document.getElementById("mensagem-recuperacao").innerText = mensagem;
+            }
+        </script>
       </header>
       <!-- end header inner -->
       <!-- end header -->
@@ -95,8 +104,8 @@
                         
                         <div class="col-md-12">
                            <div class="form-group">
-                            <input class="book_btn" type="submit" value="Recuperar Senha">
-                            <a class="nav-link" href="login.html">Voltar</a>
+                              <button class="book_btn" onclick="enviarLinkRecuperacao()">Recuperar Senha</button>>
+                              <a class="nav-link" href="login.html">Voltar</a>
                            </div>
                         </div>
                      </div>
