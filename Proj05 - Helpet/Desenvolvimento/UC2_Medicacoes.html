@@ -132,13 +132,10 @@
       HELPET
       <span>&#169;</span> <span id="copyright-year">2023</span>
   </footer>
-
-  <!-- Bootstrap JS and Popper JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <!-- Script para mostrar/esconder campos de medicação e salvar dados -->
   <script>
     function toggleMedicationFields() {
       const takesMedication = $('#takesMedication').val();
@@ -148,12 +145,12 @@
 
       if (takesMedication === 'Sim') {
         medicationFields.show();
-        medicationName.val('');  // Limpa o campo quando a opção é 'Sim'
-        dosage.val('');  // Limpa o campo quando a opção é 'Sim'
+        medicationName.val('');
+        dosage.val('');
       } else {
         medicationFields.hide();
-        medicationName.val('-');  // Preenche o campo com '-' quando a opção é 'Não'
-        dosage.val('-');  // Preenche o campo com '-' quando a opção é 'Não'
+        medicationName.val('-'); 
+        dosage.val('-'); 
       }
     }
 
@@ -176,10 +173,8 @@
       alert('Informações do medicamento salvas!');
       $('#medicationModal').modal('hide');
       $('#medicationForm')[0].reset();
-      toggleMedicationFields(); // Atualiza a exibição dos campos de medicação conforme necessário
+      toggleMedicationFields();
     });
-
-    // Chama a função no carregamento da página para garantir que os campos estão no estado correto
     toggleMedicationFields();
   </script>
 </body>
