@@ -1,4 +1,4 @@
-package vendaprodutos.jdbc;
+package chamaweb.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
