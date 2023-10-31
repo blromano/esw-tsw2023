@@ -9,27 +9,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import chamaweb.entidades.Categoria;
+import chamaweb.entidades.Tipo;
 
 
 /**
  *
  * @author bv3018229
  */
-public class CategoriaDAO extends DAO<Categoria> {
+public class TipoDAO extends DAO<Tipo> {
 
-    public CategoriaDAO() throws SQLException {
+    public TipoDAO() throws SQLException {
     }
     
-    
-    
     @Override
-    public void salvar( Categoria obj ) throws SQLException {
+    public void salvar( Tipo obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
-                "categorias( CAT_NOME, CAT_ATIVO) " + 
-                "VALUES( ?, 1 );");
+                "tipos( TIP_NOME ) " + 
+                "VALUES( ? );");
 
         stmt.setString( 1, obj.getNome() );
 
@@ -39,19 +37,17 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void atualizar( Categoria obj ) throws SQLException {
+    public void atualizar( Tipo obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "UPDATE categorias " + 
+                "UPDATE tipos " + 
                 "SET" + 
-                "    CAT_NOME = ?," + 
-                "    CAT_ATIVO = ? " + 
+                "    TIP_NOME = ? " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    TIP_ID = ?;" );
 
         stmt.setString( 1, obj.getNome() );
-        stmt.setInt( 2, obj.getAtivo() );
-        stmt.setInt( 3, obj.getId() );
+        stmt.setInt( 2, obj.getId() );
 
         stmt.executeUpdate();
         stmt.close();
@@ -59,12 +55,12 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void excluir( Categoria obj ) throws SQLException {
+    public void excluir( Tipo obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "DELETE FROM categorias " + 
+                "DELETE FROM tipos " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    TIP_ID = ?;" );
 
         stmt.setInt( 1, obj.getId() );
 
@@ -74,28 +70,28 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public List<Categoria> listarTodos() throws SQLException {
+    public List<Tipo> listarTodos() throws SQLException {
 
-        List<Categoria> lista = new ArrayList<>();
+        List<Tipo> lista = new ArrayList<>();
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    TIP_ID, " + 
+                "    TIP_NOME " + 
                 "FROM" + 
-                "    categorias " + 
-                "ORDER BY CAT_NOME;" );
+                "    tipos " + 
+                "ORDER BY TIP_NOME;" );
 
         ResultSet rs = stmt.executeQuery();
 
         while ( rs.next() ) {
 
-            Categoria cat = new Categoria();
+            Tipo tipo = new Tipo();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            tipo.setId( rs.getInt( "TIP_ID" ) );
+            tipo.setNome( rs.getString( "TIP_NOME" ) );
 
-            lista.add( cat );
+            lista.add( tipo );
 
         }
 
@@ -107,18 +103,18 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public Categoria obterPorId( int id ) throws SQLException {
+    public Tipo obterPorId( int id ) throws SQLException {
 
-        Categoria cat = null;
+        Tipo tipo = null;
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    TIP_ID, " + 
+                "    TIP_NOME " + 
                 "FROM" + 
-                "    categorias " +
-                "WHERE CAT_ID = ? " +
-                "ORDER BY CAT_NOME;" );
+                "    tipos " +
+                "WHERE TIP_ID = ? " +
+                "ORDER BY TIP_NOME;" );
 
         stmt.setInt( 1, id );
 
@@ -126,17 +122,17 @@ public class CategoriaDAO extends DAO<Categoria> {
 
         if ( rs.next() ) {
 
-            cat = new Categoria();
+            tipo = new Tipo();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            tipo.setId( rs.getInt( "TIP_ID" ) );
+            tipo.setNome( rs.getString( "TIP_NOME" ) );
 
         }
 
         rs.close();
         stmt.close();
 
-        return cat;
+        return tipo;
 
     }    
 }

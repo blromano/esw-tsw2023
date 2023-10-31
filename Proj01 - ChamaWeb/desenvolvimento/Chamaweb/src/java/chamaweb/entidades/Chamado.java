@@ -4,7 +4,7 @@
  */
 package chamaweb.entidades;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 /**
@@ -16,53 +16,54 @@ public class Chamado {
     private String titulo;
     private Date data;
     private String descricao;
-    private int resultadoAvaliacao;
+    private boolean resultadoAvaliacao;
     private String observacoesAvaliacao;
     
-    private Usuario idUsuario;
-    private Maquina MaquinaId;
-    private Usuario idUsuarioTecnico; //Precisava diferenciar de outra forma?
-    private Categoria idCategoria;
-    private Estado idEstado;
+    private Usuario usuario;
+    private Maquina maquina;
+    private Usuario tecnico;
+    private Categoria categoria;
+    private Estado estado;
+    private Prioridade prioridade;
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Maquina getMaquinaId() {
-        return MaquinaId;
+    public Maquina getMaquina() {
+        return maquina;
     }
 
-    public void setMaquinaId(Maquina MaquinaId) {
-        this.MaquinaId = MaquinaId;
+    public void setMaquina(Maquina maquina) {
+        this.maquina = maquina;
     }
 
-    public Usuario getIdUsuarioTecnico() {
-        return idUsuarioTecnico;
+    public Usuario getTecnico() {
+        return tecnico;
     }
 
-    public void setIdUsuarioTecnico(Usuario idUsuarioTecnico) {
-        this.idUsuarioTecnico = idUsuarioTecnico;
+    public void setTecnico(Usuario usuarioTecnico) {
+        this.tecnico = usuarioTecnico;
     }
 
-    public Categoria getIdCategoria() {
-        return idCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(Categoria idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public Estado getIdEstado() {
-        return idEstado;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setIdEstado(Estado idEstado) {
-        this.idEstado = idEstado;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
 
@@ -98,11 +99,11 @@ public class Chamado {
         this.descricao = descricao;
     }
 
-    public int getResultadoAvaliacao() {
+    public boolean getResultadoAvaliacao() {
         return resultadoAvaliacao;
     }
 
-    public void setResultadoAvaliacao(int resultadoAvaliacao) {
+    public void setResultadoAvaliacao(boolean resultadoAvaliacao) {
         this.resultadoAvaliacao = resultadoAvaliacao;
     }
 
@@ -114,5 +115,12 @@ public class Chamado {
         this.observacoesAvaliacao = observacoesAvaliacao;
     }
 
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
 
 }

@@ -9,27 +9,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import chamaweb.entidades.Categoria;
+import chamaweb.entidades.Prioridade;
 
 
 /**
  *
  * @author bv3018229
  */
-public class CategoriaDAO extends DAO<Categoria> {
+public class PrioridadeDAO extends DAO<Prioridade> {
 
-    public CategoriaDAO() throws SQLException {
+    public PrioridadeDAO() throws SQLException {
     }
     
-    
-    
     @Override
-    public void salvar( Categoria obj ) throws SQLException {
+    public void salvar( Prioridade obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
-                "categorias( CAT_NOME, CAT_ATIVO) " + 
-                "VALUES( ?, 1 );");
+                "prioridades( PRI_NOME ) " + 
+                "VALUES( ? );");
 
         stmt.setString( 1, obj.getNome() );
 
@@ -39,19 +37,17 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void atualizar( Categoria obj ) throws SQLException {
+    public void atualizar( Prioridade obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "UPDATE categorias " + 
+                "UPDATE prioridades " + 
                 "SET" + 
-                "    CAT_NOME = ?," + 
-                "    CAT_ATIVO = ? " + 
+                "    PRI_NOME = ? " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    PRI_ID = ?;" );
 
         stmt.setString( 1, obj.getNome() );
-        stmt.setInt( 2, obj.getAtivo() );
-        stmt.setInt( 3, obj.getId() );
+        stmt.setInt( 2, obj.getId() );
 
         stmt.executeUpdate();
         stmt.close();
@@ -59,12 +55,12 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void excluir( Categoria obj ) throws SQLException {
+    public void excluir( Prioridade obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "DELETE FROM categorias " + 
+                "DELETE FROM prioridades " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    PRI_ID = ?;" );
 
         stmt.setInt( 1, obj.getId() );
 
@@ -74,28 +70,28 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public List<Categoria> listarTodos() throws SQLException {
+    public List<Prioridade> listarTodos() throws SQLException {
 
-        List<Categoria> lista = new ArrayList<>();
+        List<Prioridade> lista = new ArrayList<>();
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    PRI_ID, " + 
+                "    PRI_NOME " + 
                 "FROM" + 
-                "    categorias " + 
-                "ORDER BY CAT_NOME;" );
+                "    prioridades " + 
+                "ORDER BY PRI_NOME;" );
 
         ResultSet rs = stmt.executeQuery();
 
         while ( rs.next() ) {
 
-            Categoria cat = new Categoria();
+            Prioridade prioridade = new Prioridade();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            prioridade.setId( rs.getInt( "PRI_ID" ) );
+            prioridade.setNome( rs.getString( "PRI_NOME" ) );
 
-            lista.add( cat );
+            lista.add( prioridade );
 
         }
 
@@ -107,18 +103,18 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public Categoria obterPorId( int id ) throws SQLException {
+    public Prioridade obterPorId( int id ) throws SQLException {
 
-        Categoria cat = null;
+        Prioridade prioridade = null;
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    PRI_ID, " + 
+                "    PRI_NOME " + 
                 "FROM" + 
-                "    categorias " +
-                "WHERE CAT_ID = ? " +
-                "ORDER BY CAT_NOME;" );
+                "    prioridades " +
+                "WHERE PRI_ID = ? " +
+                "ORDER BY PRI_NOME;" );
 
         stmt.setInt( 1, id );
 
@@ -126,17 +122,17 @@ public class CategoriaDAO extends DAO<Categoria> {
 
         if ( rs.next() ) {
 
-            cat = new Categoria();
+            prioridade = new Prioridade();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            prioridade.setId( rs.getInt( "PRI_ID" ) );
+            prioridade.setNome( rs.getString( "PRI_NOME" ) );
 
         }
 
         rs.close();
         stmt.close();
 
-        return cat;
+        return prioridade;
 
     }    
 }

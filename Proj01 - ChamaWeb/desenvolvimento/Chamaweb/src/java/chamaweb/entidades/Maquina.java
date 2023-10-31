@@ -17,7 +17,7 @@ public class Maquina {
     private String OS;
     private int Ativo;
     
-    private Laboratorio idLaboratorio;
+    private Laboratorio Laboratorio;
     
     //FK laboratorio;
 
@@ -77,11 +77,11 @@ public class Maquina {
         this.Ativo = Ativo;
     }
 
-    public Laboratorio getIdLaboratorio() {
-        return idLaboratorio;
+    public Laboratorio getLaboratorio() {
+        return Laboratorio;
     }
 
-    public void setIdLaboratorio(Laboratorio idLaboratorio) {
-        this.idLaboratorio = idLaboratorio;
+    public void setLaboratorio(Laboratorio Laboratorio) {
+        this.Laboratorio = Laboratorio;
     }
 }

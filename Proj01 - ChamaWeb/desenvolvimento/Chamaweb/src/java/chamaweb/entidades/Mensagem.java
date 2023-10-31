@@ -10,10 +10,10 @@ package chamaweb.entidades;
  */
 public class Mensagem {
     private int id;
-    private String mensagem;
+    private String conteudo;
     
-    private Chamado idChamado;
-    private Usuario idUsuario;
+    private Chamado chamado;
+    private Usuario usuario;
     //FK chamado id
     //FK usuario id
 
@@ -25,27 +25,27 @@ public class Mensagem {
         this.id = id;
     }
 
-    public String getMensagem() {
-        return mensagem;
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 
-    public Chamado getIdChamado() {
-        return idChamado;
+    public Chamado getChamado() {
+        return chamado;
     }
 
-    public void setIdChamado(Chamado idChamado) {
-        this.idChamado = idChamado;
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

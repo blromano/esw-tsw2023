@@ -12,8 +12,8 @@ public class Operacao {
     private int id;
     private String descricao;
     
-    private Chamado idChamado;
-    private Usuario idUsuario;
+    private Chamado chamado;
+    private Usuario usuario;
 
     public int getId() {
         return id;
@@ -31,20 +31,20 @@ public class Operacao {
         this.descricao = descricao;
     }
 
-    public Chamado getIdChamado() {
-        return idChamado;
+    public Chamado getChamado() {
+        return chamado;
     }
 
-    public void setIdChamado(Chamado idChamado) {
-        this.idChamado = idChamado;
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     

@@ -9,26 +9,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import chamaweb.entidades.Categoria;
+import chamaweb.entidades.Laboratorio;
 
 
 /**
  *
  * @author bv3018229
  */
-public class CategoriaDAO extends DAO<Categoria> {
+public class LaboratorioDAO extends DAO<Laboratorio> {
 
-    public CategoriaDAO() throws SQLException {
+    public LaboratorioDAO() throws SQLException {
     }
     
     
     
     @Override
-    public void salvar( Categoria obj ) throws SQLException {
+    public void salvar( Laboratorio obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
-                "categorias( CAT_NOME, CAT_ATIVO) " + 
+                "laboratorios( LAB_NOME, LAB_ATIVO) " + 
                 "VALUES( ?, 1 );");
 
         stmt.setString( 1, obj.getNome() );
@@ -39,15 +39,15 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void atualizar( Categoria obj ) throws SQLException {
+    public void atualizar( Laboratorio obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "UPDATE categorias " + 
+                "UPDATE laboratorios " + 
                 "SET" + 
-                "    CAT_NOME = ?," + 
-                "    CAT_ATIVO = ? " + 
+                "    LAB_NOME = ?," + 
+                "    LAB_ATIVO = ? " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    LAB_ID = ?;" );
 
         stmt.setString( 1, obj.getNome() );
         stmt.setInt( 2, obj.getAtivo() );
@@ -59,12 +59,12 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public void excluir( Categoria obj ) throws SQLException {
+    public void excluir( Laboratorio obj ) throws SQLException {
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "DELETE FROM categorias " + 
+                "DELETE FROM laboratorios " + 
                 "WHERE" + 
-                "    CAT_ID = ?;" );
+                "    LAB_ID = ?;" );
 
         stmt.setInt( 1, obj.getId() );
 
@@ -74,28 +74,28 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public List<Categoria> listarTodos() throws SQLException {
+    public List<Laboratorio> listarTodos() throws SQLException {
 
-        List<Categoria> lista = new ArrayList<>();
+        List<Laboratorio> lista = new ArrayList<>();
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    LAB_ID, " + 
+                "    LAB_NOME " + 
                 "FROM" + 
-                "    categorias " + 
-                "ORDER BY CAT_NOME;" );
+                "    laboratorios " + 
+                "ORDER BY LAB_NOME;" );
 
         ResultSet rs = stmt.executeQuery();
 
         while ( rs.next() ) {
 
-            Categoria cat = new Categoria();
+            Laboratorio lab = new Laboratorio();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            lab.setId( rs.getInt( "LAB_ID" ) );
+            lab.setNome( rs.getString( "LAB_NOME" ) );
 
-            lista.add( cat );
+            lista.add( lab );
 
         }
 
@@ -107,18 +107,18 @@ public class CategoriaDAO extends DAO<Categoria> {
     }
 
     @Override
-    public Categoria obterPorId( int id ) throws SQLException {
+    public Laboratorio obterPorId( int id ) throws SQLException {
 
-        Categoria cat = null;
+        Laboratorio lab = null;
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
-                "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    LAB_ID, " + 
+                "    LAB_NOME " + 
                 "FROM" + 
-                "    categorias " +
-                "WHERE CAT_ID = ? " +
-                "ORDER BY CAT_NOME;" );
+                "    laboratorios " +
+                "WHERE LAB_ID = ? " +
+                "ORDER BY LAB_NOME;" );
 
         stmt.setInt( 1, id );
 
@@ -126,17 +126,17 @@ public class CategoriaDAO extends DAO<Categoria> {
 
         if ( rs.next() ) {
 
-            cat = new Categoria();
+            lab = new Laboratorio();
 
-            cat.setId( rs.getInt( "CAT_ID" ) );
-            cat.setNome( rs.getString( "CAT_NOME" ) );
+            lab.setId( rs.getInt( "LAB_ID" ) );
+            lab.setNome( rs.getString( "LAB_NOME" ) );
 
         }
 
         rs.close();
         stmt.close();
 
-        return cat;
+        return lab;
 
     }    
 }

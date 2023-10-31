@@ -5,12 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import chamaweb.jdbc.ConnectionFactory;
 
-/**
- * DAO genérico que implementa a interface AutoCloseable,
- * permitindo o uso da construção try-with-resources.
- *
- * @author Prof. Dr. David Buzatto
- */
 public abstract class DAO<Tipo> implements AutoCloseable {
 
     // cada DAO terá uma conexão.

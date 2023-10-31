@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import chamaweb.utils.Utils;
 import chamaweb.entidades.Usuario;
 
 
@@ -133,7 +132,7 @@ public class UsuarioDAO extends DAO<Usuario>{
                 "WHERE USR_ID = ? " +
                 "ORDER BY USR_NOME;" );
 
-        stmt.setLong( 1, id );
+        stmt.setInt( 1, id );
 
         ResultSet rs = stmt.executeQuery();
 
