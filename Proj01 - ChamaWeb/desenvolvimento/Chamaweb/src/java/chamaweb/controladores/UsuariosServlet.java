@@ -10,14 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import chamaweb.dao.UsuarioDAO;
 import chamaweb.entidades.Usuario;
+import chamaweb.utils.Utils;
 
-/**
- * Servlet para tratar Estados.
- *
- * @author Prof. Dr. David Buzatto
- */
-@WebServlet( name = "EstadosServlet", 
-             urlPatterns = { "/processaEstados" } )
+@WebServlet( name = "UsuariosServlet", 
+             urlPatterns = { "/processaUsuarios" } )
 public class UsuariosServlet extends HttpServlet {
 
     protected void processRequest( 
@@ -28,62 +24,27 @@ public class UsuariosServlet extends HttpServlet {
         String acao = request.getParameter( "acao" );
         RequestDispatcher disp = null;
 
-        try ( EstadoDAO dao = new EstadoDAO() ){
+        try ( UsuarioDAO dao = new UsuarioDAO() ){
 
-            if ( acao.equals( "inserir" ) ) {
+                String matricula = request.getParameter( "matricula" );
+                String senha = request.getParameter( "senha" );
 
-                String nome = request.getParameter( "nome" );
-                String sigla = request.getParameter( "sigla" );
+                Usuario usuarioFornecido = new Usuario();
+                u.setMatricula( matricula );
+                u.setSenha( senha );
 
-                Estado e = new Estado();
-                e.setNome( nome );
-                e.setSigla( sigla );
-
-                Utils.validar( e, "id" );
-                dao.salvar( e );
-                disp = request.getRequestDispatcher(
-                        "/formularios/estados/listagem.jsp" );
-
-            } else if ( acao.equals( "alterar" ) ) {
-
-                Long id = Utils.getLong( request, "id" );
-                String nome = request.getParameter( "nome" );
-                String sigla = request.getParameter( "sigla" );
-
-                Estado e = dao.obterPorId( id );
-                e.setNome( nome );
-                e.setSigla( sigla );
-
-                Utils.validar( e );
-                dao.atualizar( e );
-                disp = request.getRequestDispatcher(
-                        "/formularios/estados/listagem.jsp" );
-
-            } else if ( acao.equals( "excluir" ) ) {
-
-                Long id = Utils.getLong( request, "id" );
-                Estado e = dao.obterPorId( id );
-
-                dao.excluir( e );
-                disp = request.getRequestDispatcher(
-                        "/formularios/estados/listagem.jsp" );
-
-            } else {
+                Usuario u = dao.obterPorMatricula( matricula );
                 
-                Long id = Utils.getLong( request, "id" );
-                Estado e = dao.obterPorId( id );
-                request.setAttribute( "estado", e );
-                
-                if ( acao.equals( "prepararAlteracao" ) ) {
-                    disp = request.getRequestDispatcher( 
-                            "/formularios/estados/alterar.jsp" );
-                } else if ( acao.equals( "prepararExclusao" ) ) {
-                    disp = request.getRequestDispatcher( 
-                            "/formularios/estados/excluir.jsp" );
+                if (u == null) {
+                    request.setAttribute( "erro",  "Matricula não encontrada!");
+                    disp = request.getRequestDispatcher("/index.jsp" );
+                } else if (u.getSenha() != usuarioFornecido.getSenha()) {
+                    request.setAttribute( "erro",  "Matricula não encontrada!");
+                    disp = request.getRequestDispatcher("/index.jsp" );
+                } else {
+                    disp = request.getRequestDispatcher("/chamado/meusChamados.jsp" );
                 }
                 
-            }
-
         } catch ( SQLException exc ) {
             disp = Utils.prepararDespachoErro( request, exc.getMessage() );
         }
@@ -112,7 +73,7 @@ public class UsuariosServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "EstadosServlet";
+        return "UsuariosServlet";
     }
 
 }
