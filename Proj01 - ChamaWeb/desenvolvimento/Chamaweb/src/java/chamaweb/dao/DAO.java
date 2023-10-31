@@ -1,9 +1,9 @@
-package vendaprodutos.dao;
+package chamaweb.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import vendaprodutos.jdbc.ConnectionFactory;
+import chamaweb.jdbc.ConnectionFactory;
 
 /**
  * DAO genérico que implementa a interface AutoCloseable,
@@ -113,6 +113,6 @@ public abstract class DAO<Tipo> implements AutoCloseable {
      * encontrada.
      * @throws SQLException Caso ocorra algum erro durante a consulta.
      */
-    public abstract Tipo obterPorId( Long id ) throws SQLException;
+    public abstract Tipo obterPorId( int id ) throws SQLException;
 
 }

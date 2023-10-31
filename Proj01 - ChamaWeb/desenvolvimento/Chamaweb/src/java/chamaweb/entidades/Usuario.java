@@ -14,15 +14,16 @@ public class Usuario {
     private String matricula;
     private String senha;
     private String email;
+    private String nome;
     
-    private Tipo idTipo;
+    private Tipo tipo;
 
-    public Tipo getIdTipo() {
-        return idTipo;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setIdTipo(Tipo idTipo) {
-        this.idTipo = idTipo;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     public int getId() {
@@ -57,5 +58,12 @@ public class Usuario {
         this.email = email;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
                                                             
 }
