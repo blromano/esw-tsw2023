@@ -118,7 +118,7 @@ public class MensagemDAO extends DAO<Mensagem> {
             maquina.setModelo( rs.getString( "MAQ_MODELO" ) );
             maquina.setProcessador( rs.getString( "MAQ_PROCESSADOR" ) );
             maquina.setRam( rs.getString( "MAQ_RAM" ) );
-            maquina.setOS( rs.getString( "MAQ_OS" ) );
+            maquina.setOs( rs.getString( "MAQ_OS" ) );
             maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
             maquina.setLaboratorio( laboratorio );
 
@@ -228,7 +228,7 @@ public class MensagemDAO extends DAO<Mensagem> {
                         maquina.setModelo( rs.getString( "MAQ_MODELO" ) );
                         maquina.setProcessador( rs.getString( "MAQ_PROCESSADOR" ) );
                         maquina.setRam( rs.getString( "MAQ_RAM" ) );
-                        maquina.setOS( rs.getString( "MAQ_OS" ) );
+                        maquina.setOs( rs.getString( "MAQ_OS" ) );
                         maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
                         maquina.setLaboratorio( laboratorio );
 

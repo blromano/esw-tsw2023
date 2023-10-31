@@ -81,7 +81,8 @@ public class CategoriaDAO extends DAO<Categoria> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
                 "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    CAT_NOME, " + 
+                "    CAT_ATIVO " +
                 "FROM" + 
                 "    categorias " + 
                 "ORDER BY CAT_NOME;" );
@@ -94,6 +95,7 @@ public class CategoriaDAO extends DAO<Categoria> {
 
             cat.setId( rs.getInt( "CAT_ID" ) );
             cat.setNome( rs.getString( "CAT_NOME" ) );
+            cat.setAtivo( rs.getInt( "CAT_ATIVO" ) );
 
             lista.add( cat );
 
@@ -114,7 +116,8 @@ public class CategoriaDAO extends DAO<Categoria> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
                 "    CAT_ID, " + 
-                "    CAT_NOME " + 
+                "    CAT_NOME, " + 
+                "    CAT_ATIVO " + 
                 "FROM" + 
                 "    categorias " +
                 "WHERE CAT_ID = ? " +
@@ -130,6 +133,7 @@ public class CategoriaDAO extends DAO<Categoria> {
 
             cat.setId( rs.getInt( "CAT_ID" ) );
             cat.setNome( rs.getString( "CAT_NOME" ) );
+            cat.setAtivo( rs.getInt( "CAT_ATIVO" ) );
 
         }
 

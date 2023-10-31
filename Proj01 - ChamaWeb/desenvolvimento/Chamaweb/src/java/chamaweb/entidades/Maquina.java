@@ -10,14 +10,14 @@ package chamaweb.entidades;
  */
 public class Maquina {
     private int id;
-    private String Marca;
-    private String Modelo;
-    private String Processador;
-    private String Ram;
-    private String OS;
-    private int Ativo;
+    private String marca;
+    private String modelo;
+    private String processador;
+    private String ram;
+    private String os;
+    private int ativo;
     
-    private Laboratorio Laboratorio;
+    private Laboratorio laboratorio;
     
     //FK laboratorio;
 
@@ -30,58 +30,58 @@ public class Maquina {
     }
 
     public String getMarca() {
-        return Marca;
+        return marca;
     }
 
     public void setMarca(String Marca) {
-        this.Marca = Marca;
+        this.marca = Marca;
     }
 
     public String getModelo() {
-        return Modelo;
+        return modelo;
     }
 
     public void setModelo(String Modelo) {
-        this.Modelo = Modelo;
+        this.modelo = Modelo;
     }
 
     public String getProcessador() {
-        return Processador;
+        return processador;
     }
 
     public void setProcessador(String Processador) {
-        this.Processador = Processador;
+        this.processador = Processador;
     }
 
     public String getRam() {
-        return Ram;
+        return ram;
     }
 
     public void setRam(String Ram) {
-        this.Ram = Ram;
+        this.ram = Ram;
     }
 
-    public String getOS() {
-        return OS;
+    public String getOs() {
+        return os;
     }
 
-    public void setOS(String OS) {
-        this.OS = OS;
+    public void setOs(String OS) {
+        this.os = OS;
     }
 
     public int getAtivo() {
-        return Ativo;
+        return ativo;
     }
 
     public void setAtivo(int Ativo) {
-        this.Ativo = Ativo;
+        this.ativo = Ativo;
     }
 
     public Laboratorio getLaboratorio() {
-        return Laboratorio;
+        return laboratorio;
     }
 
     public void setLaboratorio(Laboratorio Laboratorio) {
-        this.Laboratorio = Laboratorio;
+        this.laboratorio = Laboratorio;
     }
 }

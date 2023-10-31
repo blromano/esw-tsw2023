@@ -1,8 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Meus Chamados</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +18,7 @@
       crossorigin="anonymous"
     />
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-theme="dark">
@@ -32,22 +35,22 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="meusChamados.html">Meus Chamados</a>
+                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Técnico
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="listagemMaquinas.html">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="listagemChamados.html">Chamados</a></li>
-                  <li><a class="dropdown-item" href="listagemLaboratorios.html">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="listagemProblemas.html">Categorias de Problemas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
+                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
+                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
                 </ul>
               </li>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('abrirChamado.html', '_self')">Abrir Chamado</button>
+            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
         </div>
       </nav>
@@ -60,7 +63,7 @@
         </thead>
         <thead>
           <tr>
-            <th scope="col">Título</th>
+            <th scope="col">TÃ­tulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Data</th>
             <th scope="col">Acessar</th>
@@ -68,7 +71,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">PC não liga</th>
+            <th scope="row">PC nÃ£o liga</th>
             <td>Pendente</td>
             <td>19/06/2023 12:57</td>
             <td><a class="link-light" href="acessarChamado.html">Acessar</a></td>

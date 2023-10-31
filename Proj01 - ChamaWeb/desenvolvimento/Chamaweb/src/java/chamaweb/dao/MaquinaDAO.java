@@ -23,16 +23,15 @@ public class MaquinaDAO extends DAO<Maquina> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
                 "maquinas(MAQ_ID, MAQ_MARCA, MAQ_MODELO, MAQ_PROCESSADOR, MAQ_RAM, MAQ_OS, MAQ_ATIVO, FK_LABORATORIOS_LAB_ID) " + 
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+                "VALUES(?, ?, ?, ?, ?, ?, 1, ?);");
 
         stmt.setInt( 1, obj.getId() );
         stmt.setString( 2, obj.getMarca() );
         stmt.setString( 3, obj.getModelo() );
         stmt.setString( 4, obj.getProcessador() );
         stmt.setString( 5, obj.getRam() );
-        stmt.setString( 6, obj.getOS() );
-        stmt.setInt( 7, obj.getAtivo() );
-        stmt.setInt( 8, obj.getLaboratorio().getId() );
+        stmt.setString( 6, obj.getOs() );
+        stmt.setInt( 7, obj.getLaboratorio().getId() );
 
         stmt.executeUpdate();
         stmt.close();
@@ -59,7 +58,7 @@ public class MaquinaDAO extends DAO<Maquina> {
         stmt.setString( 2, obj.getModelo() );
         stmt.setString( 3, obj.getProcessador() );
         stmt.setString( 4, obj.getRam() );
-        stmt.setString( 5, obj.getOS() );
+        stmt.setString( 5, obj.getOs() );
         stmt.setInt( 6, obj.getAtivo() );
         stmt.setInt( 7, obj.getLaboratorio().getId() );
         stmt.setInt( 8, obj.getId() );
@@ -109,7 +108,7 @@ public class MaquinaDAO extends DAO<Maquina> {
             maquina.setModelo( rs.getString( "MAQ_MODELO" ) );
             maquina.setProcessador( rs.getString( "MAQ_PROCESSADOR" ) );
             maquina.setRam( rs.getString( "MAQ_RAM" ) );
-            maquina.setOS( rs.getString( "MAQ_OS" ) );
+            maquina.setOs( rs.getString( "MAQ_OS" ) );
             maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
 
             laboratorio.setId( rs.getInt( "LAB_ID" ) );
@@ -160,7 +159,7 @@ public class MaquinaDAO extends DAO<Maquina> {
             maquina.setModelo(rs.getString("MAQ_MODELO"));
             maquina.setProcessador(rs.getString("MAQ_PROCESSADOR"));
             maquina.setRam(rs.getString("MAQ_RAM"));
-            maquina.setOS(rs.getString("MAQ_OS"));
+            maquina.setOs(rs.getString("MAQ_OS"));
             maquina.setAtivo(rs.getInt("MAQ_ATIVO"));
             maquina.setLaboratorio(laboratorio);
         }

@@ -1,8 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Editar Categoria</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +18,7 @@
       crossorigin="anonymous"
     />
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-theme="dark">
@@ -32,7 +35,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="meusChamados.html">Meus Chamados</a>
+                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,36 +43,55 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="listagemMaquinas.html">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="listagemChamados.html">Chamados</a></li>
-                  <li><a class="dropdown-item" href="listagemLaboratorios.html">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="listagemProblemas.html">Categorias de Problemas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
+                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
+                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
                 </ul>
               </li>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('abrirChamado.html', '_self')">Abrir Chamado</button>
+            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
         </div>
       </nav>
   </header>
   <main>
     <div class="card col-sm-7" style="min-width: 400px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
-      <h5>Categoria #0001</h5>
+      <form action="${cp}/processaCategorias" method="POST">
+        <input name="acao" type="hidden" value="alterar"/>
+        <input name="ativo" type="hidden" value="${requestScope.categoria.ativo}"/>
+      <input name="id" type="hidden" value="${requestScope.categoria.id}"/>
+      <h5>Categoria #${requestScope.categoria.id}</h5>
       <table class="table table-striped">
         <tbody style="vertical-align: middle;">
           <tr>
             <th scope="row">Nome da Categoria</th>
-            <td><input type="text" class="form-control" id="floatingID" placeholder = "Título" value="Não Liga" required></td>
+            <td><input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Categoria" value="${requestScope.categoria.nome}" required></td>
           </tr>
         </tbody>
       </table>
         <div>
           <div class="d-grid gap-2 d-md-inline">
             <div class="d-grid gap-2 d-md-inline float-end">
-              <button class="btn btn-primary" type="button" >Salvar Alterações</button>
-              <button class="btn btn-secondary" type="button" >Cancelar</button>
+              <button class="btn btn-primary" type="submit" value="alterar" >Salvar Alterações</button>
+              <button class="btn btn-secondary" type="button" onclick="window.open('${cp}/problema/listagemProblemas.jsp', '_self')" >Cancelar</button>
             </div>
-            <button class="btn btn-danger float-start" type="button">Desativar Categoria</button>
+      </form>
+            <form action="${cp}/processaCategorias" method="POST">
+              <input name="id" type="hidden" value="${requestScope.categoria.id}"/>
+              <input name="acao" type="hidden" value="ativar"/>
+              <input name="ativo" type="hidden" value="${requestScope.categoria.ativo}"/>
+              <button class="btn btn-danger float-start" type="submit" value="ativar">
+                <c:choose>
+                  <c:when test="${requestScope.categoria.ativo == 1}">
+                    Desativar Categoria
+                  </c:when>
+                  <c:otherwise>
+                    Ativar Categoria
+                  </c:otherwise>
+                </c:choose>
+              </button>
+            </form>
           </div>
         </div>
     </div>

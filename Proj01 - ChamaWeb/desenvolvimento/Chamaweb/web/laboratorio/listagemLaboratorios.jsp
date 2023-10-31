@@ -1,8 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Laboratorios</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +18,7 @@
       crossorigin="anonymous"
     />
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-theme="dark">
@@ -32,7 +35,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="meusChamados.html">Meus Chamados</a>
+                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,26 +43,47 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="listagemMaquinas.html">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="listagemChamados.html">Chamados</a></li>
-                  <li><a class="dropdown-item" href="listagemLaboratorios.html">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="listagemProblemas.html">Categorias de Problemas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
+                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
+                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
                 </ul>
               </li>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('abrirChamado.html', '_self')">Abrir Chamado</button>
+            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
         </div>
       </nav>
   </header>
   <main>
     <div class="card col-sm-3" style="min-width: 400px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
-      <h5>Cadastrar Novo Laboratório</h5>  
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingID" placeholder = "ID da maquina" required>
-        <label for="floatingID">Nome do Laboratório</label>
-      </div>
-      <button type="button" class="btn btn-primary">Enviar</button>
+        <table class="table table-striped">
+          <thead style="text-align: center;">
+            <th colspan="3">Listagem de Laboratórios</th>
+          </thead>
+          <tbody>
+            <jsp:useBean id="servicos" class="chamaweb.servicos.LaboratorioServices" />
+            <c:forEach items="${servicos.todos}" var="laboratorio">
+              <tr>
+                <td>${laboratorio.nome}</td>
+                <td> 
+                  <c:choose>
+                    <c:when test="${laboratorio.ativo == 1}">
+                      Ativo
+                    </c:when>
+                    <c:otherwise>
+                      Inativo
+                    </c:otherwise>
+                  </c:choose>
+                </td>
+                <td style="text-align: right; padding-right:20px;"> 
+                    <a class="link-light" href="${cp}/processaLaboratorios?acao=prepararAlteracao&id=${laboratorio.id}" >Editar</a>
+                </td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="window.open('${cp}/laboratorio/cadastroLaboratorio.jsp', '_self')">Cadastrar Laboratório</button>
     </div>
   </main>
 

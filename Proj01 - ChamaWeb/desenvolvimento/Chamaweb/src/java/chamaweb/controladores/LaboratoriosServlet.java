@@ -8,18 +8,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import chamaweb.dao.CategoriaDAO;
-import chamaweb.entidades.Categoria;
+import chamaweb.dao.LaboratorioDAO;
+import chamaweb.entidades.Laboratorio;
 import chamaweb.utils.Utils;
 
 /**
- * Servlet para tratar Categorias.
+ * Servlet para tratar Laboratorios.
  *
  * @author Prof. Dr. David Buzatto
  */
-@WebServlet( name = "CategoriasServlet", 
-             urlPatterns = { "/processaCategorias" } )
-public class CategoriasServlet extends HttpServlet {
+@WebServlet( name = "LaboratoriosServlet", 
+             urlPatterns = { "/processaLaboratorios" } )
+public class LaboratoriosServlet extends HttpServlet {
 
     protected void processRequest( 
             HttpServletRequest request, 
@@ -29,18 +29,18 @@ public class CategoriasServlet extends HttpServlet {
         String acao = request.getParameter( "acao" );
         RequestDispatcher disp = null;
 
-        try ( CategoriaDAO dao = new CategoriaDAO() ){
+        try ( LaboratorioDAO dao = new LaboratorioDAO() ){
 
             if ( acao.equals( "inserir" ) ) {
 
                 String nome = request.getParameter( "nome" );
 
-                Categoria c = new Categoria();
-                c.setNome( nome );
+                Laboratorio l = new Laboratorio();
+                l.setNome( nome );
 
-                dao.salvar( c );
+                dao.salvar( l );
                 disp = request.getRequestDispatcher(
-                        "problema/listagemProblemas.jsp" );
+                        "laboratorio/listagemLaboratorios.jsp" );
 
             } else if ( acao.equals( "alterar" ) ) {
 
@@ -48,13 +48,13 @@ public class CategoriasServlet extends HttpServlet {
                 String nome = request.getParameter( "nome" );
                 int ativo = Integer.parseInt(request.getParameter( "ativo" ));
 
-                Categoria c = dao.obterPorId( id );
-                c.setNome( nome );
-                c.setAtivo( ativo );
+                Laboratorio l = dao.obterPorId( id );
+                l.setNome( nome );
+                l.setAtivo( ativo );
 
-                dao.atualizar( c );
+                dao.atualizar( l );
                 disp = request.getRequestDispatcher(
-                        "problema/listagemProblemas.jsp" );
+                        "laboratorio/listagemLaboratorios.jsp" );
 
             } else if ( acao.equals( "ativar" ) ) {
                 
@@ -66,22 +66,22 @@ public class CategoriasServlet extends HttpServlet {
                     ativo = 0;
                 }
 
-                Categoria c = dao.obterPorId( id );
-                c.setAtivo( ativo );
+                Laboratorio l = dao.obterPorId( id );
+                l.setAtivo( ativo );
 
-                dao.atualizar( c );
+                dao.atualizar( l );
                 disp = request.getRequestDispatcher(
-                        "problema/listagemProblemas.jsp" );
+                        "laboratorio/listagemLaboratorios.jsp" );
 
             } else {
                 
                 int id = Integer.parseInt(request.getParameter( "id" ));
-                Categoria c = dao.obterPorId( id );
-                request.setAttribute( "categoria", c );
+                Laboratorio l = dao.obterPorId( id );
+                request.setAttribute( "laboratorio", l );
                 
                 if ( acao.equals( "prepararAlteracao" ) ) {
                     disp = request.getRequestDispatcher( 
-                            "problema/editarProblema.jsp" );
+                            "laboratorio/editarLaboratorio.jsp" );
                 } 
                 
             }
@@ -114,7 +114,7 @@ public class CategoriasServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "CategoriasServlet";
+        return "LaboratoriosServlet";
     }
 
 }

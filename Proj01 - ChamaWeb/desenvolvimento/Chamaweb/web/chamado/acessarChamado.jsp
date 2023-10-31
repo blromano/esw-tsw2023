@@ -1,8 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Visualizar Chamado</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +18,7 @@
       crossorigin="anonymous"
     />
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-theme="dark">
@@ -32,22 +35,22 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="meusChamados.html">Meus Chamados</a>
+                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Técnico
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="listagemMaquinas.html">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="listagemChamados.html">Chamados</a></li>
-                  <li><a class="dropdown-item" href="listagemLaboratorios.html">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="listagemProblemas.html">Categorias de Problemas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
+                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
+                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
                 </ul>
               </li>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('abrirChamado.html', '_self')">Abrir Chamado</button>
+            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
         </div>
       </nav>
@@ -58,8 +61,8 @@
       <table class="table table-striped">
         <tbody style="vertical-align: middle;">
           <tr>
-            <th scope="row">Título</th>
-            <td>PC não liga</td>
+            <th scope="row">TÃ­tulo</th>
+            <td>PC nÃ£o liga</td>
           </tr>
           <tr>
             <th scope="row">Estado</th>
@@ -70,33 +73,33 @@
             <td>19/06/2023 12:57</td>
           </tr>
           <tr>
-            <th scope="row">Usuário</th>
-            <td>João da Silva</td>
+            <th scope="row">UsuÃ¡rio</th>
+            <td>JoÃ£o da Silva</td>
           </tr>
           <tr>
-            <th scope="row">Técnico</th>
+            <th scope="row">TÃ©cnico</th>
             <td>Jonas Johnson</td>
           </tr>
           <tr>
-            <th scope="row">Máquina</th>
+            <th scope="row">MÃ¡quina</th>
             <td>001</td>
           </tr>
           <tr>
             <th scope="row">Local</th>
-            <td>Laboratório 1</td>
+            <td>LaboratÃ³rio 1</td>
           </tr>
           <tr>
             <th scope="row">Categoria</th>
-            <td>Não liga</td>
+            <td>NÃ£o liga</td>
           </tr>
           <tr>
-            <th scope="row">Descrição</th>
-            <td>Ao pressionar o botão de ligar, não há resposta alguma da máquina.</td>
+            <th scope="row">DescriÃ§Ã£o</th>
+            <td>Ao pressionar o botÃ£o de ligar, nÃ£o hÃ¡ resposta alguma da mÃ¡quina.</td>
           </tr>
         </tbody>
       </table>
-      <h5>Operações realizadas</h5>
-      Nenhuma operação foi realizada até o momento.
+      <h5>OperaÃ§Ãµes realizadas</h5>
+      Nenhuma operaÃ§Ã£o foi realizada atÃ© o momento.
       <br>
       <div style="margin-top: 15px;" class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="button" class="btn btn-secondary disabled">Avaliar Chamado</button>
@@ -108,7 +111,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            Nenhuma mensagem foi enviada até o momento.
+            Nenhuma mensagem foi enviada atÃ© o momento.
             <div class="input-group mb-3 fixed-bottom" style="padding-left: calc(100% - 390px); padding-right: 10px;">
                 <input type="text" class="form-control" placeholder="Digite sua mensagem..." aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Enviar</button>

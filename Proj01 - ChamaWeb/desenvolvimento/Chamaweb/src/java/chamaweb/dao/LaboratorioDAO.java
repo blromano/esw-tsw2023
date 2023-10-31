@@ -81,7 +81,8 @@ public class LaboratorioDAO extends DAO<Laboratorio> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
                 "    LAB_ID, " + 
-                "    LAB_NOME " + 
+                "    LAB_NOME, " + 
+                "    LAB_ATIVO " +
                 "FROM" + 
                 "    laboratorios " + 
                 "ORDER BY LAB_NOME;" );
@@ -94,6 +95,7 @@ public class LaboratorioDAO extends DAO<Laboratorio> {
 
             lab.setId( rs.getInt( "LAB_ID" ) );
             lab.setNome( rs.getString( "LAB_NOME" ) );
+            lab.setAtivo( rs.getInt( "LAB_ATIVO" ) );
 
             lista.add( lab );
 
@@ -114,7 +116,8 @@ public class LaboratorioDAO extends DAO<Laboratorio> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT" + 
                 "    LAB_ID, " + 
-                "    LAB_NOME " + 
+                "    LAB_NOME, " + 
+                "    LAB_ATIVO " + 
                 "FROM" + 
                 "    laboratorios " +
                 "WHERE LAB_ID = ? " +
@@ -130,6 +133,7 @@ public class LaboratorioDAO extends DAO<Laboratorio> {
 
             lab.setId( rs.getInt( "LAB_ID" ) );
             lab.setNome( rs.getString( "LAB_NOME" ) );
+            lab.setAtivo( rs.getInt( "LAB_ATIVO" ) );
 
         }
 

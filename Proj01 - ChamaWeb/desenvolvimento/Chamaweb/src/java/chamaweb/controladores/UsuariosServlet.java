@@ -40,7 +40,7 @@ public class UsuariosServlet extends HttpServlet {
                     request.setAttribute( "erro",  "Matricula não encontrada!");
                     disp = request.getRequestDispatcher("/index.jsp" );
                 } else if (!u.getSenha().equals(usuarioFornecido.getSenha())) {
-                    request.setAttribute( "erro",  "Matricula não encontrada!");
+                    request.setAttribute( "erro",  "Senha Incorreta!");
                     disp = request.getRequestDispatcher("/index.jsp" );
                 } else {
                     disp = request.getRequestDispatcher("/chamado/meusChamados.jsp" );

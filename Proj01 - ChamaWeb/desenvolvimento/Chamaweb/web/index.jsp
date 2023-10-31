@@ -1,24 +1,29 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Chamaweb</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
 
-  <link href="css/style.css" rel="stylesheet">
-  
-<!--reCaptcha API-->
-<script src="https://www.google.com/recaptcha/api.js"></script>
+    <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-theme="dark">
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container-fluid">   
             <a class="navbar-brand" href="#">
                 <!--<img src="src/chamaweb.png" alt="" height="50" class="d-inline-block align-text-top">-->
@@ -30,22 +35,22 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="meusChamados.html">Meus Chamados</a>
+                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Técnico
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="listagemMaquinas.html">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="listagemChamados.html">Chamados</a></li>
-                  <li><a class="dropdown-item" href="listagemLaboratorios.html">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="listagemProblemas.html">Categorias de Problemas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
+                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
+                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
+                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
                 </ul>
               </li>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('abrirChamado.html', '_self')">Abrir Chamado</button>
+            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
         </div>
       </nav>
