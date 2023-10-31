@@ -23,10 +23,10 @@ public class UsuariosServlet extends HttpServlet {
         
         String acao = request.getParameter( "acao" );
         RequestDispatcher disp = null;
-        UsuarioDAO dao = new UsuarioDAO();
 
         try {
-
+            
+                UsuarioDAO dao = new UsuarioDAO();
                 String matricula = request.getParameter( "matricula" );
                 String senha = request.getParameter( "senha" );
 
