@@ -23,22 +23,23 @@ public class UsuariosServlet extends HttpServlet {
         
         String acao = request.getParameter( "acao" );
         RequestDispatcher disp = null;
+        UsuarioDAO dao = new UsuarioDAO();
 
-        try ( UsuarioDAO dao = new UsuarioDAO() ){
+        try {
 
                 String matricula = request.getParameter( "matricula" );
                 String senha = request.getParameter( "senha" );
 
                 Usuario usuarioFornecido = new Usuario();
-                u.setMatricula( matricula );
-                u.setSenha( senha );
+                usuarioFornecido.setMatricula( matricula );
+                usuarioFornecido.setSenha( senha );
 
                 Usuario u = dao.obterPorMatricula( matricula );
                 
                 if (u == null) {
                     request.setAttribute( "erro",  "Matricula não encontrada!");
                     disp = request.getRequestDispatcher("/index.jsp" );
-                } else if (u.getSenha() != usuarioFornecido.getSenha()) {
+                } else if (!u.getSenha().equals(usuarioFornecido.getSenha())) {
                     request.setAttribute( "erro",  "Matricula não encontrada!");
                     disp = request.getRequestDispatcher("/index.jsp" );
                 } else {
