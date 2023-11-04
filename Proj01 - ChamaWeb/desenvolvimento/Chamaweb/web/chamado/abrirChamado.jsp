@@ -70,7 +70,11 @@
               <option selected></option>
               <jsp:useBean id="servicosMaq" class="chamaweb.servicos.MaquinaServices" scope="page"/>
               <c:forEach var="maquina" items="${servicosMaq.todos}">
-                <option value="${maquina.id}">${maquina.id} - ${maquina.marca} ${maquina.modelo}</option>
+                <c:choose>
+                  <c:when test="${maquina.ativo == 1}">
+                    <option value="${maquina.id}">${maquina.id} - ${maquina.marca} ${maquina.modelo}</option>
+                  </c:when>
+                </c:choose>
               </c:forEach>
             </select>
             <label for="floatingProblem">ID da máquina</label>
@@ -80,7 +84,11 @@
               <option selected></option>
               <jsp:useBean id="servicosCat" class="chamaweb.servicos.CategoriaServices" scope="page"/>
               <c:forEach var="categoria" items="${servicosCat.todos}">
-                <option value="${categoria.id}">${categoria.nome}</option>
+                <c:choose>
+                  <c:when test="${categoria.ativo == 1}">
+                    <option value="${categoria.id}">${categoria.nome}</option>
+                  </c:when>
+                </c:choose>
               </c:forEach>
             </select>
             <label for="floatingProblem">Categoria do problema</label>

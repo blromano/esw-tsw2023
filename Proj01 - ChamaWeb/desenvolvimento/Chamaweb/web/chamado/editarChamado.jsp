@@ -57,81 +57,157 @@
   </header>
   <main>
     <div class="card col-sm-7" style="min-width: 450px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
-      <h5>Chamado #0001</h5>
-      <table class="table table-striped">
-        <tbody style="vertical-align: middle;">
-          <tr>
-            <th scope="row">TÃ­tulo</th>
-            <td><input type="text" class="form-control" id="floatingID" placeholder = "TÃ­tulo" value="PC nÃ£o liga" required></td>
-          </tr>
-          <tr>
-            <th scope="row">Estado</th>
-            <td>
-              <select class="form-select" id="floatingState">
-                <option selected>Pendente</option>
-                <option>Em Progresso</option>
-                <option>ConcluÃ­do</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Prioridade</th>
-            <td>
-              <select class="form-select" id="floatingState">
-                <option selected>Baixa</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Data</th>
-            <td><input type="text" class="form-control" id="floatingID" placeholder = "TÃ­tulo" value="19/06/2023 12:57" required></td>
-          </tr>
-          <tr>
-            <th scope="row">UsuÃ¡rio</th>
-            <td>JoÃ£o da Silva</td>
-          </tr>
-          <tr>
-            <th scope="row">TÃ©cnico</th>
-            <td>
-              <select class="form-select" id="floatingState">
-                <option selected>Jonas Johnson</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">MÃ¡quina</th>
-            <td><select class="form-select" id="floatingState">
-              <option selected>001</option>
-            </select></td>
-          </tr>
-          <tr>
-            <th scope="row">Local</th>
-            <td><select class="form-select" id="floatingState">
-              <option selected>LaboratÃ³rio 1</option>
-            </select></td>
-          </tr>
-          <tr>
-            <th scope="row">Categoria</th>
-            <td><select class="form-select" id="floatingState">
-              <option selected>NÃ£o Liga</option>
-            </select></td>
-          </tr>
-          <tr>
-            <th scope="row">DescriÃ§Ã£o</th>
-            <td>Ao pressionar o botÃ£o de ligar, nÃ£o hÃ¡ resposta alguma da mÃ¡quina.</td>
-          </tr>
-        </tbody>
-      </table>
-      <h5>OperaÃ§Ãµes realizadas</h5>
-      <input type="text" class="form-control" id="floatingID" placeholder = "OperaÃ§Ãµes realizadas" value="Nenhuma operaÃ§Ã£o foi realizada atÃ© o momento." required>
-      <br>
-      <div class="d-grid gap-2 d-md-inline">
-        <div class="d-grid gap-2 d-md-inline float-end">
-          <button class="btn btn-primary" type="button" >Salvar AlteraÃ§Ãµes</button>
-          <button class="btn btn-secondary" type="button" >Cancelar</button>
+      <form action="${cp}/processaChamados" method="POST">
+        <input type="hidden" name="acao" value="alterar">
+        <input type="hidden" name="id" value="${requestScope.chamado.id}">
+        <input type="hidden" name="usuario" value="${requestScope.chamado.usuario.id}">
+        <h5>Chamado #${requestScope.chamado.id}</h5>
+        <table class="table table-striped">
+          <tbody style="vertical-align: middle;">
+            <tr>
+              <th scope="row">Tí­tulo</th>
+              <td><input type="text" class="form-control" id="floatingID" placeholder = "Título" value="${requestScope.chamado.titulo}" required name="titulo"></td>
+            </tr>
+            <tr>
+              <th scope="row">Estado</th>
+              <td>
+                <select class="form-select" id="floatingState" name="estado">
+                  <jsp:useBean id="servicosEst" class="chamaweb.servicos.EstadoServices" scope="page"/>
+                  <c:forEach var="estado" items="${servicosEst.todos}">
+                    <c:choose>
+                      <c:when test="${estado.id == requestScope.chamado.estado.id}">
+                        <option value="${estado.id}" selected>${estado.nome}</option>
+                      </c:when>
+                      <c:otherwise>
+                        <option value="${estado.id}">${estado.nome}</option>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:forEach>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Prioridade</th>
+              <td>
+                <select class="form-select" id="floatingState" name="prioridade">
+                  <jsp:useBean id="servicosPri" class="chamaweb.servicos.PrioridadeServices" scope="page"/>
+                  <c:forEach var="prioridade" items="${servicosPri.todos}">
+                    <c:choose>
+                      <c:when test="${prioridade.id == requestScope.chamado.prioridade.id}">
+                        <option value="${prioridade.id}" selected>${prioridade.nome}</option>
+                      </c:when>
+                      <c:otherwise>
+                        <option value="${prioridade.id}">${prioridade.nome}</option>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:forEach>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Data</th>
+              <td><input type="text" name="data" class="form-control" id="floatingID" placeholder = "Tí­tulo" value="${requestScope.chamado.data}" required></td>
+            </tr>
+            <tr>
+              <th scope="row">Usuário</th>
+              <td>${requestScope.chamado.usuario.nome}</td>
+            </tr>
+            <tr>
+              <th scope="row">Técnico</th>
+              <td>
+                <select class="form-select" id="floatingState" name="tecnico">
+                  <jsp:useBean id="servicosUsr" class="chamaweb.servicos.UsuarioServices" scope="page"/>
+                  <c:forEach var="usuario" items="${servicosUsr.todos}">
+                    <c:choose>
+                      <c:when test="${usuario.tipo.id == requestScope.chamado.tecnico.tipo.id}">
+                        <c:choose>
+                          <c:when test="${usuario.id == requestScope.chamado.tecnico.id}">
+                            <option value="${usuario.id}" selected>${usuario.nome}</option>
+                          </c:when>
+                          <c:otherwise>
+                            <option value="${usuario.id}">${usuario.nome}</option>
+                          </c:otherwise>
+                        </c:choose>
+                      </c:when>
+                    </c:choose>
+                  </c:forEach>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Máquina</th>
+              <td><select class="form-select" id="floatingState" name="maquina">
+                <jsp:useBean id="servicosMaq" class="chamaweb.servicos.MaquinaServices" scope="page"/>
+                <c:forEach var="maquina" items="${servicosMaq.todos}">
+                  <c:choose>
+                    <c:when test="${maquina.id == requestScope.chamado.maquina.id}">
+                      <option value="${maquina.id}" selected>${maquina.id} - ${maquina.marca} ${maquina.modelo}</option>
+                    </c:when>
+                    <c:otherwise>
+                      <option value="${maquina.id}">${maquina.id} - ${maquina.marca} ${maquina.modelo}</option>
+                    </c:otherwise>
+                  </c:choose>
+                </c:forEach>
+              </select></td>
+            </tr>
+            <tr>
+              <th scope="row">Local</th>
+              <td><select class="form-select" id="floatingState" name="laboratorio">
+                <jsp:useBean id="servicosLab" class="chamaweb.servicos.LaboratorioServices" scope="page"/>
+                <c:forEach var="laboratorio" items="${servicosLab.todos}">
+                  <c:choose>
+                    <c:when test="${laboratorio.ativo == 1}">
+                      <c:choose>
+                        <c:when test="${laboratorio.id == requestScope.chamado.maquina.laboratorio.id}">
+                          <option value="${laboratorio.id}" selected>${laboratorio.id} - ${laboratorio.nome}</option>
+                        </c:when>
+                        <c:otherwise>
+                          <option value="${laboratorio.id}">${laboratorio.id} - ${laboratorio.nome}</option>
+                        </c:otherwise>
+                      </c:choose>
+                    </c:when>
+                  </c:choose>
+                </c:forEach>
+              </select></td>
+            </tr>
+            <tr>
+              <th scope="row">Categoria</th>
+              <td><select class="form-select" id="floatingState" name="categoria">
+                <jsp:useBean id="servicosCat" class="chamaweb.servicos.CategoriaServices" scope="page"/>
+                <c:forEach var="categoria" items="${servicosCat.todos}">
+                  <c:choose>
+                    <c:when test="${categoria.ativo == 1}">
+                      <c:choose>
+                        <c:when test="${categoria.id == requestScope.chamado.categoria.id}">
+                          <option value="${categoria.id}" selected>${categoria.nome}</option>
+                        </c:when>
+                        <c:otherwise>
+                          <option value="${categoria.id}">${categoria.nome}</option>
+                        </c:otherwise>
+                      </c:choose>
+                    </c:when>
+                  </c:choose>
+                </c:forEach>
+              </select></td>
+            </tr>
+            <tr>
+              <th scope="row">Descrição</th>
+              <td>${requestScope.chamado.descricao}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>Operações realizadas</h5>
+        <!--TODO: Adicionar operações realizadas no valor-->
+        <input type="text" class="form-control" id="floatingID" placeholder = "Operações realizadas" value="" required name="operacoes">
+        <br>
+        <div class="d-grid gap-2 d-md-inline">
+          <div class="d-grid gap-2 d-md-inline float-end">
+            <button class="btn btn-primary" type="submit" >Salvar Alterações</button>
+            <button class="btn btn-secondary" type="button" >Cancelar</button>
+          </div>
+        </form>
+          <button class="btn btn-danger float-start" type="submit">Excluir Chamado</button>
         </div>
-        <button class="btn btn-danger float-start" type="button">Excluir Chamado</button>
-      </div>
     </div>
   </main>
 

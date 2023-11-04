@@ -79,8 +79,8 @@ public class PrioridadeDAO extends DAO<Prioridade> {
                 "    PRI_ID, " + 
                 "    PRI_NOME " + 
                 "FROM" + 
-                "    prioridades " + 
-                "ORDER BY PRI_NOME;" );
+                "    prioridades " +
+                "ORDER BY PRI_ID" );
 
         ResultSet rs = stmt.executeQuery();
 
@@ -113,8 +113,7 @@ public class PrioridadeDAO extends DAO<Prioridade> {
                 "    PRI_NOME " + 
                 "FROM" + 
                 "    prioridades " +
-                "WHERE PRI_ID = ? " +
-                "ORDER BY PRI_NOME;" );
+                "WHERE PRI_ID = ? " );
 
         stmt.setInt( 1, id );
 

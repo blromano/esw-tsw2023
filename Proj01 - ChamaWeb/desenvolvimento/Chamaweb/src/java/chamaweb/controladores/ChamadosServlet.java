@@ -76,13 +76,10 @@ public class ChamadosServlet extends HttpServlet {
                         "chamado/listagemChamados.jsp" );
 
             } else if ( acao.equals( "alterar" ) ) {
-                
                 int id = Integer.parseInt(request.getParameter( "id" ));
                 String titulo = request.getParameter( "titulo" );
                 String data = request.getParameter( "data" );
                 String descricao = request.getParameter( "descricao" );
-                boolean resultadoAvaliacao = Boolean.parseBoolean(request.getParameter( "resultadoAvaliacao" ));
-                String observacoesAvaliacao = request.getParameter( "observacoesAvaliacao" );
                 Maquina maquina = daoMaq.obterPorId( Integer.parseInt( request.getParameter( "maquina" ) ) );
                 Usuario usuario = daoUsr.obterPorId( Integer.parseInt( request.getParameter( "usuario" ) ) );
                 Usuario tecnico = daoUsr.obterPorId( Integer.parseInt( request.getParameter( "tecnico" ) ) );
@@ -95,8 +92,6 @@ public class ChamadosServlet extends HttpServlet {
                 chamado.setTitulo( titulo );
                 chamado.setData( Date.valueOf(LocalDate.parse(data)) );
                 chamado.setDescricao( descricao );
-                chamado.setResultadoAvaliacao( resultadoAvaliacao );
-                chamado.setObservacoesAvaliacao( observacoesAvaliacao );
                 chamado.setMaquina( maquina );
                 chamado.setUsuario( usuario );
                 chamado.setTecnico( tecnico );
@@ -105,10 +100,12 @@ public class ChamadosServlet extends HttpServlet {
                 chamado.setEstado( estado );
 
                 dao.atualizar( chamado );
+                
+                System.out.println(chamado);
+
                 disp = request.getRequestDispatcher(
                         "chamado/listagemChamados.jsp" );
             } else {
-                
                 int id = Integer.parseInt(request.getParameter( "id" ));
                 Chamado chamado = dao.obterPorId( id );
                 request.setAttribute( "chamado", chamado );

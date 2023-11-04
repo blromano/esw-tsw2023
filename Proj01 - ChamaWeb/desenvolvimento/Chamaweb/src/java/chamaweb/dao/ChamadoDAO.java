@@ -54,9 +54,7 @@ public class ChamadoDAO extends DAO<Chamado> {
                 "SET" + 
                 "    CHA_TITULO = ?," + 
                 "    CHA_DATA = ?," + 
-                "    CHA_DESCRICAO = ?," + 
-                "    CHA_RESULTADO_AVALIACAO = ?," + 
-                "    CHA_OBSERVACOES_AVALIACAO = ?," + 
+                //"    CHA_DESCRICAO = ?," + 
                 "    FK_MAQUINAS_MAQ_ID = ?," + 
                 "    FK_USUARIOS_USR_ID = ?," + 
                 "    FK_USUARIOS_USR_ID_TECNICO = ?," + 
@@ -68,16 +66,16 @@ public class ChamadoDAO extends DAO<Chamado> {
 
         stmt.setString( 1, obj.getTitulo() );
         stmt.setDate( 2, obj.getData() );
-        stmt.setString( 3, obj.getDescricao() );
-        stmt.setBoolean( 4, obj.getResultadoAvaliacao() );
-        stmt.setString( 5, obj.getObservacoesAvaliacao() );
-        stmt.setInt( 6, obj.getMaquina().getId() );
-        stmt.setInt( 7, obj.getUsuario().getId() );
-        stmt.setInt( 8, obj.getTecnico().getId() );
-        stmt.setInt( 9, obj.getCategoria().getId() );
-        stmt.setInt( 10, obj.getPrioridade().getId() );
-        stmt.setInt( 11, obj.getEstado().getId() );
-        stmt.setInt( 12, obj.getId() );
+        //stmt.setString( 3, obj.getDescricao() );
+        stmt.setInt( 3, obj.getMaquina().getId() );
+        stmt.setInt( 4, obj.getUsuario().getId() );
+        stmt.setInt( 5, obj.getTecnico().getId() );
+        stmt.setInt( 6, obj.getCategoria().getId() );
+        stmt.setInt( 7, obj.getPrioridade().getId() );
+        stmt.setInt( 8, obj.getEstado().getId() );
+        stmt.setInt( 9, obj.getId() );
+
+        System.out.println( stmt.toString());
 
         stmt.executeUpdate();
         stmt.close();
@@ -219,8 +217,8 @@ public class ChamadoDAO extends DAO<Chamado> {
                 "FROM" + 
                 "    chamados " +
                 "INNER JOIN maquinas ON maquinas.MAQ_ID = chamados.FK_MAQUINAS_MAQ_ID " +
-                "INNER JOIN usuarios usuario ON usuarios.USR_ID = chamados.FK_USUARIOS_USR_ID " +
-                "LEFT JOIN usuarios tecnico ON usuarios.USR_ID = chamados.FK_USUARIOS_USR_ID_TECNICO " +
+                "INNER JOIN usuarios usuario ON usuario.USR_ID = chamados.FK_USUARIOS_USR_ID " +
+                "LEFT JOIN usuarios tecnico ON tecnico.USR_ID = chamados.FK_USUARIOS_USR_ID_TECNICO " +
                 "INNER JOIN categorias ON categorias.CAT_ID = chamados.FK_CATEGORIAS_CAT_ID " +
                 "LEFT JOIN prioridades ON prioridades.PRI_ID = chamados.FK_PRIORIDADES_PRI_ID " +
                 "INNER JOIN estados ON estados.EST_ID = chamados.FK_ESTADOS_EST_ID " +

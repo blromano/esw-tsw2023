@@ -80,7 +80,7 @@ public class EstadoDAO extends DAO<Estado> {
                 "    EST_NOME " + 
                 "FROM" + 
                 "    estados " + 
-                "ORDER BY EST_NOME;" );
+                "ORDER BY EST_ID;" );
 
         ResultSet rs = stmt.executeQuery();
 
@@ -114,7 +114,7 @@ public class EstadoDAO extends DAO<Estado> {
                 "FROM" + 
                 "    estados " +
                 "WHERE EST_ID = ? " +
-                "ORDER BY EST_NOME;" );
+                "ORDER BY EST_ID;" );
 
         stmt.setInt( 1, id );
 
