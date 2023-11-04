@@ -57,36 +57,41 @@
   </header>
   <main>
     <div class="card col-sm-3" style="min-width: 400px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
+      <form action="${cp}/processaChamados" method="POST">
+      <input type="hidden" name="acao" value="inserir">
       <h5>Abrir Chamado</h5>  
       <div class="card-body">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingTitle" placeholder = "Titulo do chamado" required>
+            <input type="text" class="form-control" id="floatingTitle" name="titulo" placeholder = "Titulo do chamado" required>
             <label for="floatingTitle">Titulo do Chamado</label>
           </div>
           <div class="form-floating mb-3">
-            <select class="form-select">
+            <select name="maquina" class="form-select">
               <option selected></option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <jsp:useBean id="servicosMaq" class="chamaweb.servicos.MaquinaServices" scope="page"/>
+              <c:forEach var="maquina" items="${servicosMaq.todos}">
+                <option value="${maquina.id}">${maquina.id} - ${maquina.marca} ${maquina.modelo}</option>
+              </c:forEach>
             </select>
-            <label for="floatingProblem">ID da mÃ¡quina</label>
+            <label for="floatingProblem">ID da máquina</label>
           </div>
           <div class="form-floating mb-3">
-            <select class="form-select">
+            <select name="categoria" class="form-select">
               <option selected></option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <jsp:useBean id="servicosCat" class="chamaweb.servicos.CategoriaServices" scope="page"/>
+              <c:forEach var="categoria" items="${servicosCat.todos}">
+                <option value="${categoria.id}">${categoria.nome}</option>
+              </c:forEach>
             </select>
             <label for="floatingProblem">Categoria do problema</label>
           </div>
           <div class="form-floating mb-3">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <label for="exampleFormControlTextarea1" class="form-label">DescriÃ§Ã£o do problema</label>
+            <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="exampleFormControlTextarea1" class="form-label">Descrição do problema</label>
           </div>
         </div>
-        <button type="button" class="btn btn-primary">Enviar</button>
+        <button type="submit" value="inserir" class="btn btn-primary">Enviar</button>
+      </form>
     </div>
   </main>
 

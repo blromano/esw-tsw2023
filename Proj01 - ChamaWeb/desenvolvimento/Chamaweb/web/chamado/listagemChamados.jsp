@@ -63,39 +63,26 @@
         </thead>
         <thead>
           <tr>
-            <th scope="col">TÃ­tulo</th>
+            <th scope="col">Tí­tulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Prioridade</th>
-            <th scope="col">TÃ©cnico</th>
+            <th scope="col">Técnico</th>
             <th scope="col">Data</th>
             <th scope="col">Acessar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">PC nÃ£o liga</th>
-            <td>Pendente</td>
-            <td>Baixa</td>
-            <td>Jonas Johnson</td>
-            <td>19/06/2023 12:57</td>
-            <td><a class="link-light" href="editarChamado.html">Acessar</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Monitor com defeito</th>
-            <td>Pendente</td>
-            <td>Baixa</td>
-            <td>Jonas Johnson</td>
-            <td>19/06/2023 12:57</td>
-            <td><a class="link-light" href="editarChamado.html">Acessar</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Sem acesso a internet</th>
-            <td>Pendente</td>
-            <td>Baixa</td>
-            <td>Jonas Johnson</td>
-            <td>19/06/2023 12:57</td>
-            <td><a class="link-light" href="editarChamado.html">Acessar</a></td>
-          </tr>
+          <jsp:useBean id="servicosCham" class="chamaweb.servicos.ChamadoServices" scope="page"/>
+          <c:forEach var="chamado" items="${servicosCham.todos}">
+            <tr>
+              <th scope="row">${chamado.titulo}</th>
+              <td>${chamado.estado.nome}</td>
+              <td>${chamado.prioridade.nome}</td>
+              <td>${chamado.tecnico.nome}</td>
+              <td>${chamado.data}</td>
+              <td><a class="link-light" href="${cp}/processaChamados?acao=prepararAlteracao&id=${chamado.id}">Acessar</a></td>
+            </tr>
+          </c:forEach>
         </tbody>
       </table>
       </table>

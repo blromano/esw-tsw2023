@@ -10,6 +10,7 @@ package chamaweb.entidades;
  */
 public class Prioridade {
     private int id;
+    private String nome;
 
     public int getId() {
         return id;
@@ -26,5 +27,4 @@ public class Prioridade {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    private String nome;
 }
