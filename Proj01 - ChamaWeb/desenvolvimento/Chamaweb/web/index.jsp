@@ -32,49 +32,32 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Técnico
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
-                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
-                </ul>
-              </li>
-            </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
           </div>
-        </div>
       </nav>
   </header>
   <main>
     <div class="card col-sm-3" style="min-width: 400px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
       <h5>Login</h5>
+      <h5>${requestScope.erro}</h5>
+      <form action="${cp}/processaUsuarios" method="POST">
       <div class="card-body">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Matricula">
-            <label for="floatingInput">Matricula</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula">
+            <label for="matricula">Matricula</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Senha">
-            <label for="floatingPassword">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+            <label for="senha">Senha</label>
           </div>
           <div class="mb-3 col">
-                <a href="recuperarSenha.html" class="link-secondary">Esqueci minha senha</a>
+                <a href="recuperarSenha.jsp" class="link-secondary">Esqueci minha senha</a>
           </div>
           <div class="mb-3 col">
             <div class="g-recaptcha brochure__form__captcha" data-sitekey="6LdfcXUmAAAAANsjGsUShQbReD5KcY3pdKE4B73g" style="margin-bottom: 10px;"></div>
-            <button type="button" class="btn btn-primary">Entrar</button>
+            <button type="submit" class="btn btn-primary" value="entrar">Entrar</button>
           </div>
         </div>
+      </form>
       </div>
     </div>
   </main>

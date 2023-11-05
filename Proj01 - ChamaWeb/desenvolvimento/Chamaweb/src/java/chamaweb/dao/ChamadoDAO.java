@@ -39,7 +39,7 @@ public class ChamadoDAO extends DAO<Chamado> {
         stmt.setInt( 6, obj.getMaquina().getId() );
         stmt.setInt( 7, obj.getUsuario().getId() );
         stmt.setInt( 8, obj.getCategoria().getId() );
-        stmt.setInt( 9, obj.getEstado().getId() );
+        stmt.setInt( 9, 1 );
 
         stmt.executeUpdate();
         stmt.close();
@@ -54,7 +54,6 @@ public class ChamadoDAO extends DAO<Chamado> {
                 "SET" + 
                 "    CHA_TITULO = ?," + 
                 "    CHA_DATA = ?," + 
-                //"    CHA_DESCRICAO = ?," + 
                 "    FK_MAQUINAS_MAQ_ID = ?," + 
                 "    FK_USUARIOS_USR_ID = ?," + 
                 "    FK_USUARIOS_USR_ID_TECNICO = ?," + 
@@ -66,7 +65,6 @@ public class ChamadoDAO extends DAO<Chamado> {
 
         stmt.setString( 1, obj.getTitulo() );
         stmt.setDate( 2, obj.getData() );
-        //stmt.setString( 3, obj.getDescricao() );
         stmt.setInt( 3, obj.getMaquina().getId() );
         stmt.setInt( 4, obj.getUsuario().getId() );
         stmt.setInt( 5, obj.getTecnico().getId() );
@@ -74,8 +72,6 @@ public class ChamadoDAO extends DAO<Chamado> {
         stmt.setInt( 7, obj.getPrioridade().getId() );
         stmt.setInt( 8, obj.getEstado().getId() );
         stmt.setInt( 9, obj.getId() );
-
-        System.out.println( stmt.toString());
 
         stmt.executeUpdate();
         stmt.close();
@@ -258,23 +254,27 @@ public class ChamadoDAO extends DAO<Chamado> {
             maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
             maquina.setLaboratorio( laboratorio );
 
-            tipoUsuario.setId( rs.getInt( "TIP_ID" ) );
-            tipoUsuario.setNome( rs.getString( "TIP_NOME" ) );
+            tipoUsuario.setId( rs.getInt( "tipoUsuario.TIP_ID" ) );
+            tipoUsuario.setNome( rs.getString( "tipoUsuario.TIP_NOME" ) );
 
-            usuario.setId( rs.getInt( "USR_ID" ) );
-            usuario.setNome( rs.getString( "USR_NOME" ) );
-            usuario.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            usuario.setSenha( rs.getString( "USR_SENHA" ) );
+            usuario.setId( rs.getInt( "usuario.USR_ID" ) );
+            usuario.setNome( rs.getString( "usuario.USR_NOME" ) );
+            usuario.setMatricula( rs.getString( "usuario.USR_MATRICULA" ) );
+            usuario.setSenha( rs.getString( "usuario.USR_SENHA" ) );
             usuario.setTipo( tipoUsuario );
 
-            tipoTecnico.setId( rs.getInt( "TIP_ID" ) );
-            tipoTecnico.setNome( rs.getString( "TIP_NOME" ) );
+            if ( rs.getInt( "tecnico.USR_ID" ) == 0 ) {
+                tecnico = null;
+            }else{
+                tipoTecnico.setId( rs.getInt( "tipoTecnico.TIP_ID" ) );
+                tipoTecnico.setNome( rs.getString( "tipoTecnico.TIP_NOME" ) );
 
-            tecnico.setId( rs.getInt( "USR_ID" ) );
-            tecnico.setNome( rs.getString( "USR_NOME" ) );
-            tecnico.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            tecnico.setSenha( rs.getString( "USR_SENHA" ) );
-            tecnico.setTipo( tipoTecnico );
+                tecnico.setId( rs.getInt( "tecnico.USR_ID" ) );
+                tecnico.setNome( rs.getString( "tecnico.USR_NOME" ) );
+                tecnico.setMatricula( rs.getString( "tecnico.USR_MATRICULA" ) );
+                tecnico.setSenha( rs.getString( "tecnico.USR_SENHA" ) );
+                tecnico.setTipo( tipoTecnico );
+            }
 
             categoria.setId( rs.getInt( "CAT_ID" ) );
             categoria.setNome( rs.getString( "CAT_NOME" ) );
@@ -307,4 +307,23 @@ public class ChamadoDAO extends DAO<Chamado> {
         return chamado;
 
     }    
+
+    public void avaliar( Chamado obj ) throws SQLException {
+
+        PreparedStatement stmt = getConnection().prepareStatement(
+                "UPDATE chamados " + 
+                "SET" + 
+                "    CHA_RESULTADO_AVALIACAO = ?," +
+                "    CHA_OBSERVACOES_AVALIACAO = ? " +
+                "WHERE" + 
+                "    CHA_ID = ?;" );
+
+        stmt.setBoolean( 1, obj.getResultadoAvaliacao() );
+        stmt.setString( 2, obj.getObservacoesAvaliacao() );
+        stmt.setInt( 3, obj.getId() );
+
+        stmt.executeUpdate();
+        stmt.close();
+
+    }
 }

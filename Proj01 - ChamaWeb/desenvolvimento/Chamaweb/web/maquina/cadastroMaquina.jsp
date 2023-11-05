@@ -35,22 +35,62 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="${cp}/chamado/meusChamados.jsp">Meus Chamados</a>
+                <form action="${cp}/processaChamados" method="POST">
+                  <input type="hidden" name="acao" value="prepararListagemUsuario" />
+                  <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+                  <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+                  <button class="btn btn-link" type="submit">Meus Chamados</button>
+                </form>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Técnico
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <h6 class="dropdown-header">Listagens</h6>
-                  <li><a class="dropdown-item" href="${cp}/maquina/listagemMaquinas.jsp">Máquinas</a></li>
-                  <li><a class="dropdown-item" href="${cp}/chamado/listagemChamados.jsp">Chamados</a></li>
-                  <li><a class="dropdown-item" href="${cp}/laboratorio/listagemLaboratorios.jsp">Laboratórios</a></li>
-                  <li><a class="dropdown-item" href="${cp}/problema/listagemProblemas.jsp">Categorias de Problemas</a></li>
-                </ul>
-              </li>
+              <c:choose>
+                <c:when test="${requestScope.tipoUsuarioAtual == 1}">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Técnico
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <h6 class="dropdown-header">Listagens</h6>
+                      <li><form action="${cp}/processaMaquinas" method="POST">
+                        <input type="hidden" name="acao" value="prepararListagem" />
+                        <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+                        <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+                        <input class="dropdown-item" type="submit" value="Máquinas">
+                        </form>
+                      </li>
+                      <li><form action="${cp}/processaChamados" method="POST">
+                        <input type="hidden" name="acao" value="prepararListagemTecnico" />
+                        <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+                        <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+                        <input class="dropdown-item" type="submit" value="Chamados">
+                        </form>
+                      </li>
+                      <li>
+                        <form action="${cp}/processaLaboratorios" method="POST">
+                          <input type="hidden" name="acao" value="prepararListagem" />
+                          <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+                          <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+                          <input class="dropdown-item" type="submit" value="Laboratórios">
+                        </form>
+                      </li>
+                      <li>
+                        <form action="${cp}/processaCategorias" method="POST">
+                          <input type="hidden" name="acao" value="prepararListagem" />
+                          <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+                          <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+                          <input class="dropdown-item" type="submit" value="Categorias de Problemas">
+                        </form>
+                      </li>
+                    </ul>
+                  </li>
+                </c:when>
+              </c:choose>
             </ul>
-            <button type="button" class="btn btn-danger" onclick="window.open('${cp}/chamado/abrirChamado.jsp', '_self')">Abrir Chamado</button>
+            <form action="${cp}/processaChamados" method="POST">
+              <input type="hidden" name="acao" value="prepararInsercao" />
+              <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+              <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
+              <button class="btn btn-danger" type="submit">Abrir Chamado</button>
+            </form>
           </div>
         </div>
       </nav>
@@ -60,6 +100,8 @@
         <h5>Cadastrar Nova Máquina</h5>
         <form action="${cp}/processaMaquinas" method="POST">
         <input name="acao" type="hidden" value="inserir"/>
+        <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
+        <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
         <div class="form-floating mb-3">
           <select class="form-select" id="laboratorio" name="laboratorio">
             <jsp:useBean id="servicosLab" class="chamaweb.servicos.LaboratorioServices" scope="page"/>

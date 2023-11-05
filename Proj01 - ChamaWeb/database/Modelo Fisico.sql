@@ -137,3 +137,12 @@ ALTER TABLE MENSAGENS ADD CONSTRAINT FK_MENSAGENS_3
     FOREIGN KEY (FK_USUARIOS_USR_ID)
     REFERENCES USUARIOS (USR_ID)
     ON DELETE CASCADE;
+
+INSERT INTO estados(EST_NOME) VALUES ("Pendente"), ("Em Progresso"), ("Concluído");
+INSERT INTO tipos(TIP_NOME) VALUES ("Técnico"), ("Usuário");
+INSERT INTO prioridades(PRI_NOME) VALUES ("Baixa"), ("Média"), ("Alta");
+INSERT INTO usuarios(USR_MATRICULA, USR_SENHA, USR_EMAIL, USR_NOME, FK_TIPOS_TIP_ID) VALUES
+    ("tecnico1", "1234", "sgm001@chamaweb.com", "Sérgio Seleno", 1),
+    ("tecnico2", "1234", "sgm002@chamaweb.com", "Robson Robson", 1),
+    ("usuario1", "1234", "sgm003@chamaweb.com", "Jonas Johnson", 2),
+    ("usuario2", "1234", "sgm004@chamaweb.com", "Renato Russo", 2);

@@ -27,6 +27,8 @@ public class CategoriasServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String acao = request.getParameter( "acao" );
+        request.setAttribute( "idUsuarioAtual",  request.getParameter( "idUsuarioAtual" ));
+        request.setAttribute( "tipoUsuarioAtual",  request.getParameter( "tipoUsuarioAtual" ));
         RequestDispatcher disp = null;
 
         try ( CategoriaDAO dao = new CategoriaDAO() ){
@@ -72,6 +74,16 @@ public class CategoriasServlet extends HttpServlet {
                 dao.atualizar( c );
                 disp = request.getRequestDispatcher(
                         "problema/listagemProblemas.jsp" );
+
+            } else if ( acao.equals("prepararListagem") ) {
+
+                disp = request.getRequestDispatcher( 
+                        "problema/listagemProblemas.jsp" );
+
+            } else if (acao.equals("prepararInsercao")) {
+
+                disp = request.getRequestDispatcher( 
+                        "problema/cadastroProblema.jsp" );
 
             } else {
                 

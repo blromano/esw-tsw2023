@@ -43,6 +43,8 @@ public class UsuariosServlet extends HttpServlet {
                     request.setAttribute( "erro",  "Senha Incorreta!");
                     disp = request.getRequestDispatcher("/index.jsp" );
                 } else {
+                    request.setAttribute( "idUsuarioAtual",  u.getId());
+                    request.setAttribute( "tipoUsuarioAtual",  u.getTipo().getId());
                     disp = request.getRequestDispatcher("/chamado/meusChamados.jsp" );
                 }
                 

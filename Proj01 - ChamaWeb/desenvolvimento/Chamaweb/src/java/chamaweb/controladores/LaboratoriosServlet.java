@@ -27,6 +27,8 @@ public class LaboratoriosServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String acao = request.getParameter( "acao" );
+        request.setAttribute( "idUsuarioAtual",  request.getParameter( "idUsuarioAtual" ));
+        request.setAttribute( "tipoUsuarioAtual",  request.getParameter( "tipoUsuarioAtual" ));
         RequestDispatcher disp = null;
 
         try ( LaboratorioDAO dao = new LaboratorioDAO() ){
@@ -72,6 +74,16 @@ public class LaboratoriosServlet extends HttpServlet {
                 dao.atualizar( l );
                 disp = request.getRequestDispatcher(
                         "laboratorio/listagemLaboratorios.jsp" );
+
+            } else if (acao.equals("prepararListagem")) {
+
+                disp = request.getRequestDispatcher( 
+                        "laboratorio/listagemLaboratorios.jsp" );
+
+            } else if (acao.equals("prepararInsercao")) {
+
+                disp = request.getRequestDispatcher( 
+                        "laboratorio/cadastroLaboratorio.jsp" );
 
             } else {
                 

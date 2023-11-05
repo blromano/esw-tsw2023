@@ -29,6 +29,8 @@ public class MaquinasServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String acao = request.getParameter( "acao" );
+        request.setAttribute( "idUsuarioAtual",  request.getParameter( "idUsuarioAtual" ));
+        request.setAttribute( "tipoUsuarioAtual",  request.getParameter( "tipoUsuarioAtual" ));
         RequestDispatcher disp = null;
 
         try {
@@ -98,6 +100,16 @@ public class MaquinasServlet extends HttpServlet {
                 dao.atualizar( m );
                 disp = request.getRequestDispatcher(
                         "maquina/listagemMaquinas.jsp" );
+
+            } else if (acao.equals("prepararListagem")) {
+
+                disp = request.getRequestDispatcher( 
+                        "maquina/listagemMaquinas.jsp" );
+
+            } else if (acao.equals("prepararInsercao")) {
+
+                disp = request.getRequestDispatcher( 
+                        "maquina/cadastroMaquina.jsp" );
 
             } else {
                 

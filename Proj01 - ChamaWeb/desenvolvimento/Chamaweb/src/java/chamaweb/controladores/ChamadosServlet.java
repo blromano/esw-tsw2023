@@ -40,6 +40,9 @@ public class ChamadosServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String acao = request.getParameter( "acao" );
+        int idUsuarioAtual = Integer.parseInt(request.getParameter( "idUsuarioAtual" ));
+        request.setAttribute( "idUsuarioAtual",  request.getParameter( "idUsuarioAtual" ));
+        request.setAttribute( "tipoUsuarioAtual",  request.getParameter( "tipoUsuarioAtual" ));
         RequestDispatcher disp = null;
 
         try {
@@ -57,7 +60,7 @@ public class ChamadosServlet extends HttpServlet {
                 String descricao = request.getParameter( "descricao" );
                 Maquina maquina = daoMaq.obterPorId( Integer.parseInt( request.getParameter( "maquina" ) ) );
                 //TODO: substituir com o ID do usuario logado
-                Usuario usuario = daoUsr.obterPorId( 1 ); //Integer.parseInt( request.getParameter( "usuario" ) ) );
+                Usuario usuario = daoUsr.obterPorId(Integer.parseInt( request.getParameter( "usuario" ) ));
                 Categoria categoria = daoCat.obterPorId( Integer.parseInt( request.getParameter( "categoria" ) ) );
                 Estado estado = daoEst.obterPorId( 1 );
                 String data = new Date(System.currentTimeMillis()).toString();
@@ -73,7 +76,7 @@ public class ChamadosServlet extends HttpServlet {
 
                 dao.salvar( chamado );
                 disp = request.getRequestDispatcher(
-                        "chamado/listagemChamados.jsp" );
+                        "chamado/meusChamados.jsp" );
 
             } else if ( acao.equals( "alterar" ) ) {
                 int id = Integer.parseInt(request.getParameter( "id" ));
@@ -100,17 +103,61 @@ public class ChamadosServlet extends HttpServlet {
                 chamado.setEstado( estado );
 
                 dao.atualizar( chamado );
-                
-                System.out.println(chamado);
 
                 disp = request.getRequestDispatcher(
                         "chamado/listagemChamados.jsp" );
-            } else {
+            } else if ( acao.equals( "avaliar" ) ) {
+                
+                int id = Integer.parseInt(request.getParameter( "id" ));
+
+                Chamado chamado = dao.obterPorId( id );
+
+                chamado.setResultadoAvaliacao( Boolean.parseBoolean(request.getParameter( "resultadoAvaliacao" )) );
+                chamado.setObservacoesAvaliacao( request.getParameter( "observacoesAvaliacao" ) );
+
+                dao.avaliar(chamado);
+
+                disp = request.getRequestDispatcher(
+                        "chamado/meusChamados.jsp" );
+            } else if ( acao.equals( "excluir" ) ) {
                 int id = Integer.parseInt(request.getParameter( "id" ));
                 Chamado chamado = dao.obterPorId( id );
-                request.setAttribute( "chamado", chamado );
+                dao.excluir( chamado );
+                disp = request.getRequestDispatcher(
+                        "chamado/listagemChamados.jsp" );
+            } else if (acao.equals("prepararListagemUsuario")) {
+
+                disp = request.getRequestDispatcher( 
+                        "chamado/meusChamados.jsp" );
+
+            } 
+            else if (acao.equals("prepararListagemTecnico")) {
+
+                disp = request.getRequestDispatcher( 
+                        "chamado/listagemChamados.jsp" );
+
+            } else {
+                Usuario usuario = daoUsr.obterPorId( idUsuarioAtual );
+                request.setAttribute( "usuario", usuario );
+
+                if ( acao.equals( "prepararInsercao" ) ) {
+                    disp = request.getRequestDispatcher( 
+                            "chamado/abrirChamado.jsp" );
+                } 
                 
+                if ( acao.equals( "prepararAcesso" ) ) {
+                    int id = Integer.parseInt(request.getParameter( "id" ));
+                    Chamado chamado = dao.obterPorId( id );
+                    request.setAttribute( "chamado", chamado );
+                    
+                    disp = request.getRequestDispatcher( 
+                            "chamado/acessarChamado.jsp" );
+                }
+
                 if ( acao.equals( "prepararAlteracao" ) ) {
+                    int id = Integer.parseInt(request.getParameter( "id" ));
+                    Chamado chamado = dao.obterPorId( id );
+                    request.setAttribute( "chamado", chamado );
                     disp = request.getRequestDispatcher( 
                             "chamado/editarChamado.jsp" );
                 } 
