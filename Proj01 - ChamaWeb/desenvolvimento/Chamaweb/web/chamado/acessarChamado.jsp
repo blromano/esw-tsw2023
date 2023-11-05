@@ -139,10 +139,17 @@
         </tbody>
       </table>
       <h5>Operações realizadas</h5>
-      Nenhuma operação foi realizada até o momento.
+      
       <br>
       <div style="margin-top: 15px;" class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAvaliacao${chamado.id}">Avaliar Chamado</button>
+        <c:choose>
+          <c:when test="${requestScope.chamado.estado.id == 3}">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAvaliacao${chamado.id}">Avaliar Chamado</button>
+          </c:when>
+          <c:otherwise>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalAvaliacao${chamado.id}" disabled>Avaliar Chamado</button>
+          </c:otherwise>
+        </c:choose>
                                         <!-- Modal -->
     <div class="modal fade" id="modalAvaliacao${chamado.id}" tabindex="-1" role="dialog" aria-labelledby="modalAvaliacao${chamado.id}Label" aria-hidden="true">
      <div class="modal-dialog" role="document">

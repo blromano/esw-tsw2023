@@ -239,10 +239,23 @@
           </tbody>
         </table>
         <h5>Operações realizadas</h5>
-        <!--TODO: Adicionar operações realizadas no valor-->
-        <div class="">
-          <input type="text" class="form-control" id="floatingID" placeholder = "Operações realizadas" value="" name="operacoes">
-          <input type="button" class="btn btn-primary" value="+" id="brn-inserir" />
+        <table class="table table-striped" id="opTable" name="opTable">
+          <jsp:useBean id="servicos" class="chamaweb.servicos.OperacaoServices" />
+            <c:forEach items="${servicos.todos}" var="operacao">
+              <c:choose>
+                <c:when test="${operacao.chamado.id == requestScope.chamado.id}">
+                  <tr>
+                    <td>${operacao.usuario.nome}</td>
+                    <td>${operacao.data}</td>
+                    <td>${operacao.descricao}</td>
+                  </tr>
+                </c:when>
+              </c:choose>
+            </c:forEach>
+          </table>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="floatingID" placeholder = "Operações realizadas" value="" id="operacoes" name="operacoes">
+          <input type="button" class="btn btn-primary" value="+" id="btnInserir" name="btnInserir" />
         </div>
         <br>
         <div class="d-grid gap-2 d-md-inline">
