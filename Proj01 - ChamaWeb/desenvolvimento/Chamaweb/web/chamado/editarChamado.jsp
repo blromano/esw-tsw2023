@@ -18,6 +18,10 @@
       crossorigin="anonymous"
     />
 
+    <script src="${cp}/js/libs/jquery/jquery.min.js"></script>
+    <script src="${cp}/js/libs/decimal.js/decimal.min.js"></script>
+    <script src="${cp}/js/formularios/operacoes/editarChamado.js"></script>
+
     <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
@@ -103,6 +107,7 @@
         <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
         <input type="hidden" name="id" value="${requestScope.chamado.id}">
         <input type="hidden" name="usuario" value="${requestScope.chamado.usuario.id}">
+        <input type="hidden" id="hiddenOperacoes" name="operacoes"/>
         <h5>Chamado #${requestScope.chamado.id}</h5>
         <table class="table table-striped">
           <tbody style="vertical-align: middle;">
@@ -240,8 +245,8 @@
         </table>
         <h5>Operações realizadas</h5>
         <table class="table table-striped" id="opTable" name="opTable">
-          <jsp:useBean id="servicos" class="chamaweb.servicos.OperacaoServices" />
-            <c:forEach items="${servicos.todos}" var="operacao">
+          <jsp:useBean id="servicosO" class="chamaweb.servicos.OperacaoServices" />
+            <c:forEach items="${servicosO.todos}" var="operacao">
               <c:choose>
                 <c:when test="${operacao.chamado.id == requestScope.chamado.id}">
                   <tr>
@@ -254,7 +259,7 @@
             </c:forEach>
           </table>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="floatingID" placeholder = "Operações realizadas" value="" id="operacoes" name="operacoes">
+          <input type="text" data-username="${usuario.nome}" class="form-control" placeholder = "Operações realizadas" value="" id="newOperacao" name="newOperacao">
           <input type="button" class="btn btn-primary" value="+" id="btnInserir" name="btnInserir" />
         </div>
         <br>

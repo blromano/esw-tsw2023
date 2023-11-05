@@ -4,6 +4,8 @@
  */
 package chamaweb.entidades;
 
+import java.sql.Date;
+
 /**
  *
  * @author bv3008762
@@ -11,7 +13,7 @@ package chamaweb.entidades;
 public class Operacao {
     private int id;
     private String descricao;
-    
+    private Date data;
     private Chamado chamado;
     private Usuario usuario;
 
@@ -47,5 +49,14 @@ public class Operacao {
         this.usuario = usuario;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    
     
 }

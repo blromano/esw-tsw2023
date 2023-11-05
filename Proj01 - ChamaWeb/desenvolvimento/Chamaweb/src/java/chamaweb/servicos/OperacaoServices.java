@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Gabryel
  */
-public class OperacoesServices {
+public class OperacaoServices {
 
     /**
      * Usa o OperacaoDAO para obter todos os estados.

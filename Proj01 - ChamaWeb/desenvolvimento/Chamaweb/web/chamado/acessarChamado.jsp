@@ -139,7 +139,20 @@
         </tbody>
       </table>
       <h5>Operações realizadas</h5>
-      
+      <table class="table table-striped" id="opTable" name="opTable">
+        <jsp:useBean id="servicosO" class="chamaweb.servicos.OperacaoServices" />
+          <c:forEach items="${servicosO.todos}" var="operacao">
+            <c:choose>
+              <c:when test="${operacao.chamado.id == requestScope.chamado.id}">
+                <tr>
+                  <td>${operacao.usuario.nome}</td>
+                  <td>${operacao.data}</td>
+                  <td>${operacao.descricao}</td>
+                </tr>
+              </c:when>
+            </c:choose>
+          </c:forEach>
+        </table>
       <br>
       <div style="margin-top: 15px;" class="d-grid gap-2 d-md-flex justify-content-md-end">
         <c:choose>

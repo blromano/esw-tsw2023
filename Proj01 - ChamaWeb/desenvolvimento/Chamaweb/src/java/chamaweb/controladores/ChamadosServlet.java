@@ -15,15 +15,23 @@ import chamaweb.dao.CategoriaDAO;
 import chamaweb.dao.ChamadoDAO;
 import chamaweb.dao.EstadoDAO;
 import chamaweb.dao.MaquinaDAO;
+import chamaweb.dao.OperacaoDAO;
 import chamaweb.dao.PrioridadeDAO;
 import chamaweb.dao.UsuarioDAO;
 import chamaweb.entidades.Categoria;
 import chamaweb.entidades.Chamado;
 import chamaweb.entidades.Estado;
 import chamaweb.entidades.Maquina;
+import chamaweb.entidades.Operacao;
 import chamaweb.entidades.Prioridade;
 import chamaweb.entidades.Usuario;
 import chamaweb.utils.Utils;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonValue;
+import java.io.StringReader;
 
 /**
  * Servlet para tratar Chamados.
@@ -53,6 +61,7 @@ public class ChamadosServlet extends HttpServlet {
             CategoriaDAO daoCat = new CategoriaDAO();
             PrioridadeDAO daoPri = new PrioridadeDAO();
             EstadoDAO daoEst = new EstadoDAO();
+            OperacaoDAO daoOpe = new OperacaoDAO();
 
             if ( acao.equals( "inserir" ) ) {
 
@@ -89,6 +98,14 @@ public class ChamadosServlet extends HttpServlet {
                 Categoria categoria = daoCat.obterPorId( Integer.parseInt( request.getParameter( "categoria" ) ) );
                 Prioridade prioridade = daoPri.obterPorId( Integer.parseInt( request.getParameter( "prioridade" ) ) );
                 Estado estado = daoEst.obterPorId( Integer.parseInt( request.getParameter( "estado" ) ) );
+                String operacoes = request.getParameter( "operacoes" );
+                Usuario usuarioLogado = daoUsr.obterPorId( idUsuarioAtual );
+
+                System.out.println(operacoes);
+
+                JsonReader jsr = Json.createReader(new StringReader(operacoes));
+
+                JsonArray ja = jsr.readArray();
 
                 Chamado chamado = new Chamado();
                 chamado.setId( id );
@@ -103,6 +120,19 @@ public class ChamadosServlet extends HttpServlet {
                 chamado.setEstado( estado );
 
                 dao.atualizar( chamado );
+
+                for ( JsonValue jsv : ja ) {
+                    JsonObject jo = jsv.asJsonObject();
+
+                    String descricaoOperacao = jo.getString( "descricao" );
+                    Date dataOperacao = Date.valueOf(jo.getString( "data" ));
+                    Operacao operacao = new Operacao();
+                    operacao.setDescricao( descricaoOperacao );
+                    operacao.setData( dataOperacao );
+                    operacao.setChamado( chamado ); 
+                    operacao.setUsuario( usuarioLogado );
+                    daoOpe.salvar(operacao);
+                }
 
                 disp = request.getRequestDispatcher(
                         "chamado/listagemChamados.jsp" );

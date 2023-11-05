@@ -30,13 +30,14 @@ public class OperacaoDAO extends DAO<Operacao> {
 
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
-                "operacoes(OPS_ID, OPS_DESCRICAO, FK_CHAMADOS_CHA_ID, FK_USUARIOS_USR_ID) " + 
-                "VALUES(?, ?, ?, ?);");
+                "operacoes(OPS_ID, OPS_DATA, OPS_DESCRICAO, FK_CHAMADOS_CHA_ID, FK_USUARIOS_USR_ID) " + 
+                "VALUES(?, ?, ?, ?, ?);");
 
         stmt.setInt( 1, obj.getId() );
-        stmt.setString( 2, obj.getDescricao() );
-        stmt.setInt( 3, obj.getChamado().getId() );
-        stmt.setInt( 4, obj.getUsuario().getId() );
+        stmt.setDate(2, obj.getData() );
+        stmt.setString( 3, obj.getDescricao() );
+        stmt.setInt( 4, obj.getChamado().getId() );
+        stmt.setInt( 5, obj.getUsuario().getId() );
 
         stmt.executeUpdate();
         stmt.close();
@@ -50,15 +51,17 @@ public class OperacaoDAO extends DAO<Operacao> {
                 "UPDATE operacoes " + 
                 "SET" + 
                 "    OPS_DESCRICAO = ?," + 
+                "    OPS_DATA = ?," +
                 "    FK_CHAMADOS_CHA_ID = ?," + 
                 "    FK_USUARIOS_USR_ID = ? " + 
                 "WHERE" + 
                 "    OPS_ID = ?;" );
 
         stmt.setString( 1, obj.getDescricao() );
-        stmt.setInt( 2, obj.getChamado().getId() );
-        stmt.setInt( 3, obj.getUsuario().getId() );
-        stmt.setInt( 4, obj.getId() );
+        stmt.setDate( 2, obj.getData() );
+        stmt.setInt( 3, obj.getChamado().getId() );
+        stmt.setInt( 4, obj.getUsuario().getId() );
+        stmt.setInt( 5, obj.getId() );
 
         stmt.executeUpdate();
         stmt.close();
@@ -91,8 +94,16 @@ public class OperacaoDAO extends DAO<Operacao> {
                 "FROM" + 
                 "    operacoes " +
                 "INNER JOIN chamados ON chamados.CHA_ID = operacoes.FK_CHAMADOS_CHA_ID " +
-                "INNER JOIN usuarios ON usuarios.USR_ID = operacoes.FK_USUARIOS_USR_ID " +
-                "ORDER BY OPS_ID;" );
+                "INNER JOIN maquinas ON maquinas.MAQ_ID = chamados.FK_MAQUINAS_MAQ_ID " +
+                "INNER JOIN usuarios usuario ON usuario.USR_ID = chamados.FK_USUARIOS_USR_ID " +
+                "INNER JOIN usuarios tecnico ON tecnico.USR_ID = chamados.FK_USUARIOS_USR_ID_TECNICO " +
+                "INNER JOIN categorias ON categorias.CAT_ID = chamados.FK_CATEGORIAS_CAT_ID " +
+                "INNER JOIN prioridades ON prioridades.PRI_ID = chamados.FK_PRIORIDADES_PRI_ID " +
+                "INNER JOIN estados ON estados.EST_ID = chamados.FK_ESTADOS_EST_ID " +
+                "INNER JOIN laboratorios ON laboratorios.LAB_ID = maquinas.FK_LABORATORIOS_LAB_ID " +
+                "INNER JOIN tipos tipoUsuario ON tipoUsuario.TIP_ID = usuario.FK_TIPOS_TIP_ID " +
+                "INNER JOIN tipos tipoTecnico ON tipoTecnico.TIP_ID = tecnico.FK_TIPOS_TIP_ID " +
+                "ORDER BY OPS_DESCRICAO;");
 
         ResultSet rs = stmt.executeQuery();
 
@@ -123,30 +134,38 @@ public class OperacaoDAO extends DAO<Operacao> {
             maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
             maquina.setLaboratorio( laboratorio );
 
-            tipoUsuario.setId( rs.getInt( "TIP_ID" ) );
-            tipoUsuario.setNome( rs.getString( "TIP_NOME" ) );
+            tipoUsuario.setId( rs.getInt( "tipoUsuario.TIP_ID" ) );
+            tipoUsuario.setNome( rs.getString( "tipoUsuario.TIP_NOME" ) );
 
-            usuario.setId( rs.getInt( "USR_ID" ) );
-            usuario.setNome( rs.getString( "USR_NOME" ) );
-            usuario.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            usuario.setSenha( rs.getString( "USR_SENHA" ) );
+            usuario.setId( rs.getInt( "usuario.USR_ID" ) );
+            usuario.setNome( rs.getString( "usuario.USR_NOME" ) );
+            usuario.setMatricula( rs.getString( "usuario.USR_MATRICULA" ) );
+            usuario.setSenha( rs.getString( "usuario.USR_SENHA" ) );
             usuario.setTipo( tipoUsuario );
 
-            tipoTecnico.setId( rs.getInt( "TIP_ID" ) );
-            tipoTecnico.setNome( rs.getString( "TIP_NOME" ) );
+            if ( rs.getInt( "tecnico.USR_ID" ) == 0 ) {
+                tecnico = null;
+            }else{
+                tipoTecnico.setId( rs.getInt( "tipoTecnico.TIP_ID" ) );
+                tipoTecnico.setNome( rs.getString( "tipoTecnico.TIP_NOME" ) );
 
-            tecnico.setId( rs.getInt( "USR_ID" ) );
-            tecnico.setNome( rs.getString( "USR_NOME" ) );
-            tecnico.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            tecnico.setSenha( rs.getString( "USR_SENHA" ) );
-            tecnico.setTipo( tipoTecnico );
+                tecnico.setId( rs.getInt( "tecnico.USR_ID" ) );
+                tecnico.setNome( rs.getString( "tecnico.USR_NOME" ) );
+                tecnico.setMatricula( rs.getString( "tecnico.USR_MATRICULA" ) );
+                tecnico.setSenha( rs.getString( "tecnico.USR_SENHA" ) );
+                tecnico.setTipo( tipoTecnico );
+            }
 
             categoria.setId( rs.getInt( "CAT_ID" ) );
             categoria.setNome( rs.getString( "CAT_NOME" ) );
             categoria.setAtivo( rs.getInt( "CAT_ATIVO" ) );
 
-            prioridade.setId( rs.getInt( "PRI_ID" ) );
-            prioridade.setNome( rs.getString( "PRI_NOME" ) );
+            if ( rs.getInt( "PRI_ID" ) == 0 ) {
+                prioridade = null;
+            }else{
+                prioridade.setId( rs.getInt( "PRI_ID" ) );
+                prioridade.setNome( rs.getString( "PRI_NOME" ) );
+            }
             
             estado.setId( rs.getInt( "EST_ID" ) );
             estado.setNome( rs.getString( "EST_NOME" ) );
@@ -165,6 +184,7 @@ public class OperacaoDAO extends DAO<Operacao> {
             chamado.setEstado( estado );
 
             operacao.setId(rs.getInt("OPS_ID"));
+            operacao.setData(rs.getDate("OPS_DATA"));
             operacao.setDescricao(rs.getString("OPS_DESCRICAO"));
             operacao.setChamado(chamado);
             operacao.setUsuario(tecnico);
@@ -191,8 +211,8 @@ public class OperacaoDAO extends DAO<Operacao> {
                 "    operacoes " +
                 "INNER JOIN chamados ON chamados.CHA_ID = operacoes.FK_CHAMADOS_CHA_ID " +
                 "INNER JOIN maquinas ON maquinas.MAQ_ID = chamados.FK_MAQUINAS_MAQ_ID " +
-                "INNER JOIN usuarios usuario ON usuarios.USR_ID = chamados.FK_USUARIOS_USR_ID " +
-                "INNER JOIN usuarios tecnico ON usuarios.USR_ID = chamados.FK_USUARIOS_USR_ID_TECNICO " +
+                "INNER JOIN usuarios usuario ON usuario.USR_ID = chamados.FK_USUARIOS_USR_ID " +
+                "INNER JOIN usuarios tecnico ON tecnico.USR_ID = chamados.FK_USUARIOS_USR_ID_TECNICO " +
                 "INNER JOIN categorias ON categorias.CAT_ID = chamados.FK_CATEGORIAS_CAT_ID " +
                 "INNER JOIN prioridades ON prioridades.PRI_ID = chamados.FK_PRIORIDADES_PRI_ID " +
                 "INNER JOIN estados ON estados.EST_ID = chamados.FK_ESTADOS_EST_ID " +
@@ -233,30 +253,38 @@ public class OperacaoDAO extends DAO<Operacao> {
             maquina.setAtivo( rs.getInt( "MAQ_ATIVO" ) );
             maquina.setLaboratorio( laboratorio );
 
-            tipoUsuario.setId( rs.getInt( "TIP_ID" ) );
-            tipoUsuario.setNome( rs.getString( "TIP_NOME" ) );
+            tipoUsuario.setId( rs.getInt( "tipoUsuario.TIP_ID" ) );
+            tipoUsuario.setNome( rs.getString( "tipoUsuario.TIP_NOME" ) );
 
-            usuario.setId( rs.getInt( "USR_ID" ) );
-            usuario.setNome( rs.getString( "USR_NOME" ) );
-            usuario.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            usuario.setSenha( rs.getString( "USR_SENHA" ) );
+            usuario.setId( rs.getInt( "usuario.USR_ID" ) );
+            usuario.setNome( rs.getString( "usuario.USR_NOME" ) );
+            usuario.setMatricula( rs.getString( "usuario.USR_MATRICULA" ) );
+            usuario.setSenha( rs.getString( "usuario.USR_SENHA" ) );
             usuario.setTipo( tipoUsuario );
 
-            tipoTecnico.setId( rs.getInt( "TIP_ID" ) );
-            tipoTecnico.setNome( rs.getString( "TIP_NOME" ) );
+            if ( rs.getInt( "tecnico.USR_ID" ) == 0 ) {
+                tecnico = null;
+            }else{
+                tipoTecnico.setId( rs.getInt( "tipoTecnico.TIP_ID" ) );
+                tipoTecnico.setNome( rs.getString( "tipoTecnico.TIP_NOME" ) );
 
-            tecnico.setId( rs.getInt( "USR_ID" ) );
-            tecnico.setNome( rs.getString( "USR_NOME" ) );
-            tecnico.setMatricula( rs.getString( "USR_MATRICULA" ) );
-            tecnico.setSenha( rs.getString( "USR_SENHA" ) );
-            tecnico.setTipo( tipoTecnico );
+                tecnico.setId( rs.getInt( "tecnico.USR_ID" ) );
+                tecnico.setNome( rs.getString( "tecnico.USR_NOME" ) );
+                tecnico.setMatricula( rs.getString( "tecnico.USR_MATRICULA" ) );
+                tecnico.setSenha( rs.getString( "tecnico.USR_SENHA" ) );
+                tecnico.setTipo( tipoTecnico );
+            }
 
             categoria.setId( rs.getInt( "CAT_ID" ) );
             categoria.setNome( rs.getString( "CAT_NOME" ) );
             categoria.setAtivo( rs.getInt( "CAT_ATIVO" ) );
 
-            prioridade.setId( rs.getInt( "PRI_ID" ) );
-            prioridade.setNome( rs.getString( "PRI_NOME" ) );
+            if ( rs.getInt( "PRI_ID" ) == 0 ) {
+                prioridade = null;
+            }else{
+                prioridade.setId( rs.getInt( "PRI_ID" ) );
+                prioridade.setNome( rs.getString( "PRI_NOME" ) );
+            }
             
             estado.setId( rs.getInt( "EST_ID" ) );
             estado.setNome( rs.getString( "EST_NOME" ) );
@@ -275,9 +303,10 @@ public class OperacaoDAO extends DAO<Operacao> {
             chamado.setEstado( estado );
 
             operacao.setId(rs.getInt("OPS_ID"));
+            operacao.setData(rs.getDate("OPS_DATA"));
             operacao.setDescricao(rs.getString("OPS_DESCRICAO"));
             operacao.setChamado(chamado);
-            operacao.setUsuario(tecnico); //Técnico?
+            operacao.setUsuario(tecnico);
         }
 
         rs.close();
