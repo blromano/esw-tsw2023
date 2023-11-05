@@ -103,7 +103,7 @@ public class OperacaoDAO extends DAO<Operacao> {
                 "INNER JOIN laboratorios ON laboratorios.LAB_ID = maquinas.FK_LABORATORIOS_LAB_ID " +
                 "INNER JOIN tipos tipoUsuario ON tipoUsuario.TIP_ID = usuario.FK_TIPOS_TIP_ID " +
                 "INNER JOIN tipos tipoTecnico ON tipoTecnico.TIP_ID = tecnico.FK_TIPOS_TIP_ID " +
-                "ORDER BY OPS_DESCRICAO;");
+                "ORDER BY OPS_ID;");
 
         ResultSet rs = stmt.executeQuery();
 
@@ -220,7 +220,7 @@ public class OperacaoDAO extends DAO<Operacao> {
                 "INNER JOIN tipos tipoUsuario ON tipoUsuario.TIP_ID = usuario.FK_TIPOS_TIP_ID " +
                 "INNER JOIN tipos tipoTecnico ON tipoTecnico.TIP_ID = tecnico.FK_TIPOS_TIP_ID " +
                 "WHERE OPS_ID = ? " +
-                "ORDER BY OPS_DESCRICAO;"
+                "ORDER BY OPS_ID;"
         );
 
         stmt.setInt(1, id);

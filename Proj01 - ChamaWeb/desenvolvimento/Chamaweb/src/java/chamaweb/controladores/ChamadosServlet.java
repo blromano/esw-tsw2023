@@ -101,8 +101,6 @@ public class ChamadosServlet extends HttpServlet {
                 String operacoes = request.getParameter( "operacoes" );
                 Usuario usuarioLogado = daoUsr.obterPorId( idUsuarioAtual );
 
-                System.out.println(operacoes);
-
                 Chamado chamado = new Chamado();
                 chamado.setId( id );
                 chamado.setTitulo( titulo );
