@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
@@ -25,7 +26,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container-fluid">   
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="${cp}/index.jsp">
                 <!--<img src="src/chamaweb.png" alt="" height="50" class="d-inline-block align-text-top">-->
                 Chamaweb
               </a>
@@ -110,7 +111,9 @@
           </tr>
           <tr>
             <th scope="row">Data</th>
-            <td>${requestScope.chamado.data}</td>
+            <td><fmt:formatDate 
+              pattern="dd/MM/yyyy"
+              value="${requestScope.chamado.data}"/></td>
           </tr>
           <tr>
             <th scope="row">Usuário</th>
@@ -146,7 +149,9 @@
               <c:when test="${operacao.chamado.id == requestScope.chamado.id}">
                 <tr>
                   <td>${operacao.usuario.nome}</td>
-                  <td>${operacao.data}</td>
+                  <td><fmt:formatDate 
+                    pattern="dd/MM/yyyy"
+                    value="${operacao.data}"/></td>
                   <td>${operacao.descricao}</td>
                 </tr>
               </c:when>

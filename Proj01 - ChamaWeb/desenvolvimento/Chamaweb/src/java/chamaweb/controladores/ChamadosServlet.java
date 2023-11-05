@@ -103,10 +103,6 @@ public class ChamadosServlet extends HttpServlet {
 
                 System.out.println(operacoes);
 
-                JsonReader jsr = Json.createReader(new StringReader(operacoes));
-
-                JsonArray ja = jsr.readArray();
-
                 Chamado chamado = new Chamado();
                 chamado.setId( id );
                 chamado.setTitulo( titulo );
@@ -121,17 +117,24 @@ public class ChamadosServlet extends HttpServlet {
 
                 dao.atualizar( chamado );
 
-                for ( JsonValue jsv : ja ) {
-                    JsonObject jo = jsv.asJsonObject();
+                if (operacoes != null && !operacoes.isEmpty()) {
 
-                    String descricaoOperacao = jo.getString( "descricao" );
-                    Date dataOperacao = Date.valueOf(jo.getString( "data" ));
-                    Operacao operacao = new Operacao();
-                    operacao.setDescricao( descricaoOperacao );
-                    operacao.setData( dataOperacao );
-                    operacao.setChamado( chamado ); 
-                    operacao.setUsuario( usuarioLogado );
-                    daoOpe.salvar(operacao);
+                    JsonReader jsr = Json.createReader(new StringReader(operacoes));
+
+                    JsonArray ja = jsr.readArray();
+
+                    for ( JsonValue jsv : ja ) {
+                        JsonObject jo = jsv.asJsonObject();
+
+                        String descricaoOperacao = jo.getString( "descricao" );
+                        Date dataOperacao = Date.valueOf(jo.getString( "data" ));
+                        Operacao operacao = new Operacao();
+                        operacao.setDescricao( descricaoOperacao );
+                        operacao.setData( dataOperacao );
+                        operacao.setChamado( chamado ); 
+                        operacao.setUsuario( usuarioLogado );
+                        daoOpe.salvar(operacao);
+                    }
                 }
 
                 disp = request.getRequestDispatcher(

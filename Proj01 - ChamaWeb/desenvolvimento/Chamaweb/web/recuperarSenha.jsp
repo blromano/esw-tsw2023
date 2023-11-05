@@ -19,7 +19,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">   
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="${cp}/index.jsp">
                 Instituição de Ensino X
               </a>
           </div>

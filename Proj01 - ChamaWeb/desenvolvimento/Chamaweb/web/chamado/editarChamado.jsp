@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
@@ -29,7 +30,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container-fluid">   
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="${cp}/index.jsp">
                 <!--<img src="src/chamaweb.png" alt="" height="50" class="d-inline-block align-text-top">-->
                 Chamaweb
               </a>
@@ -153,7 +154,7 @@
             </tr>
             <tr>
               <th scope="row">Data</th>
-              <td><input type="text" name="data" class="form-control" id="floatingID" placeholder = "Tí­tulo" value="${requestScope.chamado.data}" required></td>
+              <td><input type="date" name="data" class="form-control" id="floatingID" placeholder = "Tí­tulo" value="${requestScope.chamado.data}" required></td>
             </tr>
             <tr>
               <th scope="row">Usuário</th>
@@ -199,23 +200,9 @@
             </tr>
             <tr>
               <th scope="row">Local</th>
-              <td><select class="form-select" id="floatingState" name="laboratorio">
-                <jsp:useBean id="servicosLab" class="chamaweb.servicos.LaboratorioServices" scope="page"/>
-                <c:forEach var="laboratorio" items="${servicosLab.todos}">
-                  <c:choose>
-                    <c:when test="${laboratorio.ativo == 1}">
-                      <c:choose>
-                        <c:when test="${laboratorio.id == requestScope.chamado.maquina.laboratorio.id}">
-                          <option value="${laboratorio.id}" selected>${laboratorio.id} - ${laboratorio.nome}</option>
-                        </c:when>
-                        <c:otherwise>
-                          <option value="${laboratorio.id}">${laboratorio.id} - ${laboratorio.nome}</option>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                  </c:choose>
-                </c:forEach>
-              </select></td>
+              <td>
+                ${requestScope.chamado.maquina.laboratorio.id} - ${requestScope.chamado.maquina.laboratorio.nome}
+              </td>
             </tr>
             <tr>
               <th scope="row">Categoria</th>
@@ -251,7 +238,9 @@
                 <c:when test="${operacao.chamado.id == requestScope.chamado.id}">
                   <tr>
                     <td>${operacao.usuario.nome}</td>
-                    <td>${operacao.data}</td>
+                    <td><fmt:formatDate 
+                      pattern="dd/MM/yyyy"
+                      value="${operacao.data}"/></td>
                     <td>${operacao.descricao}</td>
                   </tr>
                 </c:when>
@@ -266,16 +255,11 @@
         <div class="d-grid gap-2 d-md-inline">
           <div class="d-grid gap-2 d-md-inline float-end">
             <button class="btn btn-primary" type="submit" >Salvar Alterações</button>
-            <form action="${cp}/processaChamados" method="POST">
-              <input type="hidden" name="acao" value="prepararListagemTecnico" />
-              <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
-              <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
               <form action="${cp}/processaChamados" method="POST">
                 <input type="hidden" name="acao" value="prepararListagemTecnico" />
                 <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
                 <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
                 <button class="btn btn-secondary" type="submit">Cancelar</button>
-              </form>
             </form>
           </div>
         </form>

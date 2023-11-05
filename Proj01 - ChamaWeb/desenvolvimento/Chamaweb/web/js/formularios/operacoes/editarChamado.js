@@ -26,5 +26,6 @@ $( () => {
         });
 
         $( "#hiddenOperacoes" ).val( JSON.stringify( operacoes ) );
+        newOperacao.val("");
     });
 });

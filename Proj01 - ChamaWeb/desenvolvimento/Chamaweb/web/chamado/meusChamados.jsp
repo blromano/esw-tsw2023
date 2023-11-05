@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
@@ -25,7 +26,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container-fluid">   
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="${cp}/index.jsp">
                 <!--<img src="src/chamaweb.png" alt="" height="50" class="d-inline-block align-text-top">-->
                 Chamaweb
               </a>
@@ -117,7 +118,9 @@
                   <tr>
                     <td>${chamado.titulo}</td>
                     <td>${chamado.estado.nome}</td>
-                    <td>${chamado.data}</td>
+                    <td><fmt:formatDate 
+                      pattern="dd/MM/yyyy"
+                      value="${chamado.data}"/></td>
                     <td> 
                         <a class="link-light" href="${cp}/processaChamados?acao=prepararAcesso&id=${chamado.id}&idUsuarioAtual=${requestScope.idUsuarioAtual}&tipoUsuarioAtual=${requestScope.tipoUsuarioAtual}" >Acessar</a>
                     </td>
