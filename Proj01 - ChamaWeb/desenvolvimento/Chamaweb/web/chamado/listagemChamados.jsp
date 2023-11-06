@@ -40,7 +40,7 @@
                   <input type="hidden" name="acao" value="prepararListagemUsuario" />
                   <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
                   <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
-                  <button class="btn btn-link" type="submit">Meus Chamados</button>
+                  <button class="nav-link active" type="submit">Meus Chamados</button>
                 </form>
               </li>
               <c:choose>
@@ -108,6 +108,8 @@
             <th scope="col">Estado</th>
             <th scope="col">Prioridade</th>
             <th scope="col">Técnico</th>
+            <th scope="col">Avaliação</th>
+            <th scope="col">Observações Avaliação</th>
             <th scope="col">Data</th>
             <th scope="col">Acessar</th>
           </tr>
@@ -118,8 +120,10 @@
             <tr>
               <th scope="row">${chamado.titulo}</th>
               <td>${chamado.estado.nome}</td>
-              <td>${chamado.prioridade.nome}</td>
-              <td>${chamado.tecnico.nome}</td>
+              <td>${chamado.prioridade.nome == null ? "Não Atribuído" : chamado.prioridade.nome}</td>
+              <td>${chamado.tecnico.nome == null ? "Não Atribuído" : chamado.tecnico.nome}</td>
+              <td>${chamado.observacoesAvaliacao == null && !chamado.resultadoAvaliacao ? "Não Avaliado" : chamado.resultadoAvaliacao ? "Resolvido" : "Não Resolvido"}</td>
+              <td>${chamado.observacoesAvaliacao == null ? "Sem Observações" : chamado.observacoesAvaliacao}</td>
               <td><fmt:formatDate 
                 pattern="dd/MM/yyyy"
                 value="${chamado.data}"/></td>

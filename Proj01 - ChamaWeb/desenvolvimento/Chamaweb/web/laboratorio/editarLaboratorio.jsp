@@ -40,7 +40,7 @@
                   <input type="hidden" name="acao" value="prepararListagemUsuario" />
                   <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
                   <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
-                  <button class="btn btn-link" type="submit">Meus Chamados</button>
+                  <button class="nav-link active" type="submit">Meus Chamados</button>
                 </form>
               </li>
               <c:choose>

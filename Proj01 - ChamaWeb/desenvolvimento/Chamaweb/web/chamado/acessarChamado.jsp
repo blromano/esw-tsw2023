@@ -19,6 +19,10 @@
       crossorigin="anonymous"
     />
 
+    <script src="${cp}/js/libs/jquery/jquery.min.js"></script>
+    <script src="${cp}/js/libs/decimal.js/decimal.min.js"></script>
+    <script src="${cp}/js/formularios/chamado/acessarChamado.js"></script>
+
     <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 
@@ -40,7 +44,7 @@
                   <input type="hidden" name="acao" value="prepararListagemUsuario" />
                   <input type="hidden" name="idUsuarioAtual" value="${requestScope.idUsuarioAtual}" />
                   <input type="hidden" name="tipoUsuarioAtual" value="${requestScope.tipoUsuarioAtual}" />
-                  <button class="btn btn-link" type="submit">Meus Chamados</button>
+                  <button class="nav-link active" type="submit">Meus Chamados</button>
                 </form>
               </li>
               <c:choose>
@@ -121,7 +125,7 @@
           </tr>
           <tr>
             <th scope="row">Técnico</th>
-            <td>${requestScope.chamado.tecnico.nome}</td>
+            <td>${requestScope.chamado.tecnico.nome ? requestScope.chamado.tecnico.nome : "Não Atribuído"}</td>
           </tr>
           <tr>
             <th scope="row">Máquina</th>
@@ -173,7 +177,7 @@
      <div class="modal-dialog" role="document">
       <div class="modal-content">
        <div class="modal-header">
-        <h5 class="modal-title" id="modalAvaliacao${chamado.id}Label" style="color: black;" >Avaliar Chamado</h5>
+        <h5 class="modal-title" id="modalAvaliacao${chamado.id}Label" >Avaliar Chamado</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -189,13 +193,13 @@
               <label for="resultadoAvaliacao" class="form-label">O problema foi resolvido?</label>
             </div>
             <div class="col-12">
-              <input type="radio" class="btn-check" name="resultadoAvaliacao" id="success-outlined" autocomplete="off" value="true">
+              <input type="radio" class="btn-check btnAval" name="resultadoAvaliacao" id="success-outlined" autocomplete="off" value="true">
               <label class="btn btn-outline-success" for="success-outlined">Sim</label>
 
-              <input type="radio" class="btn-check" name="resultadoAvaliacao" id="danger-outlined" autocomplete="off" value="false">
+              <input type="radio" class="btn-check btnAval" name="resultadoAvaliacao" id="danger-outlined" autocomplete="off" value="false">
               <label class="btn btn-outline-secondary" for="danger-outlined">Não</label>
             </div>
-            <div class="col-12">
+            <div class="col-12" id="divObs" style="display: none;">
               <label for="observacoesAvaliacao" class="form-label">Observações</label>
               <textarea class="form-control" id="observacoesAvaliacao" name="observacoesAvaliacao" rows="3"></textarea>
             </div>              
@@ -203,7 +207,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-dark" value="Enviar">
+          <input type="submit" class="btn btn-primary" value="Enviar">
         </div>
       </form>
     </div>
