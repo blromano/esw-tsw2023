@@ -100,7 +100,7 @@
     <div class="card col-sm-7" style="min-width: 600px; margin: auto auto; margin-top: 5vh; padding: 15px ; outline: 1px lightgray solid; border-radius: 5px;"">
       <table class="table table-striped">
         <thead style="text-align: center;">
-          <th colspan="6">Listagem de Chamados</th>
+          <th colspan="8">Listagem de Chamados</th>
         </thead>
         <thead>
           <tr>
