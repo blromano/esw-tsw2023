@@ -12,11 +12,11 @@ datasource db {
 
 model Usuarios {
   USR_ID            Int       @id @default(autoincrement())
-  USR_NAME          String
-  USR_SENHA         String
-  USR_EMAIL         String
-  USR_NOME_COMPLETO String
-  USR_STAFF         Int
+  USR_NAME          String    @default("no one") @db.VarChar(100)
+  USR_SENHA         String    @default("no one") @db.VarChar(100)
+  USR_EMAIL         String    @default("no one") @db.VarChar(100)
+  USR_NOME_COMPLETO String    @default("no one") @db.VarChar(100)
+  USR_STAFF         Int       @default(0)
   Posts             Posts[]
   Tags              Tags[]
   Tickets           Tickets[]
@@ -27,8 +27,8 @@ model Usuarios {
 
 model Posts {
   POS_ID             Int    @id @default(autoincrement())
-  POS_MENSAGEM       String
-  POS_URL_FOTO       String
+  POS_MENSAGEM       String @db.VarChar(100)
+  POS_URL_FOTO       String @db.VarChar(255)
   FK_USUARIOS_USR_ID Int
 
   fk_user_id Usuarios @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
@@ -38,7 +38,7 @@ model Posts {
 
 model Tags {
   TAG_ID             Int    @id @default(autoincrement())
-  TAG_NOME           String
+  TAG_NOME           String @db.VarChar(100)
   FK_USUARIOS_USR_ID Int
 
   fk_user_id  Usuarios      @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
@@ -49,7 +49,7 @@ model Tags {
 
 model Tickets {
   TIC_ID             Int    @id @default(autoincrement())
-  TIC_MENSAGEM       String
+  TIC_MENSAGEM       String @db.VarChar(100)
   FK_USUARIOS_USR_ID Int
 
   fk_user_id           Usuarios               @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
@@ -60,7 +60,7 @@ model Tickets {
 
 model TipoDenuncia {
   TIP_ID               Int                    @id @default(autoincrement())
-  TIP_NOME             String
+  TIP_NOME             String                 @db.VarChar(100)
   TicketsTiposDenuncia TicketsTiposDenuncia[]
 
   @@map("TIPO_DENUNCIA")
@@ -68,8 +68,8 @@ model TipoDenuncia {
 
 model Topicos {
   TOP_ID             Int    @id @default(autoincrement())
-  TOP_TITULO         String
-  TOP_MENSAGEM       String
+  TOP_TITULO         String @db.VarChar(100)
+  TOP_MENSAGEM       String @db.VarChar(500)
   FK_USUARIOS_USR_ID Int
 
   fk_user_id  Usuarios      @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
