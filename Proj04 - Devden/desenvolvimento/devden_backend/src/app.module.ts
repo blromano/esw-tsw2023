@@ -8,10 +8,12 @@ import { CriarUsuarioService } from './services/criar-usuario/criar-usuario.serv
 import { CriarUsuarioController } from './controllers/criar-usuario/criar-usuario.controller';
 import { LogarController } from './controllers/logar/logar.controller';
 import { LogarService } from './services/logar/logar.service';
+import { CriarTopicoService } from './services/criar-topico/criar-topico.service';
+import { CriarTopicoController } from './controllers/criar-topico/criar-topico.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, UserController, CriarUsuarioController, LogarController],
-  providers: [AppService, UserService, PrismaService, CriarUsuarioService, LogarService],
+  controllers: [AppController, UserController, CriarUsuarioController, LogarController, CriarTopicoController],
+  providers: [AppService, UserService, PrismaService, CriarUsuarioService, LogarService, CriarTopicoService],
 })
 export class AppModule {}
