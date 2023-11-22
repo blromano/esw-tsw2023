@@ -11,16 +11,17 @@ datasource db {
 }
 
 model Usuarios {
-  USR_ID            Int       @id @default(autoincrement())
-  USR_NAME          String    @default("no one") @db.VarChar(100)
-  USR_SENHA         String    @default("no one") @db.VarChar(100)
-  USR_EMAIL         String    @default("no one") @db.VarChar(100)
-  USR_NOME_COMPLETO String    @default("no one") @db.VarChar(100)
-  USR_STAFF         Int       @default(0)
+  USR_ID            Int         @id @default(autoincrement())
+  USR_NAME          String      @default("no one") @db.VarChar(100)
+  USR_SENHA         String      @default("no one") @db.VarChar(100)
+  USR_EMAIL         String      @default("no one") @db.VarChar(100)
+  USR_NOME_COMPLETO String      @default("no one") @db.VarChar(100)
+  USR_STAFF         Int         @default(0)
   Posts             Posts[]
   Tags              Tags[]
   Tickets           Tickets[]
   Topicos           Topicos[]
+  Mensagens         Mensagens[]
 
   @@map("USUARIOS")
 }
@@ -58,6 +59,20 @@ model Tickets {
   @@map("TICKETS")
 }
 
+model Mensagens {
+  MEN_ID       Int      @id
+  MEN_MENSAGEM String   @db.VarChar(200)
+  MEN_DATA     DateTime
+
+  FK_TOPICO_TOP_ID   Int
+  FK_USUARIOS_USR_ID Int
+
+  fk_topico_id Topicos  @relation(fields: [FK_TOPICO_TOP_ID], references: [TOP_ID])
+  fk_user_id   Usuarios @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
+
+  @@map("MENSAGENS")
+}
+
 model TipoDenuncia {
   TIP_ID               Int                    @id @default(autoincrement())
   TIP_NOME             String                 @db.VarChar(100)
@@ -74,6 +89,7 @@ model Topicos {
 
   fk_user_id  Usuarios      @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
   TopicosTags TopicosTags[]
+  Mensagens   Mensagens[]
 
   @@map("TOPICOS")
 }
