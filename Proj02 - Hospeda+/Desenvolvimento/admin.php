@@ -1,4 +1,23 @@
+<?php
+session_start();
+require_once 'models/Funcionario.php';
+require_once 'db/FuncionarioDAOMysql.php';
 
+if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+    $id = $_SESSION['id_fun'];
+
+    $data = new FuncionarioDAOMysql();
+    $data = $data->findById($id);
+
+}else {
+   if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+      header("Location: telaprincipal.php");
+   }
+   
+   header("Location: login.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +67,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,10 +80,10 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
+                                 <a class="nav-link" href=" ">Bem vindo, <?=$data->getFun_nome();?></a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -90,25 +109,25 @@
             <div class="row">
                <div class="col-md-12">
                   <form class="form_book" action="telaprincipal.html" method="post">
-                     <h1>Bem-vindo à Tela do Clienet</h1>
+                     <h1>Bem-vindo à Tela Principal do Funcionário</h1>
                         <ul class="navbar-nav mr-auto">
                            <li class="nav-item">
-                              <a class="nav-link" href="gerenciarReserva.html">Realizar Reservas</a>
+                              <a class="nav-link" href="gerenciarReserva.php">Gerenciar Reservas</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="listarquartos.html">Gerenciar Quartos</a>
+                              <a class="nav-link" href="listarquartos.php">Gerenciar Quartos</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="gerenciarUsuario.html">Gerenciar Usuários</a>
+                              <a class="nav-link" href="gerenciarUsuario.php">Gerenciar Usuários</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="telalimpeza.html">Gerenciar Limpeza</a>
+                              <a class="nav-link" href="telalimpeza.php">Gerenciar Limpeza</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="pagamento.html">Gerenciar Pagamento</a>
+                              <a class="nav-link" href="gerenciarpagamento.php">Gerenciar Pagamento</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="consumacao.html">Gerenciar Consumação</a>
+                              <a class="nav-link" href="gerenciarconsumacao.php">Gerenciar Consumação</a>
                            </li>
                         </ul>
                   </form>

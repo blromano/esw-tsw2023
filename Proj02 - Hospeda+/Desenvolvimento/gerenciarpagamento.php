@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Gerenciar usuários</title>
+      <title>Pagamento</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -46,7 +46,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -62,7 +62,7 @@
                                  <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -98,64 +98,66 @@
      
                      <!-- Formulário de busca -->
                      <form class="search-form">
-                        <input type="text" placeholder="Nome completo">
-                        <input type="text" placeholder="CPF">
-                        <input type="text" placeholder="Data de nascimento">
-                        <input type="submit" value="Pesquisars">
+                        <input type="text" placeholder="Digite o CPF do usuário">
+                        <input type="submit" value="Buscar">
                      </form>
                      <!-- Formulário de busca -->
-                     <br>
+
 
                      <table class="table table-striped">
                         
-                        <thead>
-                           <tr>
-                           <th>Nome</th>
-                           <th>CPF</th>
-                           <th>Nascimento</th>
-                           <th>Ações</th>
-                           </tr>
-                        </thead>
+                        <tr>
+                            <th colspan="9">Detalhes do Pagamento</th>
+                        </tr>
+                        <tr>
+                            <th>Código do Quarto</th>
+                            <th>Diária Total</th>
+                            <th>Consumação</th>
+                            <th>Taxas e Impostos</th>
+                            <th>Total a Receber</th>
+                            <th>Código do Cupom</th>
+                            <th>Opção de Pagamento</th>
+                            <th>Parcelamento</th>
+                            <th>Realizar Pagamento</th>
+                        </tr>
                         <tbody>
-                           <!-- Linhas da tabela com dados de usuários -->
-                           <tr>
-                              <td>Usuário 1</td>
-                              <td>123.456.789.10</td>
-                              <td>10/10/1995</td>
-                              <td>
-                                 <a href="usuario.html" target="_blank">Detalhes</a>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>Usuário 2</td>
-                              <td>987.002.345.65</td>
-                              <td>12/09/1982</td>
-                              <td>
-                                 <a href="usuario.html" target="_blank">Detalhes</a>
-                              </td>                              
-                           </tr>
-                           <tr>
-                              <td>Usuário 3</td>
-                              <td>123.456.789.10</td>
-                              <td>10/10/1995</td>
-                              <td>
-                                 <a href="usuario.html" target="_blank">Detalhes</a>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>Usuário 4</td>
-                              <td>333.345.789.00</td>
-                              <td>30/10/1990</td>
-                              <td>
-                                 <a href="usuario.html" target="_blank">Detalhes</a>
-                              </td>
-                           </tr>
-                        </tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>4</td>
+                                <td>R$ 234</td>
+                                <td>R$ 10,00</td>
+                                <td>R$ 244,00</td>
+                                <td>H0SP3D4</td>
+                                
+                                <td>
+                                    <select name="opcaoPagamento" required>
+                                    <option value="">Selecione</option>
+                                    <option value="cartao">Cartão</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="pix">Pix</option>
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <select name="parcelamento" required>
+                                    <option value="uma">1x</option>
+                                    <option value="duas">2x</option>
+                                    <option value="tres">3x</option>
+                                    <option value="quatro">4x</option>
+                                    <option value="cinco">5x</option>
+                                    </select>
+                                </td>
+                                <td colspan="2" align="center">
+                                    <button type="submit">Confirmar</button>
+                                </td>
+                            </tr>
+
+                            
                      </table>
      <!-- final tabela -->
    </div>
 </form>
-<a class="nav-link" href="admin.html">Voltar</a>
+<a class="nav-link" href="admin.php">Voltar</a>
 
 </div>
 </div>

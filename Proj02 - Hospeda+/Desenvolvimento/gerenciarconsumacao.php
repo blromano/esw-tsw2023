@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
    <head>
@@ -10,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Reservas</title>
+      <title>Consumação</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +46,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -64,7 +62,7 @@
                                  <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -100,79 +98,83 @@
      
                      <!-- Formulário de busca -->
                      <form class="search-form">
-                        <input type="text" placeholder="Número da Reserva">
+                        <input type="text" placeholder="Digite o CPF do usuário">
                         <input type="submit" value="Buscar">
                      </form>
                      <!-- Formulário de busca -->
+                     
 
                      <table class="table table-striped">
-
-                        <thead>
-                           <tr>
-                              <th>Cliente</th>
-                              <th>Reserva</th>
-                              <th>Check-in e Check-out</th>
-                              <th>Ações</th>
-                            </tr>
-                        </thead>
-                        
                         <tbody>
-                           <!-- Linhas da tabela com dados das reservas -->
-                           <tr>
-                           <td>Cliente 01 <br> 123.234.456-98 </td>
-                           <td>123987 <br> Quarto 001 </td>
-                           <td>23/06/2023 <br> 25/06/2023 </td>
-                           <td>
-                              <a href="reserva.html">Mais Informações</a> <br> 
-                              <a href="alterarreserva.html" >Editar</a>
-                           </td>
-                           </tr>
-                           <tr>
-                              <td>Cliente 02 <br> 231.567.098-55 </td>
-                              <td>56748 <br> Quarto 005 </td>
-                              <td>30/06/2023 <br> 01/07/2023 </td>
-                              <td>
-                                 <a href="reserva.html">Mais Informações</a> <br> 
-                                 <a href="alterarreserva.html" >Editar</a>
-                              </td>
-                              </tr>
-                        </tbody>
+                            <thead>
+                                <tr>
+                                  <th>Item</th>
+                                  <th>Quantidade</th>
+                                  <th>Preço Unitário</th>
+                                  <th>Total</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Refrigerante</td>
+                                  <td>2</td>
+                                  <td>R$ 5,00</td>
+                                  <td>R$ 10,00</td>
+                                </tr>
+                                <tr>
+                                  <td>Pizza</td>
+                                  <td>1</td>
+                                  <td>R$ 30,00</td>
+                                  <td>R$ 30,00</td>
+                                </tr>
+                                <tr>
+                                  <td>Cerveja</td>
+                                  <td>4</td>
+                                  <td>R$ 8,00</td>
+                                  <td>R$ 32,00</td>
+                                </tr>
+                                <!-- Adicione mais linhas conforme necessário -->
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="3" style="text-align: right;">Total:</td>
+                                  <td>R$ 72,00</td>
+                                </tr>
+                              </tfoot>
                      </table>
-                     
-                     
      <!-- final tabela -->
-                     </div>
-                  </form>
-                  <a class="nav-link" href="admin.html">Voltar</a>
+   </div>
+</form>
+<a class="nav-link" href="admin.php">Voltar</a>
 
-               </div>
-            </div>
-         </div>
-      </section>
-      
-      <!-- end form_lebal -->
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!-- end footer -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-   </body>
+</div>
+</div>
+</div>
+</section>
+
+<!-- end form_lebal -->
+<div class="copyright">
+<div class="container">
+<div class="row">
+   <div class="col-md-12">
+      <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- end footer -->
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
 </html>
 

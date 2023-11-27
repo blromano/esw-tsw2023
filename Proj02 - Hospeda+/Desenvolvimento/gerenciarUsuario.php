@@ -1,4 +1,30 @@
+<?php
+//session_start();
+$_SESSION['id_fun'] = 0;
+require_once 'models/Funcionario.php';
+require_once 'db/FuncionarioDAOMysql.php';
 
+require_once 'models/Cliente.php';
+require_once 'db/ClienteDAOMysql.php';
+
+if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+   $id = $_SESSION['id_fun'];
+
+   $f = new FuncionarioDAOMysql();
+   $f = $f->findById($id);
+
+   $c = new ClienteDAOMysql();
+   $c = $c->findAll();
+
+}else {
+   if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+      header("Location: telaprincipal.php");
+   }
+   
+   header("Location: login.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,7 +36,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Reservas</title>
+      <title>Gerenciar usuários</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +74,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,10 +87,10 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
+                                 <a class="nav-link" href=" ">Bem vindo, <?=$f->getFun_nome();?></a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -100,73 +126,71 @@
      
                      <!-- Formulário de busca -->
                      <form class="search-form">
-                        <input type="text" placeholder="Número da Reserva">
-                        <input type="submit" value="Buscar">
+                        <input type="text" placeholder="Nome completo">
+                        <input type="text" placeholder="CPF">
+                        <input type="text" placeholder="Data de nascimento">
+                        <input type="submit" value="Pesquisars">
                      </form>
                      <!-- Formulário de busca -->
+                     <br>
 
                      <table class="table table-striped">
-
+                        
                         <thead>
-                            <tr>
-                               <th>Quarto</th>
-                               <th>Cama</th>
-                               <th>Check-in e Check-out</th>
-                               <th>Hóspedes</th>
-                               <th>Ações</th>
-                             </tr>
-                         </thead>
-                         
-                         <tbody>
-                            <!-- Linhas da tabela com dados das reservas -->
-                            <tr>
-                            <td>Quarto 001 </td>
-                            <td>Cama de casal <br> 1 </td>
-                            <td>23/06/2023 <br> 25/06/2023 </td>
-                            <td> 2 </td>
-                           <td>
-                              <a href="alterarreserva.html">Editar</a> <br> 
-                              <a href="#" >Excluir</a>
-                           </td>
+                           <tr>
+                           <th>Nome</th>
+                           <th>CPF</th>
+                           <th>Nascimento</th>
+                           <th>Ações</th>
                            </tr>
-                           
+                        </thead>
+                        <tbody>
+                           <!-- Linhas da tabela com dados de usuários -->
+                           <?php foreach ($c as $value): ?>
+                           <tr>
+                              <td><?=$value->getCli_nome();?></td>
+                              <td><?=$value->getCli_cpf();?></td>
+                              <td><?=$value->getCli_nascimento();?></td>
+                              <td>
+                                 <a href="usuario.php?id=<?=$value->getId_cliente();?>" target="_blank">Detalhes</a>
+                              </td>
+                           </tr>
+                           <?php endforeach;?>
                         </tbody>
                      </table>
-                     
-                     
      <!-- final tabela -->
-                     </div>
-                  </form>
-                  <a class="nav-link" href="reserva.html">Voltar</a>
+   </div>
+</form>
+<a class="nav-link" href="admin.php">Voltar</a>
 
-               </div>
-            </div>
-         </div>
-      </section>
-      
-      <!-- end form_lebal -->
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!-- end footer -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-   </body>
+</div>
+</div>
+</div>
+</section>
+
+<!-- end form_lebal -->
+<div class="copyright">
+<div class="container">
+<div class="row">
+   <div class="col-md-12">
+      <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- end footer -->
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
 </html>
 

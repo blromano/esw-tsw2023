@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Consumação</title>
+      <title>Limpeza</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -46,7 +46,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -62,7 +62,7 @@
                                  <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -96,56 +96,82 @@
                      <div class="row">
      <!-- inicio tabela -->
      
-                     <!-- Formulário de busca -->
-                     <form class="search-form">
-                        <input type="text" placeholder="Digite o CPF do usuário">
-                        <input type="submit" value="Buscar">
-                     </form>
-                     <!-- Formulário de busca -->
-                     
+     <a class="nav-link" href="adicionarlimpeza.php">Adicionar Limpeza</a>
+
 
                      <table class="table table-striped">
+                        
+                        <thead>
+                           <tr>
+                              <th>Nome</th>
+                              <th>Quarto/Setor</th>
+                              <th>Estado</th>
+                              <th>Ações</th>                           
+                           </tr>
+                        </thead>
                         <tbody>
-                            <thead>
-                                <tr>
-                                  <th>Item</th>
-                                  <th>Quantidade</th>
-                                  <th>Preço Unitário</th>
-                                  <th>Total</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>Refrigerante</td>
-                                  <td>2</td>
-                                  <td>R$ 5,00</td>
-                                  <td>R$ 10,00</td>
-                                </tr>
-                                <tr>
-                                  <td>Pizza</td>
-                                  <td>1</td>
-                                  <td>R$ 30,00</td>
-                                  <td>R$ 30,00</td>
-                                </tr>
-                                <tr>
-                                  <td>Cerveja</td>
-                                  <td>4</td>
-                                  <td>R$ 8,00</td>
-                                  <td>R$ 32,00</td>
-                                </tr>
-                                <!-- Adicione mais linhas conforme necessário -->
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <td colspan="3" style="text-align: right;">Total:</td>
-                                  <td>R$ 72,00</td>
-                                </tr>
-                              </tfoot>
+                           <!-- Linhas da tabela com dados de usuários -->
+                           <tr>
+                           <td>Usuário 1</td>
+                           <td>Quarto 001</td>
+                           <td> <select name="Estado"> 
+                                 <option value="Limpo">Limpo</option>
+                                 <option value="Ocupado">Ocupado</option>
+                                 <option value="Limpar">Limpar</option>
+                              </select>
+                           </td>
+                           <td>
+                              <a href="alterarlimpeza.php" >Editar</a> |
+                              <a href="#"  data-toggle="modal" data-target="#confirmDeleteModal">Excluir</a> 
+                           </td>
+                           </tr>
+                           <tr>
+                           <td>Usuário 2</td>
+                           <td>Cozinha</td>
+                           <td> <select name="Estado"> 
+                              <option value="Limpo">Limpo</option>
+                              <option value="Ocupado">Ocupado</option>
+                              <option value="Limpar">Limpar</option>
+                           </select>
+                        </td>
+                           <td>
+                              <a href="alterarlimpeza.php" >Editar</a> |
+                              <a href="#"data-toggle="modal" data-target="#confirmDeleteModal">Excluir</a> 
+                           </td>
+                           </tr>
+                           <tr>
+                              <td>Usuário 3</td>
+                              <td>Recepção</td>
+                              <td> <select name="Estado"> 
+                                 <option value="Limpo">Limpo</option>
+                                 <option value="Ocupado">Ocupado</option>
+                                 <option value="Limpar">Limpar</option>
+                              </select>
+                           </td>
+                              <td>
+                                 <a href="alterarlimpeza.php" >Editar</a> |
+                              <a href="#"  data-toggle="modal" data-target="#confirmDeleteModal">Excluir</a> 
+                           </td>
+                              </tr>
+                              <tr>
+                              <td>Usuário 4</td>
+                              <td>Quarto 003</td>
+                              <td> <select name="Estado"> 
+                                 <option value="Limpo">Limpo</option>
+                                 <option value="Ocupado">Ocupado</option>
+                                 <option value="Limpar">Limpar</option>
+                              </select>
+                           </td>
+                              <td>
+                                 <a href="alterarlimpeza.php" >Editar</a> |
+                              <a href="#" data-toggle="modal" data-target="#confirmDeleteModal">Excluir</a> 
+                           </tr>
+                        </tbody>
                      </table>
      <!-- final tabela -->
    </div>
 </form>
-<a class="nav-link" href="admin.html">Voltar</a>
+<a class="nav-link" href="telaprincipalfuncionario.php">Voltar</a>
 
 </div>
 </div>

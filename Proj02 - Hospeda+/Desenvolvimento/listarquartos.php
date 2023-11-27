@@ -1,7 +1,27 @@
+<?php
+session_start();
+require_once 'models/Funcionario.php';
+require_once 'db/FuncionarioDAOMysql.php';
 
+require_once 'models/Quarto.php';
+require_once 'db/QuartoDAOMysql.php';
 
+if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+   $id = $_SESSION['id_fun'];
+
+   $f = new FuncionarioDAOMysql();
+   $f = $f->findById($id);
+
+   $q = new QuartoDAOMysql();
+   $q = $q->findAll();
+
+}else {   
+   header("Location: login.php");
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
    <head>
       <!-- basic -->
       <meta charset="utf-8">
@@ -10,7 +30,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>felicity</title>
+      <title>Quartos</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +68,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,9 +81,10 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href=" ">Bem vindo, <?=$f->getFun_nome();?></a>
                               </li>
                            </ul>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -77,59 +98,80 @@
       <section class="banner_main">
          <div class="container">
             <div class="row">
-               
+               <div class="col-md-12">
+                  <div class="text-bg">
+                     <div class="padding_lert">
+
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </section>
-      <!-- end banner -->
-      <!-- form_lebal -->
       <section>
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_book" action="admin.html" method="post">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <label for="username">Email: </label>
-                           <input class="book_n" placeholder="email" type="text" name="username" required>
-                        </div>
-                        <div class="col-md-12">
-                           <label for="password">Senha:</label>
-                           <input class="book_n" type="password" id="password" name="password" required>
-                        </div>
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <input class="book_btn" type="submit" value="Entrar">
-                           </div>
-                        </div>
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <a href="recuperarsenha.html">Esqueceu a senha? Clique aqui</a>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- end form_lebal -->
-      
-      
-      <!--  footer -->
-      <footer id="contact">
-         <div class="footer">
-            <div class="container">
-               <div class="row">
                   
-               </div>
-            </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>                     </div>
-                  </div>
+                  <form class="form_gerenciar">
+                     
+                     <div class="row">
+                        <a class="nav-link" href="adicionarquartos.php">Adicionar Quarto</a>
+
+                        
+                           <div class="col-md-12">
+                              <table class="table table-striped">
+                                 <thead>
+                                    <tr>
+                                       <th>Número do Quarto</th>
+                                       <th>Capacidade</th>
+                                       <th>Tipo de Cama</th>
+                                       <th>Disponibilidade</th>
+                                       <th>Ações</th>
+                                    </tr>
+                       
+                                 </thead>
+                                 <tbody>
+                                 <!-- Aqui serão exibidos os quartos adicionados dinamicamente -->
+                                 <!-- Para cada quarto adicionado, adicione uma nova linha na tabela -->
+                                 <?php foreach ($q as $value): ?>
+                                 <tr>
+                                    <td><?=$value->getId_quarto();?></td>
+                                    <td><?=$value->getQrt_capacidade();?> Pessoas</td>
+                                    <td>Cama <?=$value->getQrt_tipo_cama();?></td>
+                                    <td><?php $value->getQrt_disponivel() === 1 ? 'Disponível' : 'Indisponível' ;?></td>
+                                    <td>
+                                       <a href="alterarquarto.php?id=<?=$value->getId_quarto();?>" >Editar</a> |
+                                       <a href="excluirquarto.php?id=<?=$value->getId_quarto();?>" >Excluir</a>
+                                    </td>
+                                 </tr>
+                                 <?php endforeach;?>
+                                 
+                       <!-- Adicione mais linhas para cada quarto adicionado -->
+                                 </tbody>
+                              </table>
+               <!-- final tabela -->
+                           </div>
+   </div>
+</form>
+                 
+<a class="nav-link" href="telaprincipalfuncionario.php">Voltar</a>
+
+              </div>
+
+           </div>
+        </div>
+        
+     </section>
+
+     <!-- end room_list -->
+      <footer>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <p>Copyright 2023 All Right Reserved By
+                     <a href=" "> i6 - Tech </a>
+                  </p>
                </div>
             </div>
          </div>
@@ -145,6 +187,6 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script src="js/script.js"></script>
    </body>
 </html>
-

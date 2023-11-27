@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Reserva</title>
+      <title>Alterar Limpeza</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +48,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,10 +61,9 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href=" ">Bem vindo, $cliente</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -94,48 +93,40 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_book">
-                     <div class="row">
-                        
-                        
-                        <div class="col-md-5">
-                  <label class="date">Data de Chegada</label>
-                  <input class="book_n" type="date" />
-                </div>
-                <div class="col-md-3">
-                  <label class="date">Data de Partida</label>
-                  <input class="book_n" type="date" />
-                </div>
-                        <div class="col-md-5">
-                           <label class="date">Tipo de Quarto</label>
-                           <input class="book_n" placeholder="Tipo de Quarto" type="type" name="Tipo de Quarto">
-                        </div>
-                        <div class="col-md-5">
-                           <label class="date">Tipo de Cama</label>
-                           <input class="book_n" placeholder="Tipo de Cama" type="type" name="Tipo de Cama">
-                        </div>
-                        <div class="col-md-5">
-                           <label class="date">Quantidade de Hospedes</label>
-                           <input class="book_n" placeholder="Quantidade de Hospedes" type="type" name="Quantidade de Hospedes">
-                        </div>
-                        
-                        <div class="col-md-3">
-                           <button class="book_btn">Realizar Reserva</button>
-                        </div>
-                     </div>
-                  </form>
+                  <form class="form_cadastro" action="login.php" method="post">
+                    <div class="form-group">
+                       <label for="cleaning_code">Código:</label>
+                       <input class="book_n" type="number" class="form-control" id="cleaning_code" name="cleaning_code" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_name">Nome da Tarefa:</label>
+                       <input class="book_n" type="text" class="form-control" id="task_name" name="task_name" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_date">Data da Tarefa:</label>
+                       <input class="book_n" type="date" class="form-control" id="task_date" name="task_date" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_sector">Setor:</label>
+                       <input class="book_n" type="text" class="form-control" id="task_sector" name="task_sector" required>
+                    </div>
+                    <div class="col-md-3">
+                     <button class="book_btn">Editar</button>
+                  </div>
+                 </form>
+                 <a class="nav-link" href="telalimpeza.php">Voltar</a>
                </div>
             </div>
          </div>
       </section>
       <!-- end form_lebal -->
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
-                     </div>
-                  </div>
+      <footer>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <p>Copyright 2023 All Right Reserved By
+                     <a href=" "> i6 - Tech </a>
+                  </p>
                </div>
             </div>
          </div>
@@ -151,6 +142,13 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         document.getElementById("submitBtn").addEventListener("click", function() {
+           // Aqui você pode adicionar qualquer lógica personalizada antes de redirecionar
+           // Por exemplo, validação de formulário ou manipulação de dados
+           // Após a lógica, redirecione para a página desejada usando:
+           window.location.href = "outra_pagina.html";
+         });
+      </script>
    </body>
 </html>
-

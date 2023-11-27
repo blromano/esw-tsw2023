@@ -1,3 +1,23 @@
+<?php
+session_start();
+require_once 'models/Cliente.php';
+require_once 'db/ClienteDAOMysql.php';
+
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+
+    $data = new ClienteDAOMysql();
+    $data = $data->findById($id);
+
+}else {
+   if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+      header("Location: telaprincipalfuncionario.php");
+   }
+   
+   header("Location: login.php");
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -10,7 +30,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>felicity</title>
+      <title>Principal</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +68,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,55 +81,101 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href=" ">Bem vindo, <?=$data->getCli_nome();?></a>
                               </li>
+                           </ul>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
                </div>
             </div>
          </div>
-         <script>
-            function enviarLinkRecuperacao() {
-                // Aqui você pode adicionar a lógica para enviar o link de recuperação por e-mail, etc.
-    
-                // Exibindo a mensagem de sucesso
-                var mensagem = "Link de recuperação enviado com sucesso!";
-                document.getElementById("mensagem-recuperacao").innerText = mensagem;
-            }
-        </script>
+         
       </header>
       <!-- end header inner -->
       <!-- end header -->
       <!-- banner -->
       <section class="banner_main">
-         <div class="container">
-            <div class="row">
-               
-            </div>
-         </div>
-      </section>
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="text-bg">
+                    <div class="padding_lert">
+
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
       <!-- end banner -->
       <!-- form_lebal -->
       <section>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <form class="form_book" action="/recuperarsenha" method="post">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <label for="username">Email: </label>
-                           <input class="book_n" placeholder="email" type="text" name="username" required>
-                        </div>
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <form class="form_gerenciar">
+                    <div class="row">
                         
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <button class="book_btn" onclick="enviarLinkRecuperacao()">Recuperar Senha</button>>
-                              <a class="nav-link" href="login.html">Voltar</a>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
+                        <!-- inicio tabela minhas reservas-->
+                    <table class="table table-striped">
+                    <tbody>                       
+                       <tr>
+                        <h2> Minhas Reservas </h2>
+                            <td>
+                                <h3>Quarto Simples</h3>
+                                <p>2 pessoas</p>
+                            </td>
+                            <td>
+                                <h5>Data</h5>
+                                <p>Check in 25/10/2023</p>
+                                <p>Check out 29/10/2023</p>
+                             </td>
+                             <td>
+                                <h5>Status</h5>
+                                <p>Estadia concluída</p>
+                             </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Quarto Família</h3>
+                                <p>4 pessoas</p>
+                            </td>
+                            <td>
+                                <h5>Data</h5>
+                                <p>Check in 07/07/2022</p>
+                                <p>Check out 10/07/2022</p>
+                             </td>
+                             <td>
+                                <h5>Status</h5>
+                                <p>Estadia concluída</p>
+                             </td>
+                        </tr>       
+                        <tr>
+                            <td>
+                                <h3>Quarto Simples</h3>
+                                <p>2 pessoas</p>
+                            </td>
+                            <td>
+                                <h5>Data</h5>
+                                <p>Check in 10/12/2021</p>
+                                <p>Check out 13/12/2021</p>
+                             </td>
+                             <td>
+                                <h5>Status</h5>
+                                <p>Estadia concluída</p>
+                             </td>
+                        </tr>      
+                                       
+                    </table>
+                    <!-- fim tabela minhas reservas-->
+                  </section>
+           </div>
+           <a class="nav-link" href="index.php">Voltar</a>
+        </div>
+     </div>
+  </section>
                </div>
             </div>
          </div>

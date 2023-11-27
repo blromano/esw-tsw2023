@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Alterar Limpeza</title>
+      <title>Alterar Reservas</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +48,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,7 +61,7 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
                         </div>
@@ -94,27 +94,46 @@
             <div class="row">
                <div class="col-md-12">
                   <form class="form_cadastro" action="login.html" method="post">
-                    <div class="form-group">
-                       <label for="cleaning_code">Código:</label>
-                       <input class="book_n" type="number" class="form-control" id="cleaning_code" name="cleaning_code" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_name">Nome da Tarefa:</label>
-                       <input class="book_n" type="text" class="form-control" id="task_name" name="task_name" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_date">Data da Tarefa:</label>
-                       <input class="book_n" type="date" class="form-control" id="task_date" name="task_date" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_sector">Setor:</label>
-                       <input class="book_n" type="text" class="form-control" id="task_sector" name="task_sector" required>
-                    </div>
                     <div class="col-md-3">
-                     <button class="book_btn">Editar</button>
-                  </div>
-                 </form>
-                 <a class="nav-link" href="telalimpeza.html">Voltar</a>
+                      <label for="numero">Número do Quarto:</label>
+                      <input class="book_n" type="text" id="numero" name="numero" required>
+                   </div>
+                   <div class="col-md-3">
+                    <label for="tipo_cama">Tipo de Cama:</label>
+                    <select class="book_n" id="tipo_cama" name="tipo_cama" required>
+                      <option value="solteiro">Solteiro</option>
+                      <option value="casal">Casal</option>
+                      <option value="queen">Queen</option>
+                      <option value="king">King</option>
+                    </select>
+                    
+                    <div class="col-md-3">
+                        <label for="quantidade_camas">Quantidade de Camas:</label>
+                        <input class="book_n" type="text" id="quantidade_camas" name="quantidade_camas" required>
+                     </div>
+                 </div>
+                 <div class="col-md-3">
+                      <label for="capacidade">Capacidade:</label>
+                      <input class="book_n" type="text" id="capacidade" name="capacidade" required>
+                   </div>
+                   <div class="col-md-3">
+                    <label class="date">Check in</label>
+                    <input class="book_n"  type="date" >
+                 </div>
+                 <div class="col-md-3">
+                    <label class="date">Check out</label>
+                    <input class="book_n"  type="date" >
+                 </div>
+                 <div class="col-md-3">
+                    <label class="date">Pessoas</label>
+                    <input class="book_n" placeholder="2" type="type" name="2">
+                 </div>
+                     <div class="col-md-3">
+                      <button class="book_btn">Editar</button>
+                   </div>
+                  </form>
+                  <a class="nav-link" href="reserva.php">Voltar</a>
+
                </div>
             </div>
          </div>

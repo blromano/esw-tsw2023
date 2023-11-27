@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
    <head>
       <!-- basic -->
       <meta charset="utf-8">
@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Hospeda+</title>
+      <title>Reservas</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +48,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -64,14 +64,13 @@
                                  <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
                </div>
             </div>
          </div>
-         
       </header>
       <!-- end header inner -->
       <!-- end header -->
@@ -79,7 +78,13 @@
       <section class="banner_main">
          <div class="container">
             <div class="row">
-               
+               <div class="col-md-12">
+                  <div class="text-bg">
+                     <div class="padding_lert">
+
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </section>
@@ -89,43 +94,69 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_book" action="telaprincipal.html" method="post">
-                     <h1>Bem-vindo à Tela Principal do Funcionário</h1>
-                        <ul class="navbar-nav mr-auto">
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarReserva.html">Gerenciar Reservas</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarQuarto.html">Gerenciar Quartos</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarUsuario.html">Gerenciar Usuários</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarLimpeza.html">Gerenciar Limpeza</a>
-                           </li>
-                        </ul>
+                  <form class="form_gerenciar">
+                     <div class="row">
+     <!-- inicio tabela -->
+     
+                     <!-- Formulário de busca -->
+                     <form class="search-form">
+                        <input type="text" placeholder="CPF do cliente">
+                        <input type="submit" value="Buscar">
+                     </form>
+                     <!-- Formulário de busca -->
+
+                     <table class="table table-striped">
+
+                        <thead>
+                           <tr>
+                              <th>Cliente</th>
+                              <th>Reserva</th>
+                              <th>Check-in e Check-out</th>
+                              <th>Ações</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                           <!-- Linhas da tabela com dados das reservas -->
+                           <tr>
+                           <td>Cliente 01 <br> 123.234.456-98 </td>
+                           <td>123987 <br> Quarto 001 </td>
+                           <td>23/06/2023 <br> 25/06/2023 </td>
+                           <td>
+                              <a href="reserva.php">Mais Informações</a> <br> 
+                              <a href="alterarreserva.php" >Editar</a>
+                           </td>
+                           </tr>
+                           <tr>
+                              <td>Cliente 02 <br> 231.567.098-55 </td>
+                              <td>56748 <br> Quarto 005 </td>
+                              <td>30/06/2023 <br> 01/07/2023 </td>
+                              <td>
+                                 <a href="reserva.php">Mais Informações</a> <br> 
+                                 <a href="alterarreserva.php" >Editar</a>
+                              </td>
+                              </tr>
+                        </tbody>
+                     </table>
+                     
+                     
+     <!-- final tabela -->
+                     </div>
                   </form>
+                  <a class="nav-link" href="admin.php">Voltar</a>
+
                </div>
             </div>
          </div>
       </section>
+      
       <!-- end form_lebal -->
-      
-      
-      <!--  footer -->
-      <footer id="contact">
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  
-               </div>
-            </div>
             <div class="copyright">
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>                     </div>
+                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
+                     </div>
                   </div>
                </div>
             </div>

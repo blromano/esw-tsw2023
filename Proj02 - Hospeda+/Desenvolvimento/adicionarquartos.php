@@ -1,5 +1,47 @@
+<?php
+//session_start();
 
 
+require_once 'models/Funcionario.php';
+require_once 'db/FuncionarioDAOMysql.php';
+
+require_once 'models/Quarto.php';
+require_once 'db/QuartoDAOMysql.php';
+
+if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+   $id = $_SESSION['id_fun'];
+   if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      if (isset($_POST['id_quarto']) && !empty($_POST['id_quarto'])) {
+         if (isset($_POST['capacidade']) && !empty($_POST['capacidade'])) {
+            if (isset($_POST['tipo_cama']) && !empty($_POST['tipo_cama'])) {
+               if (isset($_POST['tipo_disponibilidade']) && !empty($_POST['tipo_disponibilidade'])) {
+                  if (isset($_POST['preco']) && !empty($_POST['preco'])) {
+                     $q = new Quarto();
+
+                     $q->setId_quarto($_POST['id_quarto']);
+                     $q->setQrt_capacidade($_POST['capacidade']);
+                     $q->setQrt_tipo_cama($_POST['tipo_cama']);
+                     $q->setQrt_disponivel($_POST['tipo_disponibilidade']);
+                     $q->setQrt_preco_diaria($_POST['preco']);
+
+                     $data = new QuartoDAOMysql();
+                     $data = $data->add($q);
+
+                     header("Location: listarquarto.php");
+                  }
+               }
+            }
+         }
+      }
+      http_response_code(400);
+      echo json_encode(array("success" => false, "message" => "Parâmetros inválidos"));
+      exit();
+   }   
+}else{   
+   header("Location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
    <head>
@@ -48,7 +90,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,7 +103,7 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href="telaprincipalfuncionario.php">Painel</a>
                               </li>
                            </ul>
                         </div>
@@ -93,41 +135,39 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.html" method="post">
+                  <div class="form_cadastro">
                     <div class="form-group">
-                     <label for="numero">Número do Quarto:</label>
-                     <input class="book_n" type="text" id="numero" name="numero" required>
-                  </div>
+                        <label for="numero">Número do Quarto:</label>
+                        <input class="book_n" type="text" id="numero" name="numero" required>
+                     </div>
                     <div class="form-group">
-                     <label for="capacidade">Capacidade:</label>
-                     <input class="book_n" type="text" id="capacidade" name="capacidade" required>
-                  </div>
+                        <label for="capacidade">Capacidade:</label>
+                        <input class="book_n" type="text" id="capacidade" name="capacidade" required>
+                     </div>
                     <div class="form-group">
-                     <label for="tipo_cama">Tipo de Cama:</label>
-                     <select class="book_n" id="tipo_cama" name="tipo_cama" required>
-                       <option value="solteiro">Solteiro</option>
-                       <option value="casal">Casal</option>
-                       <option value="queen">Queen</option>
-                       <option value="king">King</option>
-                     </select>
-                  </div>
-                    <div class="form-group">
-                     <label for="quantidade_camas">Quantidade de Camas:</label>
-                     <input class="book_n" type="text" id="quantidade_camas" name="quantidade_camas" required>
-                  </div>
-                  <div class="form-group">
-                     <label for="disponibilidade">Disponibilidade:</label>
-                     <select class="book_n" id="tipo_disponibilidade" name="tipo_disponibilidade" required>
-                         <option value="disponivel">Disponível</option>
-                         <option value="indisponivel">Indisponível</option>
-                     </select>
-                  </div>
+                        <label for="tipo_cama">Tipo de Cama:</label>
+                        <select class="book_n" id="tipo_cama" name="tipo_cama" required>
+                        <option value="solteiro">Solteiro</option>
+                        <option value="casal">Casal</option>
+                        <option value="queen">Queen</option>
+                        <option value="king">King</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="disponibilidade">Disponibilidade:</label>
+                        <select class="book_n" id="tipo_disponibilidade" name="tipo_disponibilidade" required>
+                           <option value="disponivel">Disponível</option>
+                           <option value="indisponivel">Indisponível</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="preco_quarto">Preço da Diaria:</label>
+                        <input class="book_n" type="text" id="preco_quarto" name="preco_quarto" required>
+                     </div>
                     <div class="col-md-3">
-                     <button class="book_btn">Adicionar</button>
+                        <button class="book_btn" id="btn_cadastrarQuarto">Adicionar</button>
+                     </div>
                   </div>
-                 </form>
-                 <a class="nav-link" href="listarquartos.html">Voltar</a>
-
                </div>
             </div>
          </div>

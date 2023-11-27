@@ -1,7 +1,47 @@
+<?php
+require_once 'db/ClienteDAOMysql.php';
+require_once 'db/FuncionarioDAOMysql.php';
 
+session_start();
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+   header("Location: telaprincipal.php");
+}else {
+   if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+      header("Location: telaprincipalfuncionario.php");
+   }
+   
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+   if (isset($_POST['user']) && !empty($_POST['user'])) {
+      if (isset($_POST['pass']) && !empty($_POST['pass'])) {
+         $user = addslashes($_POST['user']);
+         $pass = md5($_POST['pass']);
+         
+         $c = new ClienteDAOMysql();
+         $f = new FuncionarioDAOMysql();
+
+         if ($c->auth($user, $pass) || $f->auth($user, $pass)) {
+               http_response_code(200);
+               echo json_encode(array("success" => true, "message" => "Autenticação realizada sucesso"));
+               exit();
+         } else {
+               http_response_code(401);
+               echo json_encode(array("success" => false, "message" => "Credenciais inválidas"));
+               exit();
+         }      
+      }
+   }
+
+   http_response_code(400);
+   echo json_encode(array("success" => false, "message" => "Parâmetros inválidos"));
+   exit();
+}
+
+?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
    <head>
       <!-- basic -->
       <meta charset="utf-8">
@@ -10,7 +50,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Usuário</title>
+      <title>Login</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -30,18 +70,6 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-      <script>
-         function confirmarExclusao() {
-             var confirmacao = confirm("Tem certeza de que deseja excluir este usuário?");
- 
-             if (confirmacao) {
-                 // Coloque o código para excluir o usuário aqui
-                 alert("Usuário excluído com sucesso!");
-             } else {
-                 alert("A exclusão foi cancelada.");
-             }
-         }
-     </script>
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -60,7 +88,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -73,7 +101,7 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
                         </div>
@@ -89,13 +117,7 @@
       <section class="banner_main">
          <div class="container">
             <div class="row">
-               <div class="col-md-12">
-                  <div class="text-bg">
-                     <div class="padding_lert">
-
-                     </div>
-                  </div>
-               </div>
+               
             </div>
          </div>
       </section>
@@ -105,75 +127,48 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.html" method="post">
+                  <div class="form_book" >
                      <div class="row">
-                        <div class="col-md-6">
-                           <label class="date">Nome Completo</label>
-                           <input class="book_n" placeholder="Nome Completo" type="type" name="NomeCompleto">
+                        <div class="col-md-12">
+                           <label for="username">Email: </label>
+                           <input class="book_n" placeholder="email..." type="text" id="email" name="username" required>
                         </div>
-                        <div class="col-md-4">
-                           <label class="date">Data de Nascimento</label>
-                           <input class="book_n" placeholder="Data de Nascimento" type="type" name="DataNascimento">
+                        <div class="col-md-12">
+                           <label for="password">Senha:</label>
+                           <input class="book_n" type="password" id="password" name="password" placeholder="senha..." required>
                         </div>
-                        <div class="col-md-5">
-                           <label class="date">CPF</label>
-                           <input class="book_n" placeholder="CPF" type="type" name="CPF">
-                        </div>
-                        <div class="col-md-5">
-                           <label class="date">RG</label>
-                           <input class="book_n" placeholder="RG" type="type" name="RG">
-                        </div>
-                        <div class="col-md-5">
-                           <label class="date">Sexo</label>
-                              <select class="book_n" name="Sexo"> 
-                                 <option value="Masculino">Masculino</option>
-                                 <option value="Feminino">Feminino</option>
-                              </select>
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <button class="book_btn" id="bnt_auth">Entrar</button>
                            </div>
-                        <div class="col-md-5">
-                           <label class="date">Celular</label>
-                           <input class="book_n" placeholder="Celular" type="type" name="Celular">
                         </div>
-                        <div class="col-md-10">
-                           <label class="date">Email</label>
-                           <input class="book_n" placeholder="Email" type="type" name="E-mail">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <a href="recuperarsenha.php">Esqueceu a senha? Clique aqui</a>
+                           </div>
                         </div>
-                        <div class="col-md-6">
-                           <label class="date">Rua</label>
-                           <input class="book_n" placeholder="Rua" type="type" name="Rua">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Nº</label>
-                           <input class="book_n" placeholder="nº" type="type" name="nº">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Senha</label>
-                           <input class="book_n" placeholder="Senha" type="type" name="senha">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Confirmar Senha</label>
-                           <input class="book_n" placeholder="Confirmar Senha" type="type" name="confSenha">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                            <button class="book_btn">Alterar</button>
-                        </div>
-                        <button class="book_btn" onclick="confirmarExclusao()">Excluir</button>
                      </div>
-                  </form>
-                  
+                  </div>
                </div>
             </div>
          </div>
       </section>
       <!-- end form_lebal -->
+      
+      
+      <!--  footer -->
+      <footer id="contact">
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  
+               </div>
+            </div>
             <div class="copyright">
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
-                     </div>
+                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>                     </div>
                   </div>
                </div>
             </div>
@@ -190,6 +185,7 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script src="js/script.js"></script>
    </body>
 </html>
 

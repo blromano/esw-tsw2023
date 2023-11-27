@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Adicionar Limpeza</title>
+      <title>Pagamento Reserva</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -30,6 +30,7 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -48,7 +49,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,7 +62,7 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
                         </div>
@@ -90,44 +91,54 @@
       <!-- end banner -->
       <!-- form_lebal -->
       <section>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <form class="form_cadastro" action="login.html" method="post">
-                    <div class="form-group">
-                       <label for="cleaning_code">Código:</label>
-                       <input class="book_n" type="number" class="form-control" id="cleaning_code" name="cleaning_code" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_name">Nome da Tarefa:</label>
-                       <input class="book_n" type="text" class="form-control" id="task_name" name="task_name" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_date">Data da Tarefa:</label>
-                       <input class="book_n" type="date" class="form-control" id="task_date" name="task_date" required>
-                    </div>
-                    <div class="form-group">
-                       <label for="task_sector">Setor:</label>
-                       <input class="book_n" type="text" class="form-control" id="task_sector" name="task_sector" required>
-                    </div>
-                    <div class="col-md-3">
-                     <button class="book_btn">Adicionar</button>
-                  </div>
-                 </form>
-                 <a class="nav-link" href="telalimpeza.html">Voltar</a>
-
-               </div>
-            </div>
-         </div>
-      </section>
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <form class="form_gerenciar">
+                    <div class="row">
+    <!-- inicio tabela -->
+    
+                    <!-- Formulário de pagamento -->
+                                   
+                    <section>
+                        <form action="processa_pagamento.php" method="post">                          
+                            <div class="form-group">
+                              <label for="numero_cartao">Número do cartão</label>
+                              <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="validade">Validade</label>
+                                <input type="month" class="form-control" id="validade" name="validade" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="cvv">CVV</label>
+                              <input type="text" class="form-control" id="cvv" name="cvv" required>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="nome_completo">Nome do titular</label>
+                              <input type="text" class="form-control" id="nome_completo" name="nome_completo" required>
+                            </div>
+                            <br>                       
+                                                     
+                            <button type="submit" class="read_more">Confirmar Pagamento</button>
+                          
+                          </form>
+                     </section>
+              </div>
+              <a class="nav-link" href="index.php">Voltar</a>
+           </div>
+        </div>
+     </section>
+     
       <!-- end form_lebal -->
-      <footer>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <p>Copyright 2023 All Right Reserved By
-                     <a href=" "> i6 - Tech </a>
-                  </p>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
@@ -143,13 +154,6 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-      <script>
-         document.getElementById("submitBtn").addEventListener("click", function() {
-           // Aqui você pode adicionar qualquer lógica personalizada antes de redirecionar
-           // Por exemplo, validação de formulário ou manipulação de dados
-           // Após a lógica, redirecione para a página desejada usando:
-           window.location.href = "outra_pagina.html";
-         });
-      </script>
    </body>
 </html>
+

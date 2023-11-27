@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
    <head>
       <!-- basic -->
       <meta charset="utf-8">
@@ -10,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Hospeda+</title>
+      <title>Adicionar Limpeza</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -48,7 +46,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,17 +59,15 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href=" ">Bem vindo, $funcionario</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
-                           <div class="sign_btn"><a href="index.html">Sair</a></div>
                         </div>
                      </nav>
                   </div>
                </div>
             </div>
          </div>
-         
       </header>
       <!-- end header inner -->
       <!-- end header -->
@@ -79,7 +75,13 @@
       <section class="banner_main">
          <div class="container">
             <div class="row">
-               
+               <div class="col-md-12">
+                  <div class="text-bg">
+                     <div class="padding_lert">
+
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </section>
@@ -89,50 +91,41 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_book" action="telaprincipal.html" method="post">
-                     <h1>Bem-vindo à Tela Principal do Funcionário</h1>
-                        <ul class="navbar-nav mr-auto">
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarReserva.html">Gerenciar Reservas</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="listarquartos.html">Gerenciar Quartos</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarUsuario.html">Gerenciar Usuários</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="telalimpeza.html">Gerenciar Limpeza</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarpagamento.html">Gerenciar Pagamento</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" href="gerenciarconsumacao.html">Gerenciar Consumação</a>
-                           </li>
-                        </ul>
-                  </form>
+                  <form class="form_cadastro" action="login.html" method="post">
+                    <div class="form-group">
+                       <label for="cleaning_code">Código:</label>
+                       <input class="book_n" type="number" class="form-control" id="cleaning_code" name="cleaning_code" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_name">Nome da Tarefa:</label>
+                       <input class="book_n" type="text" class="form-control" id="task_name" name="task_name" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_date">Data da Tarefa:</label>
+                       <input class="book_n" type="date" class="form-control" id="task_date" name="task_date" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="task_sector">Setor:</label>
+                       <input class="book_n" type="text" class="form-control" id="task_sector" name="task_sector" required>
+                    </div>
+                    <div class="col-md-3">
+                     <button class="book_btn">Adicionar</button>
+                  </div>
+                 </form>
+                 <a class="nav-link" href="telaLimpeza.php">Voltar</a>
+
                </div>
             </div>
          </div>
       </section>
       <!-- end form_lebal -->
-      
-      
-      <!--  footer -->
-      <footer id="contact">
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  
-               </div>
-            </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>                     </div>
-                  </div>
+      <footer>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <p>Copyright 2023 All Right Reserved By
+                     <a href=" "> i6 - Tech </a>
+                  </p>
                </div>
             </div>
          </div>
@@ -148,6 +141,13 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         document.getElementById("submitBtn").addEventListener("click", function() {
+           // Aqui você pode adicionar qualquer lógica personalizada antes de redirecionar
+           // Por exemplo, validação de formulário ou manipulação de dados
+           // Após a lógica, redirecione para a página desejada usando:
+           window.location.href = "outra_pagina.html";
+         });
+      </script>
    </body>
 </html>
-

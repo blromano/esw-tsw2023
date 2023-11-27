@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Alterar Reservas</title>
+      <title>Feedback</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -30,6 +30,31 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <style>
+         .rating {
+           unicode-bidi: bidi-override;
+           direction: rtl;
+           text-align: center;
+         }
+     
+         .rating > span {
+           display: inline-block;
+           position: relative;
+           width: 1.1em;
+         }
+     
+         .rating > span:before {
+           content: "\2605";
+           position: absolute;
+           color: #ccc;
+         }
+     
+         .rating > span:hover:before,
+         .rating > span:hover ~ span:before {
+           content: "\2605";
+           color: #ffcc00;
+         }
+       </style>
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -48,7 +73,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,9 +86,10 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href=" ">Bem vindo, $cliente</a>
                               </li>
                            </ul>
+                           <div class="sign_btn"><a href="index.php">Sair</a></div>
                         </div>
                      </nav>
                   </div>
@@ -93,59 +119,75 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.html" method="post">
-                    <div class="col-md-3">
-                      <label for="numero">Número do Quarto:</label>
-                      <input class="book_n" type="text" id="numero" name="numero" required>
-                   </div>
-                   <div class="col-md-3">
-                    <label for="tipo_cama">Tipo de Cama:</label>
-                    <select class="book_n" id="tipo_cama" name="tipo_cama" required>
-                      <option value="solteiro">Solteiro</option>
-                      <option value="casal">Casal</option>
-                      <option value="queen">Queen</option>
-                      <option value="king">King</option>
-                    </select>
-                    
-                    <div class="col-md-3">
-                        <label for="quantidade_camas">Quantidade de Camas:</label>
-                        <input class="book_n" type="text" id="quantidade_camas" name="quantidade_camas" required>
-                     </div>
-                 </div>
-                 <div class="col-md-3">
-                      <label for="capacidade">Capacidade:</label>
-                      <input class="book_n" type="text" id="capacidade" name="capacidade" required>
-                   </div>
-                   <div class="col-md-3">
-                    <label class="date">Check in</label>
-                    <input class="book_n"  type="date" >
-                 </div>
-                 <div class="col-md-3">
-                    <label class="date">Check out</label>
-                    <input class="book_n"  type="date" >
-                 </div>
-                 <div class="col-md-3">
-                    <label class="date">Pessoas</label>
-                    <input class="book_n" placeholder="2" type="type" name="2">
-                 </div>
-                     <div class="col-md-3">
-                      <button class="book_btn">Editar</button>
-                   </div>
-                  </form>
-                  <a class="nav-link" href="reserva.html">Voltar</a>
+                  <form class="form_cadastro">
+                     <div class="row">
+                        
+                        <div class="col-md-5">
+                           <label class="date">Nome Completo</label>
+                           <input class="book_n" placeholder="Nome Completo" type="type" name="Nome Completo">                        
+                        </div>
+                        <div class="col-md-5"></div>   
+                              <div class="rating">
+                                 <span></span>
+                                 <span></span>
+                                 <span></span>
+                                 <span></span>
+                                 <span></span>
+                              </div>
+                           
+                              <!-- Seus scripts JavaScript podem ser incluídos aqui -->
+                              <script>
+                                 const stars = document.querySelectorAll('.rating span');
+                           
+                                 stars.forEach((star, index) => {
+                                 star.addEventListener('click', () => {
+                                    resetStars();
+                                    setRating(index + 1);
+                                 });
+                                 });
+                           
+                                 function resetStars() {
+                                 stars.forEach(star => {
+                                    star.classList.remove('selected');
+                                 });
+                                 }
+                           
+                                 function setRating(rating) {
+                                 for (let i = 0; i < rating; i++) {
+                                    stars[i].classList.add('selected');
+                                 }
+                                 }
+                              </script>
+                        </div>
+                        <div class="col-md-5">
+                           <label class="date">Gostaria de receber um retorno? </label>
+                              <select class="book_n" name="Retorno">
+                                 <option value="Masculino">Sim</option>
+                                 <option value="Feminino">Não</option>
+    </select>
+                        </div>
+                        <div class="col-md-5">
+                           <label class="date">Feedback</label>
+                           <textarea class="book_n" id="feedback" placeholder="Digite seu feedback aqui..." required></textarea>
 
+                        </div>
+                        <div class="col-md-3">
+                           <button class="book_btn">Enviar Feedback</button>
+                        </div>
+                     </div>
+                  </form>
                </div>
             </div>
          </div>
       </section>
       <!-- end form_lebal -->
-      <footer>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <p>Copyright 2023 All Right Reserved By
-                     <a href=" "> i6 - Tech </a>
-                  </p>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>Copyright 2023 All Right Reserved By <a href=" "> i6 - Tech </a></p>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
@@ -161,13 +203,6 @@
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-      <script>
-         document.getElementById("submitBtn").addEventListener("click", function() {
-           // Aqui você pode adicionar qualquer lógica personalizada antes de redirecionar
-           // Por exemplo, validação de formulário ou manipulação de dados
-           // Após a lógica, redirecione para a página desejada usando:
-           window.location.href = "outra_pagina.html";
-         });
-      </script>
    </body>
 </html>
+

@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Cadastro</title>
+      <title>Usuário</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -30,6 +30,18 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <script>
+         function confirmarExclusao() {
+             var confirmacao = confirm("Tem certeza de que deseja excluir este usuário?");
+ 
+             if (confirmacao) {
+                 // Coloque o código para excluir o usuário aqui
+                 alert("Usuário excluído com sucesso!");
+             } else {
+                 alert("A exclusão foi cancelada.");
+             }
+         }
+     </script>
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -48,7 +60,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -61,7 +73,7 @@
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
                               <li class="nav-item">
-                                 <a class="nav-link" href="index.html">Tela Inicial</a>
+                                 <a class="nav-link" href="index.php">Tela Inicial</a>
                               </li>
                            </ul>
                         </div>
@@ -70,7 +82,6 @@
                </div>
             </div>
          </div>
-         
       </header>
       <!-- end header inner -->
       <!-- end header -->
@@ -94,7 +105,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.html" method="post">
+                  <form class="form_cadastro" action="login.php" method="post">
                      <div class="row">
                         <div class="col-md-6">
                            <label class="date">Nome Completo</label>
@@ -144,8 +155,11 @@
                            <input class="book_n" placeholder="Confirmar Senha" type="type" name="confSenha">
                         </div>
                         <div class="col-md-3">
-                           <button class="book_btn">Cadastrar</button>
                         </div>
+                        <div class="col-md-3">
+                            <button class="book_btn">Alterar</button>
+                        </div>
+                        <button class="book_btn" onclick="confirmarExclusao()">Excluir</button>
                      </div>
                   </form>
                   
