@@ -18,7 +18,7 @@ Para executar a aplicação, você pode:
 
 
 ## Abrir em uma IDE
-Baixar o código do projeto (clicar em "<> Code" e baixar como ZIP), abrir o projeto no NetBeans/IntelliJ e fazer a build. Executar a função main do projeto, da classe VotoLyzeApplication.java. 
+Abrir a pasta do projeto (Final/VotoLyze) no NetBeans/IntelliJ e fazer a build (Clean and Build no NetBeans, Rebuild Modules no IntelliJ). Executar a função main do projeto, da classe VotoLyzeApplication.java. 
 
 
 ## Build pelo terminal
