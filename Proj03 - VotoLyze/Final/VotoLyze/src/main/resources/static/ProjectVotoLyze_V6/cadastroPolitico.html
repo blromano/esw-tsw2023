@@ -56,7 +56,7 @@
         event.preventDefault();
         alert('Senha inválida!');
         const passwordInfo = document.getElementById('password-info');
-        passwordInfo.textContent = 'Senha deve ter no mínimo: 6 caracteres, 1 letra maiúscula, uma letra minúscula e um caractere especial.';
+        passwordInfo.textContent = 'Senha deve ter no mínimo: 6 caracteres: 1 letra maiúscula, uma letra minúscula, um dígito e um caractere especial.';
         passwordInfo.style.color = 'red';
         return;
       } else {
