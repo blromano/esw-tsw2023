@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function pegarPartidos() {
+            fetch('http://localhost:8080/partido')
+                .then(response => response.json())
+                .then(data => {
+                    // Get reference to the select element
+                    const select = document.getElementById('mySelect');
+
+                    // Loop through the data and create options
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.id; // Assuming 'id' is a property in your data
+                        option.textContent = item.nome + ' - ' + item.sigla; // Change 'name' to the property you want to display
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        let fetchUrl;
+        const tipoUsuario = localStorage['tipoUsuario'];
+
+        if (tipoUsuario === 'eleitor') {
+            fetchUrl = 'http://localhost:8080/eleitor/';
+        } else {
+            fetchUrl = 'http://localhost:8080/politico/';
+        }
+
+
+        let userData = {}
+        let oldEmail;
+        document.addEventListener("DOMContentLoaded", function (event) {
+            const loginLink = document.getElementById('loginLink');
+            const accessToken = localStorage.getItem('accessToken');
+
+            const emailInput = document.getElementById('emailInput');
+
+            const passwordInput = document.getElementById('password');
+            const CPF = document.getElementById('CPF');
+            const sexo = document.getElementById('sexo');
+            const dataNascimento = document.getElementById('dataNascimento');
+            const nome = document.getElementById('nome');
+
+            console.log(accessToken)
+
+            // Check if accessToken exists
+            if (accessToken) {
+
+                loginLink.innerHTML = `<a href="painel.html"> ${localStorage['userEmail']} </a>`;
+            } else {
+
+                loginLink.innerHTML = `<a href="login.html">Login</a>`;
+            }
+
+
+            const userEmail = localStorage['userEmail']; // Assuming you have the user's email stored in localStorage
+            const token = localStorage['accessToken']; // Replace with your actual Bearer token
+
+
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${token}`);
+
+
+            fetch(`${fetchUrl}${userEmail}`, {
+                headers: headers
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Work with the JSON data
+                    console.log('Data received:', data);
+                    userData = data;
+                    // You can process the 'data' here
+                    emailInput.value = `${data.email}`;
+
+                    oldEmail = data.email;
+
+                    nome.value = `${data.nome}`
+
+                    if (data.sexo === 'M') {
+                        let radiobtn = document.getElementById("male");
+                        radiobtn.checked = true;
+                    } else {
+                        let radiobtn = document.getElementById("female");
+                        radiobtn.checked = true;
+                    }
+
+                    dataNascimento.value = `${data.dataNascimento}`;
+                    CPF.value = `${data.cpf}`
+
+
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    // Handle errors here
+                });
+
+
+            const myForm = document.getElementById("myForm");
+            myForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                alterarDados();
+            });
+
+
+            if (tipoUsuario === 'politico') {
+                document.getElementById("firstHiddenInput").style.visibility = 'visible';
+                document.getElementById("firstHiddenInput").style.display = 'block';
+                document.getElementById("firstHiddenInput").disabled = false;
+
+                document.getElementById("secondHiddenInput").style.visibility = 'visible';
+                document.getElementById("secondHiddenInput").style.display = 'block';
+                document.getElementById("secondHiddenInput").disabled = false;
+
+                document.getElementById("thirdHiddenInput").style.visibility = 'visible';
+                document.getElementById("thirdHiddenInput").style.display = 'block';
+                document.getElementById("thirdHiddenInput").disabled = false;
+
+
+                pegarPartidos();
+                document.getElementById('inicioMandato').value = userData.inicioMandato;
+                if (userData.tipoCandidatura === 'vereador') {
+                    let radiobtn = document.getElementById("VEREADOR");
+                    radiobtn.checked = true;
+                } else {
+                    let radiobtn = document.getElementById("PREFEITO");
+                    radiobtn.checked = true;
+                }
+
+
+            }
+
+
+        });
+
+
+        function alterarDados() {
+            const emailInput = document.getElementById('emailInput').value;
+            const CPF = document.getElementById('CPF').value;
+            const sexo = document.querySelector('input[name="gender"]:checked').value;
+            const dataNascimento = document.getElementById('dataNascimento').value;
+            const nome = document.getElementById('nome').value;
+            let novoTipoCandidatura;
+            let novoInicioMandato;
+            let novoPartido;
+
+            if (tipoUsuario === 'politico') {
+                novoTipoCandidatura = document.querySelector('input[name="candidatura"]:checked').value;
+                novoInicioMandato = document.getElementById('inicioMandato').value;
+                console.log("inicio: " + novoInicioMandato);
+                const select = document.getElementById('mySelect');
+                const selectedOption = select.options[select.selectedIndex];
+                const partidoId = selectedOption.value;
+                novoPartido = partidoId;
+
+            }
+
+            if (!emailInput || !CPF || !sexo || !dataNascimento || !nome) {
+                alert('Preencha todos os campos.'); // Show an alert or handle the validation error
+            } else {
+
+
+                let updatedUserData;
+
+                if (tipoUsuario === 'eleitor') {
+                    updatedUserData = {
+                        "login": emailInput,
+                        "CPF": CPF,
+                        "sexo": sexo,
+                        "dataNascimento": dataNascimento,
+                        "nome": nome
+                    }
+                } else {
+                    updatedUserData = {
+                        "login": emailInput,
+                        "CPF": CPF,
+                        "sexo": sexo,
+                        "dataNascimento": dataNascimento,
+                        "nome": nome,
+                        "inicioMandato": novoInicioMandato,
+                        "tipoCandidatura": novoTipoCandidatura,
+                        "partido": {
+                            "id": novoPartido
+                        }
+                    }
+                }
+
+                console.log("sending data: " + updatedUserData.inicioMandato);
+
+                const token = localStorage['accessToken'];
+
+                const headers = new Headers();
+                headers.append('Authorization', `Bearer ${token}`);
+                headers.append('Content-Type', 'application/json');
+
+
+                fetch(`${fetchUrl}${userData.id}`, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify(updatedUserData)
+                })
+                    .then(response => {
+
+                        if (!response.ok) {
+                            window.alert("Erro!");
+                            throw new Error('Network response was not ok');
+                        }
+
+
+                        return response.json();
+                    })
+                    .then(updatedData => {
+                        console.log('Updated data:', updatedData);
+
+                        window.alert("Dados alterados com sucesso!");
+                        console.log("old: " + oldEmail);
+                        console.log("updated: " + updatedData.email);
+                        console.log(oldEmail !== updatedData.email)
+                        if (oldEmail !== updatedData.email) {
+                            window.alert("E-mail alterado, por favor faça login novamente!")
+                            localStorage.clear();
+                            window.location.replace("http://localhost:8080/ProjectVotoLyze_V6/index.html");
+                        } else {
+                            window.location.replace("http://localhost:8080/ProjectVotoLyze_V6/painel.html");
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                        // Handle errors here
+                        window.alert(error);
+                    });
+            }
+
+        }
+
+    </script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>VotoLyze</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.jpg" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <style>
+        .btn-enviar {
+            color: #FFFFFF;
+            background-color: #5271FF;
+            border-color: #545454;
+        }
+
+        .btn-enviar:hover,
+        .btn-enviar:focus,
+        .btn-enviar:active,
+        .btn-enviar.active,
+        .open .dropdown-toggle.btn-enviar {
+            color: #FFFFFF;
+            background-color: #545454;
+            border-color: #545454;
+            transition: background-color 0.3s;
+        }
+
+        .btn-enviar:active,
+        .btn-enviar.active,
+        .open .dropdown-toggle.btn-enviar {
+            background-image: none;
+        }
+
+        .btn-enviar:not(:hover) {
+            background-color: #5271FF;
+            transition: background-color 1s;
+        }
+
+        .btn-enviar.disabled,
+        .btn-enviar[disabled],
+        fieldset[disabled] .btn-enviar,
+        .btn-enviar.disabled:hover,
+        .btn-enviar[disabled]:hover,
+        fieldset[disabled] .btn-enviar:hover,
+        .btn-enviar.disabled:focus,
+        .btn-enviar[disabled]:focus,
+        fieldset[disabled] .btn-enviar:focus,
+        .btn-enviar.disabled:active,
+        .btn-enviar[disabled]:active,
+        fieldset[disabled] .btn-enviar:active,
+        .btn-enviar.disabled.active,
+        .btn-enviar[disabled].active,
+        fieldset[disabled] .btn-enviar.active {
+            background-color: #5271FF;
+
+
+        }
+
+        .btn-enviar .badge {
+            color: #5271FF;
+            background-color: #FFFFFF;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+        <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <img src="assets/img/logomenu.png" alt="" width="40px">
+            <!-- <i class="bi bi-camera"></i> -->
+            <h1>VotoLyze</h1>
+        </a>
+
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="index.html" class="active">Início</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="prefeitos.html">Prefeitos</a></li>
+                <li><a href="vereadores.html">Vereadores</a></li>
+                <li class="dropdown"><a href="#"><span>Cadastro</span> <i
+                        class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                        <li><a href="cadastroEleitor.html">Cadastro Eleitor</a></li>
+                        <li><a href="cadastroPolitico.html">Cadastro Político</a></li>
+                    </ul>
+                <li id="loginLink">Carregando</li>
+            </ul>
+        </nav><!-- .navbar -->
+
+        <div class="header-social-links">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        </div>
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+</header><!-- End Header -->
+
+
+<main id="main" data-aos="fade" data-aos-delay="1500">
+
+    <!-- ======= End Page Header ======= -->
+    <div class="page-header d-flex align-items-center">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Alterar dados</h2>
+                    <p>Alterar dados do usuário</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Page Header -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+
+            <div class="row gy-4 justify-content-center">
+
+                <div class="col-lg-5 content">
+
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <form id="myForm">
+
+                                <ul>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Nome: </strong> <input required
+                                                                                                           class="form-control"
+                                                                                                           type="text"
+                                                                                                           id="nome"/>
+                                    </li>
+
+                                    <li>
+                                        <i class="bi bi-chevron-right"></i>
+                                        <strong>Sexo:</strong>
+                                        <br>
+                                        <ul>
+                                            <li>
+                                                <label for="male">Masculino:</label>
+                                                <input required type="radio" id="male" name="gender" value="male">
+                                            </li>
+                                            <li>
+                                                <label for="female">Feminino:</label>
+                                                <input type="radio" id="female" name="gender" value="female">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Data de nascimento:</strong> <input
+                                            required
+
+                                            class="form-control" type="date" id="dataNascimento" value=""/></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>E-mail:</strong> <input required
+                                            class="form-control"
+                                            id="emailInput"
+                                            value=""/>
+                                    </li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>CPF:</strong> <input required
+                                            class="form-control"
+                                            id="CPF"
+                                            value=""/></li>
+                                    <br>
+                                    <li id="firstHiddenInput" disabled style="visibility: hidden; display: none">
+                                        <i class="bi bi-chevron-right"></i>
+                                        <strong>Tipo de candidatura:</strong>
+                                        <br>
+                                        <ul>
+                                            <li>
+                                                <label>Prefeito</label>
+                                                <input type="radio" id="PREFEITO" name="candidatura" value="PREFEITO">
+                                            </li>
+                                            <li>
+                                                <label for="female">Vereador</label>
+                                                <input type="radio" id="VEREADOR" name="candidatura" value="VEREADOR">
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li id="secondHiddenInput" disabled style="visibility: hidden; display: none"><i
+                                            class="bi bi-chevron-right"></i> <strong>Início de mandato: </strong>
+
+                                        <input type="date" class="form-control" name="inicioMandato" id="inicioMandato">
+                                    </li>
+
+
+                                    <li id="thirdHiddenInput" disabled style="visibility: hidden; display: none"><i
+                                            class="bi bi-chevron-right"></i> <strong>Partido:</strong>
+
+                                        <select class="form-select" id="mySelect" name="partido">
+
+                                        </select>
+                                    </li>
+
+                                    <button type="submit" class="btn btn-enviar btn-lg">Enviar</button>
+
+                                    <br> <br>
+
+
+                                </ul>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>VotoLyze</span></strong>. Todos os direitos reservados.
+        </div>
+        <div class="credits">
+            Orgulhosamente desenvolvido por <a href="sobre.html">Byte Builders</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader">
+    <div class="line"></div>
+</div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

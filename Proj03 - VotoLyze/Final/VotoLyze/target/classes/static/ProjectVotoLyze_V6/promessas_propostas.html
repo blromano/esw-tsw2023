@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        let userData = {}
+        let promessas = [];
+        let tipoUsuario = localStorage.getItem('tipoUsuario');
+
+        let fetchUrl;
+
+        if (tipoUsuario === 'eleitor') {
+            fetchUrl = 'http://localhost:8080/eleitor/';
+        } else {
+            fetchUrl = 'http://localhost:8080/politico/';
+        }
+
+
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+
+
+
+            const loginLink = document.getElementById('loginLink');
+            const accessToken = localStorage.getItem('accessToken');
+
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const CPF = document.getElementById('CPF');
+            const sexo = document.getElementById('sexo');
+            const dataNascimento = document.getElementById('dataNascimento');
+            const nome = document.getElementById('nome');
+
+            console.log(accessToken)
+
+            // Check if accessToken exists
+            if (accessToken) {
+
+                loginLink.innerHTML = `<a href="painel.html"> ${localStorage['userEmail']} </a>`;
+            } else {
+
+                loginLink.innerHTML = `<a href="login.html">Login</a>`;
+            }
+
+
+            const userEmail = localStorage['userEmail']; // Assuming you have the user's email stored in localStorage
+            const token = localStorage['accessToken']; // Replace with your actual Bearer token
+
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${token}`);
+
+            console.log(`${fetchUrl}${userEmail}`);
+
+
+            fetch(`${fetchUrl}${userEmail}`, {
+                headers: headers
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Work with the JSON data
+                    console.log('Data received:', data);
+                    userData = data;
+
+
+                    nome.innerHTML = `${data.nome}`;
+
+                    updatePromessaDetails();
+
+
+
+
+
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    // Handle errors here
+                });
+
+
+
+
+
+        });
+
+        // Function to fetch Promessa details by ID
+        async function fetchPromessaDetails(id) {
+            const token = localStorage.getItem('accessToken'); // Replace with your actual Bearer token
+            const url = `http://localhost:8080/promessa/${id}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    return data; // Return the fetched data
+                } else {
+                    throw new Error('Failed to fetch data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Function to update HTML content with Promessa details
+        async function updatePromessaDetails() {
+            console.log("ID: " + userData.id);
+            const promessas = await fetchPromessaDetails(userData.id); // Fetch an array of Promessas for a user
+
+            if (promessas && Array.isArray(promessas)) {
+                const promessaListElement = document.getElementById('promessaList');
+
+                console.log(promessas);
+
+                for (const promessa of promessas) {
+
+
+                        const promessaDiv = document.createElement('div');
+                        promessaDiv.innerHTML = `
+                    <p><strong>Título:</strong> ${promessa.titulo}</p>
+                    <p><strong>Descrição:</strong> ${promessa.descricao}</p>
+                    <p><strong>Data:</strong> ${promessa.data}</p>
+                    <p><strong>Político:</strong> ${promessa.politico.nome}</p>
+                    <hr>
+                `;
+                        promessaListElement.appendChild(promessaDiv);
+
+                }
+            }
+        }
+
+
+
+        function handleClick(event) {
+            event.preventDefault();
+            const novaPropostaTitulo = document.getElementById("novaPropostaTitulo").value;
+            const novaPropostaDescricao = document.getElementById("novaPropostaDescricao").value;
+            const novaPropostaData = document.getElementById("novaPropostaData").value;
+
+
+
+            let novaProposta = {
+                "titulo": novaPropostaTitulo,
+                "descricao": novaPropostaDescricao,
+                "data": novaPropostaData,
+                "politico": {
+                    "id": userData.id
+                }
+            }
+
+            console.log(novaProposta);
+
+            const token = localStorage.getItem('accessToken'); // Replace with your actual Bearer token
+            const url = `http://localhost:8080/promessa/${userData.id}`;
+
+            fetch(url, {
+                method: 'POST', // Replace with your desired HTTP method (GET, POST, etc.)
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json' // Replace with your desired content type if needed
+                },
+                body: JSON.stringify(novaProposta) // Convert the object to JSON string
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle the fetched data here
+                    console.log('Data:', data);
+                    window.alert("Proposta inserida com sucesso!")
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+
+        }
+
+
+
+
+    </script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>VotoLyze</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/logo.jpg" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+        <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <img src="assets/img/logomenu.png" alt="" width="40px">
+            <!-- <i class="bi bi-camera"></i> -->
+            <h1>VotoLyze</h1>
+        </a>
+
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="index.html" class="active">Início</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="prefeitos.html">Prefeitos</a></li>
+                <li><a href="vereadores.html">Vereadores</a></li>
+                <li class="dropdown"><a href="#"><span>Cadastro</span> <i
+                        class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                        <li><a href="cadastroEleitor.html">Cadastro Eleitor</a></li>
+                        <li><a href="cadastroPolitico.html">Cadastro Político</a></li>
+                    </ul>
+                <li id="loginLink">Carregando</li>
+            </ul>
+        </nav><!-- .navbar -->
+
+        <div class="header-social-links">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        </div>
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+</header><!-- End Header -->
+
+
+<main id="main" data-aos="fade" data-aos-delay="1500">
+
+    <!-- ======= End Page Header ======= -->
+    <div class="page-header d-flex align-items-center">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Promessas de Campanha e Propostas</h2>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Page Header -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+
+            <div class="row gy-4 justify-content-center">
+
+                <div class="col-lg-5 content">
+                    <h1 id="nome"></h1> <br>
+
+                    <div class="row">
+                        <div id="promessaDetails">
+                            <h1>Promessas/propostas cadastradas</h1><br>
+                            <div id="promessaList"></div>
+                        </div>
+
+                        <div class="input-group" id="myDiv">
+                            <h2 style="color: white">Inserir nova promessa/proposta: </h2>
+                            <div class="col-md-12">
+                                <form onsubmit="handleClick(event)">
+                                    <div class="col-md-12">
+                                        <p>Título:</p>
+                                        <input required type="text" placeholder="Titulo" class="form-control" id="novaPropostaTitulo" name="titulo">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>Descrição:</p>
+                                        <input required type="text" placeholder="Descrição" class="form-control" id="novaPropostaDescricao" name="descricao">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Data:</p>
+                                        <input required type="date" placeholder="Data" class="form-control" id="novaPropostaData" name="data">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Inserir nova promessa/proposta</button>
+                                </form>
+
+
+                            </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>VotoLyze</span></strong>. Todos os direitos reservados.
+        </div>
+        <div class="credits">
+            Orgulhosamente desenvolvido por <a href="sobre.html">Byte Builders</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader">
+    <div class="line"></div>
+</div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
