@@ -1,20 +1,39 @@
 import { X } from "@phosphor-icons/react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardTopico from "../components/CardTopico";
 import CriarTopicoForm from "../components/CriarTopicoForm";
 import FazerTicket from "../components/FazerTicket";
 import UserProfile from "../components/UserProfile";
 import VerTickets from "../components/VerTickets";
+import { instance } from "../lib/axios";
 import { auth } from "../lib/firebase";
+
+interface Topico {
+  TOP_ID: number;
+  TOP_TITULO: string;
+  TOP_MENSAGEM: string;
+  FK_USUARIOS_USR_ID: number;
+}
 
 export default function Home() {
   const navigate = useNavigate();
 
+  const [topicos, setTopicos] = useState<Topico[]>();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   console.log(isAuthenticated);
+
+  useEffect(() => {
+    loadTopicos();
+  }, []);
+
+  async function loadTopicos() {
+    const tops = await instance.get("/topicos");
+
+    setTopicos(tops.data);
+  }
 
   auth.onAuthStateChanged((u) => {
     u ? setIsAuthenticated(true) : setIsAuthenticated(false);
@@ -92,20 +111,13 @@ export default function Home() {
           placeholder="Ex.: Como fazer casos de uso"
         />
         <div className="flex flex-col justify-evenly h-screen">
-          <CardTopico
-            titulo="O que é transparência referencial e como ela é 
-          implementada em clojure?"
-          />
-
-          <CardTopico
-            titulo="Como eu posso fazer regressão linear usando a 
-          biblioteca Scikit Learn?"
-          />
-
-          <CardTopico
-            titulo="Como eu poderia aplicar melhor a teoria das cores 
-          em meu projeto?"
-          />
+          {topicos ? (
+            topicos.map((t) => {
+              return <CardTopico key={t.TOP_ID} titulo={t.TOP_TITULO} />;
+            })
+          ) : (
+            <span>Nenhum topico existe no</span>
+          )}
         </div>
       </div>
 

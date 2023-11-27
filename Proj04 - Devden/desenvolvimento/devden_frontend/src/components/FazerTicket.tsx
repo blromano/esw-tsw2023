@@ -1,9 +1,42 @@
-export default function FazerTicket() {
-  return (
-    <form className="flex flex-col items-center text-white mt-10">
-      <label htmlFor="">Email / Nome do usuario</label>
-      <input type="text" className="bg-secondary rounded-md p-2 mt-2" />
+import { FormEvent, useState } from "react";
+import { instance } from "../lib/axios";
 
+export default function FazerTicket() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(form: FormEvent) {
+    form.preventDefault();
+
+    const response = await instance.post("tickets/new", {
+      TIC_MENSAGEM: message,
+      FK_USUARIOS_USR_ID: 4,
+    });
+
+    if (response.status == 201) {
+      window.location.reload();
+    } else {
+      console.error("Erro na requisição.");
+    }
+  }
+
+  return (
+    <form
+      className="flex flex-col items-center text-white mt-10"
+      onSubmit={handleSubmit}
+    >
+      <label htmlFor="identification">Email</label>
+      <input
+        type="text"
+        name="identification"
+        id="identification"
+        className="bg-secondary rounded-md p-2 mt-2"
+        value={email}
+        onChange={(data) => {
+          setEmail(data.target.value);
+        }}
+      />
+      {/* TODO: fazer de forma dinâmica essas tipos de denuncia */}
       <label htmlFor="" className="mt-10">
         Motivo da denuncia
       </label>
@@ -33,12 +66,18 @@ export default function FazerTicket() {
           <input type="checkbox" /> Outro
         </div>
       </div>
-
-      <label htmlFor="" className="mt-10">
+      <label htmlFor="message" className="mt-10">
         Breve descricao do acontecido
       </label>
-      <textarea className="bg-secondary rounded-md p-2 mt-2 h-32" />
-
+      <textarea
+        className="bg-secondary rounded-md p-2 mt-2 h-32"
+        id="message"
+        name="message"
+        value={message}
+        onChange={(data) => {
+          setMessage(data.target.value);
+        }}
+      />
       <button type="submit" className="bg-secondary p-2 rounded-lg mt-10">
         Enviar
       </button>

@@ -1,8 +1,41 @@
+import { FormEvent, useState } from "react";
+import { instance } from "../lib/axios";
+
 export default function CriarTopicoForm() {
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+
+  // TODO: Fazer ele carregar as tags e fazer elas serem selecionáveis
+  function loadTags() {}
+
+  async function handleSubmit(form: FormEvent) {
+    form.preventDefault();
+
+    await instance.post("/topico/new", {
+      TOP_TITULO: title,
+      TOP_MENSAGEM: message,
+      FK_USUARIOS_USR_ID: 4,
+    });
+
+    window.location.reload();
+  }
+
   return (
-    <form className="flex flex-col items-center text-white mt-10">
-      <label htmlFor="">Titulo</label>
-      <input type="text" className="bg-secondary rounded-md p-2 mt-2" />
+    <form
+      className="flex flex-col items-center text-white mt-10"
+      onSubmit={handleSubmit}
+    >
+      <label htmlFor="title">Titulo</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        value={title}
+        onChange={(data) => {
+          setTitle(data.target.value);
+        }}
+        className="bg-secondary rounded-md p-2 mt-2"
+      />
 
       <label htmlFor="" className="mt-10">
         Tags
@@ -17,10 +50,18 @@ export default function CriarTopicoForm() {
         </div>
       </div>
 
-      <label htmlFor="" className="mt-10">
+      <label htmlFor="message" className="mt-10">
         Mensagem Inicial
       </label>
-      <textarea className="bg-secondary rounded-md p-2 mt-2 h-32" />
+      <textarea
+        name="message"
+        id="message"
+        className="bg-secondary rounded-md p-2 mt-2 h-32"
+        value={message}
+        onChange={(data) => {
+          setMessage(data.target.value);
+        }}
+      />
 
       <button type="submit" className="bg-secondary p-2 rounded-lg mt-10">
         Criar Topico

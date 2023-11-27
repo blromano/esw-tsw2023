@@ -4,6 +4,8 @@ import OtherMessage from "../components/OtherMessage";
 import Tag from "../components/Tag";
 import UserInTopic from "../components/UserInTopic";
 
+import { PaperPlane } from "@phosphor-icons/react";
+import { useState } from "react";
 import CupheadFoto from "../assets/cuphead.png";
 import DevilManRicardoLima from "../assets/devilman.jpeg";
 import EdFoto from "../assets/edw.png";
@@ -11,11 +13,27 @@ import AkameFoto from "../assets/kameeeee.png";
 import lighFoto from "../assets/lightYagami.jpeg";
 import MichaelFoto from "../assets/michael.jpg";
 import WesleyFoto from "../assets/wesleyDdaSilva.png";
+import { instance } from "../lib/axios";
 
 export default function Chat() {
   const { state } = useLocation();
 
-  console.log(state);
+  const [message, setMessage] = useState("");
+
+  async function handleClick() {
+    const response = await instance.post("/message/new", {
+      MEN_MENSAGEM: message,
+      FK_TOPICO_TOP_ID: 2,
+      FK_USUARIOS_USR_ID: 4,
+    });
+
+    if (response.status == 201) {
+      setMessage("");
+      console.log("mensagem enviada com sucesso");
+    } else {
+      console.error("Ocorreu um erro ao enviar a mensagem...");
+    }
+  }
 
   return (
     <div className="bg-primary h-screen w-screen grid grid-rows-3">
@@ -148,11 +166,20 @@ export default function Chat() {
             color="text-purple-300"
           />
 
-          <input
-            type="text"
-            className="w-11/12 ml-16 p-2 rounded-lg bg-terciary text-white"
-            placeholder="Conversar no chat"
-          />
+          <div className="flex flex-row">
+            <input
+              type="text"
+              className="w-11/12 ml-16 p-2 rounded-lg bg-terciary text-white"
+              placeholder="Conversar no chat"
+              value={message}
+              onChange={(data) => {
+                setMessage(data.target.value);
+              }}
+            />
+            <button onClick={handleClick}>
+              <PaperPlane size={32} className="text-white ml-2" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
