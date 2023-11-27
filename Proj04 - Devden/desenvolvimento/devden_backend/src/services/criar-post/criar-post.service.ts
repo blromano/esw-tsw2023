@@ -2,26 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 
 interface Data {
-  MEN_MENSAGEM: string;
-  FK_TOPICO_TOP_ID: number;
+  POS_MENSAGEM: string;
+  POS_URL_FOTO: string;
   FK_USUARIOS_USR_ID: number;
 }
 
 @Injectable()
-export class EnviarMensagemService {
+export class CriarPostService {
   constructor(private prisma: PrismaService) {}
 
-  async EnviarMensagem(data: Data) {
+  async criarPost(data: Data) {
     try {
-      const mensagem = await this.prisma.mensagens.create({
+      return await this.prisma.posts.create({
         data: {
-          MEN_MENSAGEM: data.MEN_MENSAGEM,
-          FK_TOPICO_TOP_ID: data.FK_TOPICO_TOP_ID,
+          POS_MENSAGEM: data.POS_MENSAGEM,
           FK_USUARIOS_USR_ID: data.FK_USUARIOS_USR_ID,
+          POS_URL_FOTO: data.POS_URL_FOTO,
         },
       });
-
-      return mensagem;
     } catch (error) {
       console.error(error);
     }

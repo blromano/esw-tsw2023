@@ -12,11 +12,11 @@ datasource db {
 
 model Usuarios {
   USR_ID            Int         @id @default(autoincrement())
-  USR_NAME          String      @default("no one") @db.VarChar(100)
-  USR_SENHA         String      @default("no one") @db.VarChar(100)
-  USR_EMAIL         String      @default("no one") @db.VarChar(100)
-  USR_NOME_COMPLETO String      @default("no one") @db.VarChar(100)
-  USR_STAFF         Int         @default(0)
+  USR_NAME          String
+  USR_SENHA         String
+  USR_EMAIL         String
+  USR_NOME_COMPLETO String
+  USR_STAFF         Int
   Posts             Posts[]
   Tags              Tags[]
   Tickets           Tickets[]
@@ -28,8 +28,8 @@ model Usuarios {
 
 model Posts {
   POS_ID             Int    @id @default(autoincrement())
-  POS_MENSAGEM       String @db.VarChar(100)
-  POS_URL_FOTO       String @db.VarChar(255)
+  POS_MENSAGEM       String
+  POS_URL_FOTO       String
   FK_USUARIOS_USR_ID Int
 
   fk_user_id Usuarios @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
@@ -39,7 +39,7 @@ model Posts {
 
 model Tags {
   TAG_ID             Int    @id @default(autoincrement())
-  TAG_NOME           String @db.VarChar(100)
+  TAG_NOME           String
   FK_USUARIOS_USR_ID Int
 
   fk_user_id  Usuarios      @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
@@ -48,21 +48,10 @@ model Tags {
   @@map("TAGS")
 }
 
-model Tickets {
-  TIC_ID             Int    @id @default(autoincrement())
-  TIC_MENSAGEM       String @db.VarChar(100)
-  FK_USUARIOS_USR_ID Int
-
-  fk_user_id           Usuarios               @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
-  TicketsTiposDenuncia TicketsTiposDenuncia[]
-
-  @@map("TICKETS")
-}
-
 model Mensagens {
-  MEN_ID       Int      @id
+  MEN_ID       Int      @id @default(autoincrement())
   MEN_MENSAGEM String   @db.VarChar(200)
-  MEN_DATA     DateTime
+  MEN_DATA     DateTime @default(now())
 
   FK_TOPICO_TOP_ID   Int
   FK_USUARIOS_USR_ID Int
@@ -73,9 +62,20 @@ model Mensagens {
   @@map("MENSAGENS")
 }
 
+model Tickets {
+  TIC_ID             Int    @id @default(autoincrement())
+  TIC_MENSAGEM       String
+  FK_USUARIOS_USR_ID Int
+
+  fk_user_id           Usuarios               @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
+  TicketsTiposDenuncia TicketsTiposDenuncia[]
+
+  @@map("TICKETS")
+}
+
 model TipoDenuncia {
   TIP_ID               Int                    @id @default(autoincrement())
-  TIP_NOME             String                 @db.VarChar(100)
+  TIP_NOME             String
   TicketsTiposDenuncia TicketsTiposDenuncia[]
 
   @@map("TIPO_DENUNCIA")
@@ -83,8 +83,8 @@ model TipoDenuncia {
 
 model Topicos {
   TOP_ID             Int    @id @default(autoincrement())
-  TOP_TITULO         String @db.VarChar(100)
-  TOP_MENSAGEM       String @db.VarChar(500)
+  TOP_TITULO         String
+  TOP_MENSAGEM       String
   FK_USUARIOS_USR_ID Int
 
   fk_user_id  Usuarios      @relation(fields: [FK_USUARIOS_USR_ID], references: [USR_ID])
