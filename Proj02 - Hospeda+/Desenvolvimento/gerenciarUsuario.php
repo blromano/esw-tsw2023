@@ -1,6 +1,5 @@
 <?php
-//session_start();
-$_SESSION['id_fun'] = 0;
+session_start();
 require_once 'models/Funcionario.php';
 require_once 'db/FuncionarioDAOMysql.php';
 

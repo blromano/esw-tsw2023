@@ -1,4 +1,64 @@
+<?php
+session_start();
 
+require_once 'models/Cliente.php';
+require_once 'db/ClienteDAOMysql.php';
+
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+   header("Location: telaprincipal.php");
+}
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+   if (isset($_POST['NomeCompleto']) && !empty($_POST['NomeCompleto'])) {
+      $nomeCompleto = $_POST['NomeCompleto'];
+      $dataNascimento = $_POST['DataNascimento'];
+      $cpf = $_POST['CPF'];
+      $rg = $_POST['RG'];
+      $celular = $_POST['Celular'];
+      $email = $_POST['email'];
+
+      $cidade = $_POST['cidade'];
+      $numero = $_POST['numero'];
+      $senha = $_POST['senha'];
+      $sexo = $_POST['Sexo'];
+      $cep = '1';
+      $estado = 's';
+      $bairro = 's';
+
+      if($sexo == "Masculino"){
+         $sexo = "M";
+      }else{
+         $sexo = "F";
+      }
+
+      $c = new Cliente();
+      $c->setCli_nome($nomeCompleto);
+      $c->setCli_nascimento($dataNascimento);
+      $c->setCli_cpf($cpf);
+      $c->setCli_rg($rg);
+      $c->setCli_celular($celular);
+      $c->setCli_email($email);
+
+      $c->setCli_cidade($cidade);
+      $c->setCli_numero($numero);
+      $c->setCli_senha($senha);
+      $c->setCli_sexo($sexo);
+      $c->setCli_cep($cep);
+      $c->setCli_estado($estado);
+      $c->setCli_bairro($bairro);
+
+      $data = new ClienteDAOMysql();
+      
+      header("Location: login.php");
+      $data = $data->add($c);
+
+               
+   }
+   http_response_code(400);
+   echo json_encode(array("success" => false, "message" => "Parâmetros inválidos"));
+   exit();
+}   
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -94,23 +154,23 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.php" method="post">
+                  <form class="form_cadastro" action="telaCadastro.php" method="post">
                      <div class="row">
                         <div class="col-md-6">
                            <label class="date">Nome Completo</label>
-                           <input class="book_n" placeholder="Nome Completo" type="type" name="NomeCompleto">
+                           <input class="book_n" placeholder="Nome Completo" type="text" name="NomeCompleto">
                         </div>
                         <div class="col-md-4">
                            <label class="date">Data de Nascimento</label>
-                           <input class="book_n" placeholder="Data de Nascimento" type="type" name="DataNascimento">
+                           <input class="book_n" placeholder="Data de Nascimento" type="date" name="DataNascimento">
                         </div>
                         <div class="col-md-5">
                            <label class="date">CPF</label>
-                           <input class="book_n" placeholder="CPF" type="type" name="CPF">
+                           <input class="book_n" placeholder="CPF" type="text" name="CPF">
                         </div>
                         <div class="col-md-5">
                            <label class="date">RG</label>
-                           <input class="book_n" placeholder="RG" type="type" name="RG">
+                           <input class="book_n" placeholder="RG" type="text" name="RG">
                         </div>
                         <div class="col-md-5">
                            <label class="date">Sexo</label>
@@ -121,27 +181,27 @@
                            </div>
                         <div class="col-md-5">
                            <label class="date">Celular</label>
-                           <input class="book_n" placeholder="Celular" type="type" name="Celular">
+                           <input class="book_n" placeholder="Celular" type="text" name="Celular">
                         </div>
                         <div class="col-md-10">
                            <label class="date">Email</label>
-                           <input class="book_n" placeholder="Email" type="type" name="E-mail">
+                           <input class="book_n" placeholder="Email" type="email" name="email">
                         </div>
                         <div class="col-md-6">
-                           <label class="date">Rua</label>
-                           <input class="book_n" placeholder="Rua" type="type" name="Rua">
+                           <label class="date">Cidade</label>
+                           <input class="book_n" placeholder="Cidade" type="text" name="cidade">
                         </div>
                         <div class="col-md-4">
                            <label class="date">Nº</label>
-                           <input class="book_n" placeholder="nº" type="type" name="nº">
+                           <input class="book_n" placeholder="nº" type="text" name="numero">
                         </div>
                         <div class="col-md-4">
                            <label class="date">Senha</label>
-                           <input class="book_n" placeholder="Senha" type="type" name="senha">
+                           <input class="book_n" placeholder="Senha" type="password" name="senha">
                         </div>
                         <div class="col-md-4">
                            <label class="date">Confirmar Senha</label>
-                           <input class="book_n" placeholder="Confirmar Senha" type="type" name="confSenha">
+                           <input class="book_n" placeholder="Confirmar Senha" type="password" name="confSenha">
                         </div>
                         <div class="col-md-3">
                            <button class="book_btn">Cadastrar</button>

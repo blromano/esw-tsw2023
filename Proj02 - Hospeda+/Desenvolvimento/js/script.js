@@ -67,8 +67,32 @@ $(document).ready(function(){
     });
 
 
-    $('#btnExcluir').on('click', function () {
-        alert($('#btnExcluir').attr("name"));
+    $('#btn_excluirUsuario').on('click', function () {
+        let id = $("#id_cliente").val();
+
+        $.ajax({
+            type: "POST",
+            url: "excluirUsuario.php",
+            dataType: "json",
+            data: {
+                id: id,
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Redireciona para a página desejada em caso de sucesso
+                    
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                // Exibe mensagens de erro no console em caso de falha na requisição
+                alert(xhr.responseJSON.message);
+            }
+        });
+
+        window.location.href = "gerenciarUsuario.php";
+
+
+
     });
     
 

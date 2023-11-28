@@ -1,5 +1,64 @@
+<?php
+session_start();
+require_once 'models/Funcionario.php';
+require_once 'db/FuncionarioDAOMysql.php';
+
+require_once 'models/Cliente.php';
+require_once 'db/ClienteDAOMysql.php';
+
+if (isset($_SESSION['id_fun']) && !empty($_SESSION['id_fun'])) {
+   $id = $_SESSION['id_fun'];
+
+   if(isset($_GET['id'])){
+      $id_cliente = $_GET['id'];
+
+      $c = new ClienteDAOMysql();
+      $c = $c->findById($id_cliente);
+   }
+
+   
+
+}else {   
+   header("Location: login.php");
+}
 
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+   if (isset($_POST['NomeCompleto']) && !empty($_POST['NomeCompleto'])) {
+      $id = $_POST['id_cliente'];
+      $nomeCompleto = $_POST['NomeCompleto'];
+      $dataNascimento = $_POST['DataNascimento'];
+      $cpf = $_POST['CPF'];
+      $rg = $_POST['RG'];
+      $celular = $_POST['Celular'];
+      $email = $_POST['email'];
+      $sexo = $_POST['Sexo'];
+
+      if($sexo == "Masculino"){
+         $sexo = "M";
+      }else{
+         $sexo = "F";
+      }
+
+      $c = new Cliente();
+      $c->setId_cliente($id);
+      $c->setCli_nome($nomeCompleto);
+      $c->setCli_nascimento($dataNascimento);
+      $c->setCli_cpf($cpf);
+      $c->setCli_rg($rg);
+      $c->setCli_celular($celular);
+      $c->setCli_email($email);
+      $c->setCli_sexo($sexo);
+      $cdao = new ClienteDAOMysql();
+
+      $cdao->update($c);         
+      
+   }
+
+   header("Location: gerenciarUsuario.php");
+   exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
    <head>
@@ -105,64 +164,46 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <form class="form_cadastro" action="login.php" method="post">
+                  <form class="form_cadastro" action="usuario.php" method="POST">
                      <div class="row">
+                     <input style="display: none;" name="id_cliente" id="id_cliente" value="<?=$c->getId_Cliente();?>">
                         <div class="col-md-6">
                            <label class="date">Nome Completo</label>
-                           <input class="book_n" placeholder="Nome Completo" type="type" name="NomeCompleto">
+                           <input class="book_n" placeholder="Nome Completo" type="type" name="NomeCompleto" id="NomeCompleto" value="<?=$c->getCli_nome();?>">
                         </div>
                         <div class="col-md-4">
                            <label class="date">Data de Nascimento</label>
-                           <input class="book_n" placeholder="Data de Nascimento" type="type" name="DataNascimento">
+                           <input class="book_n" placeholder="Data de Nascimento" type="type" name="DataNascimento" id="DataNascimento" value="<?=$c->getCli_nascimento();?>">
                         </div>
                         <div class="col-md-5">
                            <label class="date">CPF</label>
-                           <input class="book_n" placeholder="CPF" type="type" name="CPF">
+                           <input class="book_n" placeholder="CPF" type="type" name="CPF" id="CPF" value="<?=$c->getCli_cpf();?>">
                         </div>
                         <div class="col-md-5">
                            <label class="date">RG</label>
-                           <input class="book_n" placeholder="RG" type="type" name="RG">
+                           <input class="book_n" placeholder="RG" type="type" name="RG" id="RG" value="<?=$c->getCli_rg();?>">
                         </div>
                         <div class="col-md-5">
                            <label class="date">Sexo</label>
-                              <select class="book_n" name="Sexo"> 
-                                 <option value="Masculino">Masculino</option>
-                                 <option value="Feminino">Feminino</option>
+                              <select class="book_n" id="Sexo" name="Sexo"> 
+                                 <option value="Masculino" <?php if ($c->getCli_sexo() == "M") { echo "selected"; } ?>>Masculino</option>
+                                 <option value="Feminino" <?php if ($c->getCli_sexo() == "F") { echo "selected"; } ?>>Feminino</option>
                               </select>
                            </div>
                         <div class="col-md-5">
                            <label class="date">Celular</label>
-                           <input class="book_n" placeholder="Celular" type="type" name="Celular">
+                           <input class="book_n" placeholder="Celular" type="type" name="Celular" id="Celular" value="<?=$c->getCli_celular();?>">
                         </div>
                         <div class="col-md-10">
                            <label class="date">Email</label>
-                           <input class="book_n" placeholder="Email" type="type" name="E-mail">
-                        </div>
-                        <div class="col-md-6">
-                           <label class="date">Rua</label>
-                           <input class="book_n" placeholder="Rua" type="type" name="Rua">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Nº</label>
-                           <input class="book_n" placeholder="nº" type="type" name="nº">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Senha</label>
-                           <input class="book_n" placeholder="Senha" type="type" name="senha">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="date">Confirmar Senha</label>
-                           <input class="book_n" placeholder="Confirmar Senha" type="type" name="confSenha">
-                        </div>
-                        <div class="col-md-3">
+                           <input class="book_n" placeholder="Email" type="type" name="email" id="email" value="<?=$c->getCli_email();?>">
                         </div>
                         <div class="col-md-3">
                             <button class="book_btn">Alterar</button>
                         </div>
-                        <button class="book_btn" onclick="confirmarExclusao()">Excluir</button>
+                        <a class="book_btn" id="btn_excluirUsuario">Excluir</a>
                      </div>
                   </form>
-                  
                </div>
             </div>
          </div>
@@ -189,6 +230,7 @@
       <!-- sidebar -->
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
+      <script src="js/script.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
    </body>
 </html>
