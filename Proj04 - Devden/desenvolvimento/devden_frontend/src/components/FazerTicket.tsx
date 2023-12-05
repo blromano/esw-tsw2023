@@ -10,7 +10,7 @@ export default function FazerTicket() {
 
     const response = await instance.post("tickets/new", {
       TIC_MENSAGEM: message,
-      FK_USUARIOS_USR_ID: 4,
+      FK_USUARIOS_USR_ID: 1,
     });
 
     if (response.status == 201) {

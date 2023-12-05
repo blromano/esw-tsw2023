@@ -14,7 +14,7 @@ export default function CriarTopicoForm() {
     await instance.post("/topico/new", {
       TOP_TITULO: title,
       TOP_MENSAGEM: message,
-      FK_USUARIOS_USR_ID: 4,
+      FK_USUARIOS_USR_ID: 1,
     });
 
     window.location.reload();

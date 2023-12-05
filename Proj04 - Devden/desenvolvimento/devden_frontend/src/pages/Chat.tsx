@@ -23,8 +23,8 @@ export default function Chat() {
   async function handleClick() {
     const response = await instance.post("/message/new", {
       MEN_MENSAGEM: message,
-      FK_TOPICO_TOP_ID: 2,
-      FK_USUARIOS_USR_ID: 4,
+      FK_TOPICO_TOP_ID: 1,
+      FK_USUARIOS_USR_ID: 1,
     });
 
     if (response.status == 201) {
