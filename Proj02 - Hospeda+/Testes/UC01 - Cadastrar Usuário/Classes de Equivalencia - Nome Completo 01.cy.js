@@ -9,8 +9,8 @@ describe('Classes de Equivalência - Nome Completo 01', () => {
         // returning false here prevents Cypress from failing the test
         return false
       })
-	  //Devido a implementação do Hospeda+, é necessário alterar a URL de acordo com o local onde se encontram os arquivos do projeto
-      cy.visit('http://localhost:3000/GitHub/esw-tsw2023/Proj02%20-%20Hospeda+/Desenvolvimento/telaCadastro.php')
+	    //Devido a implementação do Hospeda+, pode ser necessário alterar a URL de acordo com o modo que foi hospedado o projeto
+      cy.visit('http://localhost:3000/telaCadastro.php')
       cy.wait(1000)
     })
 
