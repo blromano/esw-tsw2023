@@ -13,7 +13,7 @@ export default function PersonalPage() {
     const response = await instance.post("/post", {
       POS_MENSAGEM: message,
       POS_URL_FOTO: "",
-      FK_USUARIOS_USR_ID: 4,
+      FK_USUARIOS_USR_ID: 1,
     });
 
     if (response.status == 201) {
