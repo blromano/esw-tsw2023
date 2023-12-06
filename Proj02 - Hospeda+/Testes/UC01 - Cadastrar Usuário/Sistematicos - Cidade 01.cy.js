@@ -28,7 +28,7 @@ describe('Sistemáticos - Cidade 01', () => {
       'Masculino', 
       '(19) 12345-6789',
       'xxx@xxx.xxx',
-      'Cidade" ${das} Cidades',
+      'Cidade" $das} Cidades',
       '10',
       'A@1234',
       'A@1234'
