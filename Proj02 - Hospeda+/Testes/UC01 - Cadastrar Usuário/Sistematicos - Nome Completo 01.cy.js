@@ -21,7 +21,7 @@ describe('Sistemáticos - Nome Completo 01', () => {
   it('Sistemáticos - Nome Completo 01', () => {
       
     preencherFormulário(
-      'Jonas "${Johnson}', 
+      'Jonas "$Johnson}', 
       '2010-10-10', 
       '12345678910', 
       '20.674.839-5', 
