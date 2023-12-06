@@ -10,7 +10,7 @@ describe("Classes de Equivalência - Nome Completo 01", () => {
       return false;
     });
     //Devido a implementação do Hospeda+, pode ser necessário alterar a URL de acordo com o modo que foi hospedado o projeto
-    cy.visit("http://localhost/projeto/telaCadastro.php");
+    cy.visit("http://localhost:3000/telaCadastro.php");
     cy.wait(1000);
   });
 

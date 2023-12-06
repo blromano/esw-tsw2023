@@ -3,14 +3,14 @@
 //O projeto do Hospeda+ possui exceções não tratadas, e o cypress não consegue ignorar essas exceções para multiplos casos de teste dentro de um mesmo arquivo
 //Por isso, cada caso de teste se encontrará em um arquivo diferente, para que o cypress não pare a execução
 
-describe("Classes de Equivalência - Nome Completo 01", () => {
+describe("Classes de Equivalência - Nome Completo 04", () => {
   beforeEach(() => {
     cy.on("uncaught:exception", (err, runnable) => {
       // returning false here prevents Cypress from failing the test
       return false;
     });
     //Devido a implementação do Hospeda+, pode ser necessário alterar a URL de acordo com o modo que foi hospedado o projeto
-    cy.visit("http://localhost/projeto/telaCadastro.php");
+    cy.visit("http://localhost:3000/telaCadastro.php");
     cy.wait(1000);
   });
 
@@ -18,7 +18,7 @@ describe("Classes de Equivalência - Nome Completo 01", () => {
     cy.wait(500);
   });
 
-  it("Classes Inválidas - Nome Completo 01", () => {
+  it("Classes Inválidas - Nome Completo 04", () => {
     preencherFormulário(
       "cadeia de caracteres com 254 caracteres cadeia de caracteres com 254 caracteres cadeia de caracteres com 254 caracteres cadeia de caracteres com 254 caracteres cadeia de caracteres com 254 caracteres cadeia de caracteres com 254 caracteres cadeia de cara",
       "2010-10-10",
