@@ -12,6 +12,7 @@ describe('Classes de Equivalência - Classes Válidas', () => {
       //Devido a implementação do Hospeda+, pode ser necessário alterar a URL de acordo com o modo que foi hospedado o projeto
       cy.visit('http://localhost:3000/telaCadastro.php')
       cy.wait(1000)
+      cy.intercept('POST', 'http://localhost:3000/telaCadastro.php').as('telaCadastro')
     })
 
     afterEach(() => {
@@ -33,8 +34,10 @@ describe('Classes de Equivalência - Classes Válidas', () => {
         'A@1234',
         'A@1234'
         )
-        //verifica se o cadastro foi realizado com sucesso ao ser redirecionado para a tela de login
-        cy.url().should('include', 'login.php')
+        //verifica se o cadastro foi realizado com sucesso ao ser redirecionado para a tela de login com sucesso
+        cy.wait('@telaCadastro').then((intercept) => {
+          expect(intercept.response.statusCode).to.eq(302)
+        })
     })
 
   })

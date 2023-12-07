@@ -11,9 +11,8 @@ describe("Classes de Equivalência - Nome Completo 05", () => {
     });
     //Devido a implementação do Hospeda+, pode ser necessário alterar a URL de acordo com o modo que foi hospedado o projeto
     cy.visit("http://localhost:3000/telaCadastro.php");
-    cy.url("").should("not.include", "/login.php");
-
     cy.wait(1000);
+    cy.intercept('POST', 'http://localhost:3000/telaCadastro.php').as('telaCadastro')
   });
 
   afterEach(() => {
@@ -34,6 +33,10 @@ describe("Classes de Equivalência - Nome Completo 05", () => {
       "A@1234",
       "A@1234"
     );
+
+    cy.wait('@telaCadastro').then((intercept) => {
+      expect(intercept.response.statusCode).to.eq(302)
+    })
   });
 });
 
