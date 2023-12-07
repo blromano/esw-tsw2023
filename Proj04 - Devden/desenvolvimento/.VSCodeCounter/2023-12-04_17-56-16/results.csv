@@ -1,0 +1,86 @@
+"filename", "language", "TypeScript", "XML", "Markdown", "JavaScript", "YAML", "JSON", "HTML", "JSON with Comments", "TypeScript JSX", "Prisma", "HTTP", "SQL", "CSS", "comment", "blank", "total"
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/.eslintrc.cjs", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/.eslintrc.js", "JavaScript", 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/.prettierrc", "JSON", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/README.md", "Markdown", 0, 0, 161, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 125, 298
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/api.http", "HTTP", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 4, 14, 57
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/nest-cli.json", "JSON", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/package-lock.json", "JSON", 0, 0, 0, 0, 0, 8903, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8904
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/package.json", "JSON", 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0, 0, 0, 6, 0, 75
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/pnpm-lock.yaml", "YAML", 0, 0, 0, 0, 4653, 0, 0, 0, 0, 0, 0, 0, 0, 0, 689, 5342
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231110044348_init/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 16, 24, 100
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231110044626_rename/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 42, 37, 145
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231120035748_tamanho/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 20, 6, 38
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231122033607_tabela/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 3, 4, 17
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231122034947_pequena/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 14, 5, 27
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231124043808_tabela/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 3, 4, 17
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231124044018_id/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 3
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/migrations/20231124195126_horario/migration.sql", "SQL", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 3
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/schema.prisma", "Prisma", 0, 0, 0, 0, 0, 0, 0, 0, 0, 87, 0, 0, 0, 2, 29, 118
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/prisma/seed.ts", "TypeScript", 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 97
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/app.controller.spec.ts", "TypeScript", 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 24
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/app.controller.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 13
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/app.module.ts", "TypeScript", 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 34
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/app.service.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/buscar-mensagem/buscar-mensagem.controller.ts", "TypeScript", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 18
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/buscar-topico/buscar-topico.controller.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 17
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/criar-post/criar-post.controller.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 19
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/criar-topico/criar-topico.controller.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 18
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/criar-usuario/criar-usuario.controller.ts", "TypeScript", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/enviar-mensagem/enviar-mensagem.controller.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 19
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/gerenciar-tags/gerenciar-tags.controller.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 38
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/gerenciar-tickets/gerenciar-tickets.controller.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 23
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/get-topicos/get-topicos.controller.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 13
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/logar/logar.controller.ts", "TypeScript", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 18
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/controllers/user/user.controller.ts", "TypeScript", 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/main.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/prisma.service.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/buscar-mensagem/buscar-mensagem.service.ts", "TypeScript", 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 39
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/buscar-topico/buscar-topico.service.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 20
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/criar-post/criar-post.service.ts", "TypeScript", 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 28
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/criar-topico/criar-topico.service.ts", "TypeScript", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 24
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/criar-usuario/criar-usuario.service.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 19
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/enviar-mensagem/enviar-mensagem.service.ts", "TypeScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 30
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/gerenciar-tags/gerenciar-tags.service.ts", "TypeScript", 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 67
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/gerenciar-tickets/gerenciar-tickets.service.ts", "TypeScript", 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/get-topicos/get-topicos.service.ts", "TypeScript", 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 12
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/logar/logar.service.ts", "TypeScript", 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/src/services/user/user.service.ts", "TypeScript", 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 23
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/test/app.e2e-spec.ts", "TypeScript", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 25
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/test/jest-e2e.json", "JSON", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/tsconfig.build.json", "JSON", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_backend/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 1, 22
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/.eslintrc.cjs", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/index.html", "HTML", 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 1, 2, 16
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/package-lock.json", "JSON", 0, 0, 0, 0, 0, 5521, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5522
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/package.json", "JSON", 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1, 41
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/pnpm-lock.yaml", "YAML", 0, 0, 0, 0, 3508, 0, 0, 0, 0, 0, 0, 0, 0, 0, 458, 3966
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/postcss.config.js", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/public/vite.svg", "XML", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/readme.md", "Markdown", 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/AlertSucess.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 2, 29
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/CardTopico.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 3, 18
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/CriarTopicoForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 1, 10, 72
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/FazerTicket.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 1, 6, 87
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/Header.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 4
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/MyMessage.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 2, 16
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/OtherMessage.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/Tag.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 2, 10
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/UserInTopic.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/UserProfile.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 6, 46
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/components/VerTickets.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 7, 63
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/lib/axios.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/lib/firebase.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 19
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/main.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 2, 24
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/pages/Chat.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 163, 0, 0, 0, 0, 3, 22, 188
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/pages/Home.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 139, 0, 0, 0, 0, 5, 22, 166
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/pages/Login.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 16, 113
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/pages/NewAccount.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 5, 14, 129
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/pages/PersonalPage.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 4, 70
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/styles/public.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 3, 10
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/src/vite-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/tailwind.config.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 16
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 2, 3, 26
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/tsconfig.node.json", "JSON", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11
+"/home/lama/Documents/GitHub/esw-tsw2023/Proj04 - Devden/desenvolvimento/devden_frontend/vite.config.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 8
+"Total", "-", 657, 1, 177, 73, 8161, 14567, 13, 42, 939, 87, 39, 168, 7, 149, 1698, 26778
